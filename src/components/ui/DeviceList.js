@@ -6,13 +6,13 @@ export default function DeviceList(props){
 
     return (
         <div>
-        <div className="flex flex-col ml-3 mt-3">
+        <div className="flex flex-col ml-3 mt-3 bg-white">
             <div className="flex flex-row justify-between">
             <label className="flex items-center text-black font-medium" htmlFor="devices">
                 <input className="w-4 h-4 mr-3" type="checkbox" name="devices"/>
                 <h2 className="font-semibold text-lg">{props.name}</h2>
             </label>
-                <p className="bg-gray-400 text-white mr-3 p-1.5 rounded-md">Not Connected</p>
+                <p className="bg-[#9ca3af] text-white mr-3 p-1.5 rounded-md font-bold">Not Connected</p>
         </div>
             <div className="ml-3 mt-3 text-gray-500 font-normal">
                 <hr/>

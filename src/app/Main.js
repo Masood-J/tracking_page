@@ -22,6 +22,8 @@ import { FiPlus } from "react-icons/fi";
 import { MdOutlineShield } from "react-icons/md";
 import CalendarInput from "@/components/ui/CalendarInput";
 import { BsActivity } from "react-icons/bs";
+import DateSelect from "@/components/ui/DateSelect"
+import { Route } from "lucide-react";
 export default function main(props){
 
     const data = [
@@ -37,7 +39,7 @@ export default function main(props){
             <header className="relative top-5 left-5 flex flex-row justify-between">
                 <div className="font-black">
                     <h1 className="text-4xl text-black">Dashboard</h1>
-                    <p className="text-gray-400">Comprehensive Fleet Management & Analytics</p>
+                    <p className="text-[gray] font-medium">Comprehensive Fleet Management & Analytics</p>
                 </div>
                 <div className="Buttons flex flex-col gap-2">
                     <div className="flex flex-row gap-3 mr-5">
@@ -49,23 +51,18 @@ export default function main(props){
 </div></DashButton1>
 
                     </div>
-                    <div className="flex flex-row gap-3 mt-3">
+                    <div className="flex flex-row gap-3 mt-3 ml-8">
 
-                        <DatePicker
-                            onChange={(date) => setSelectedDate(date)}
-                            placeholderText="Pick a date range"   // <-- custom text here
-                            dateFormat="dd MMM yyyy"           // <-- formatted date like 21 Aug 2025
-                            className="border rounded px-3 py-2 text-sm text-black border-slate-500 ml-5 pr-20"
-                        />
+                        <DateSelect></DateSelect>
 
-                        <button className="bg-blue-600 p-1.5 rounded-md disabled:opacity-50" disabled >Apply Filters</button>
+                        <button className="bg-blue-600 p-1.5 rounded-xl disabled:opacity-50 font-semibold" disabled >Apply Filters</button>
                     </div>
                 </div>
             </header>
 
             <Card mt={`mt-10`} h={`h-45`} title="Fleet Summary" desc="Key metrics at a glance" icon={<LuTruck></LuTruck>}>
                     <div className="flex flex-row gap-3 mt-3">
-                        <FleetCard title="Total Distance" value="0 km" icon={<PiRoadHorizonFill color="gray"/>}></FleetCard>
+                        <FleetCard title="Total Distance" value="0 km" icon={<Route className={`text-blue-500 h-4 w-4`}/>}></FleetCard>
                         <FleetCard title="Fleet Size" value="2" icon={<LuTruck color="blue"/>}></FleetCard>
                         <FleetCard title="In Maintenance" value="0" icon={<LuWrench color="orange"/>}></FleetCard>
                     </div>
@@ -85,7 +82,7 @@ export default function main(props){
                             <h3 className="text-red-700 font-medium">Poor Safety!</h3>
                         </div>
 
-                        <p className="text-gray-400 font-semibold">Safety improvement needed, immediate attention required</p>
+                        <p className="text-[#6e7d8b] font-medium">Safety improvement needed, immediate attention required</p>
                     </div>
                 </Card>
                 <Card title={`Activity Monitor`} desc={`Driver and vehicle activity`} icon={<BsActivity></BsActivity>}>
@@ -95,15 +92,15 @@ export default function main(props){
 </div>
                 </Card>
             </div>
-            <div className="flex flex-row mt-3 rounded-md gap-3 h-[660px]" style={{}}>
+            <div className="flex flex-row mt-3 rounded-md gap-3 h-[560px]" style={{}}>
                 <Map></Map>
                 <Card CustomP={`p-0`} h={`h-full`}>
                     <div className="h-10 ml-5">
                         <h2 className=" mt-5 font-bold text-lg text-black">Devices (10)</h2>
                     </div>
 
-                    <div className="h-[550px] overflow-y-auto">
-                        <div className="flex items-center bg-gray-300 pt-3 pl-3 pb-3">
+                    <div className="h-[450px] overflow-y-auto">
+                        <div className="flex items-center bg-[#f1f5f9] pt-3 pl-3 pb-3">
                             <input className="w-4 h-4 mr-2" type="checkbox" name="all" />
                             <label  htmlFor="all">
                                 Select All
@@ -129,16 +126,16 @@ export default function main(props){
                     <div className="flex flex-row h-12 justify-between items-center rounded-b-2xl border-t-1 text-gray-400 pt-7">
 
                         <div className="flex flex-row items-center mb-7 ml-3">
-                            <button className="border-1 mr-2 rounded-md p-2 text-gray-400 disabled:opacity-50">
+                            <button className="border-1 mr-2 rounded-md p-2 text-[#e2e8f0] disabled:opacity-50">
                                 <MdKeyboardArrowLeft color={`black`}></MdKeyboardArrowLeft>
                             </button>
                             <h2 className="font-semibold text-black">1 / 6</h2>
-                            <button className="p-2 border-1 ml-2 rounded-md text-gray-400 "><MdKeyboardArrowRight
+                            <button className="p-2 border-2 ml-2 rounded-md text-gray-400 border-[#e2e8f0] "><MdKeyboardArrowRight
                             color={`black`}></MdKeyboardArrowRight>
                             </button>
                         </div>
                         <div className="mb-7 mr-3">
-                            <select className="rounded-md border-1 p-1 pl-2 pr-2 border-gray-200- text-black" name="select" id="10">
+                            <select className="rounded-xl border-1 p-2 pl-3 pr-3 border-[#e2e8f0] text-black" name="select" id="10">
                                 <option value="10">10</option>
                                 <option value="9">9</option>
                                 <option value="8">8</option>

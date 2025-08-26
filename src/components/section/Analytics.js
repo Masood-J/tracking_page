@@ -83,7 +83,7 @@ export default function Analytics(){
             </Card>
             <Card CustomP={`p-0`} title={`Harsh Acceleration Events`} margin={`mt-6 ml-6`} gradient={`bg-gradient-to-r from-[#fff6eb] to-[#ffeed9] pb-3 rounded-t-2xl`} icon={<IoMdArrowUp className={`mt-6 ml-6 mr-4`} color={`green`}></IoMdArrowUp>}>
                 <div className="flex flex-row justify-between ml-3">
-                    <div>
+                    <div className={`mt-3`}>
                         <h1 className="text-black text-2xl font-bold">0</h1>
                         <p className="text-gray-400 whitespace-nowrap">Total this week</p>
                         <h3 className="text-black font-medium mt-3">Weekly Trend</h3>
@@ -99,9 +99,9 @@ export default function Analytics(){
             </Card>
         </div>
             <div className="flex flex-row gap-3 max-h-90 mt-4">
-                <Card CustomP={`p-0`}  title={`Harsh Braking Events`} margin={`mt-6 ml-6 rounded-t-2xl`} gradient={`bg-gradient-to-r from-[#fef1f1] to-[#fee3e3] pb-3`}>
+                <Card CustomP={`p-0`}  title={`Harsh Braking Events`} margin={`mt-6 ml-6 rounded-t-2xl`} borderType={`rounded-t-2xl`} gradient={`bg-gradient-to-r from-[#fef1f1] to-[#fee3e3] pb-3`}>
 
-                    <div className="flex flex-row justify-between ml-3">
+                    <div className="flex flex-row justify-between ml-3 mt-3 mt-3">
                         <div>
                             <h1 className="text-black text-2xl font-bold">0</h1>
                             <p className="text-gray-400 whitespace-nowrap">Total this week</p>
@@ -117,7 +117,7 @@ export default function Analytics(){
                 <Card CustomP={`p-0`}  title={`Harsh Cornering Events`} margin={`mt-6 ml-6 rounded-t-2xl`} gradient={`bg-gradient-to-r from-[#fffbe9] to-[#fef4cb] pb-3`}>
 
                     <div className="flex flex-row justify-between ml-3">
-                        <div>
+                        <div className={`mt-3`}>
                             <h1 className="text-black text-2xl font-bold">0</h1>
                             <p className="text-gray-400 whitespace-nowrap">Total this week</p>
                             <h3 className="text-black font-medium mt-3">Weekly Trend</h3>
@@ -136,7 +136,7 @@ export default function Analytics(){
                         </svg>
                     </div>
                     <div className="flex flex-row justify-between ml-3">
-                        <div>
+                        <div className={`mt-3`}>
                             <h1 className="text-black text-2xl font-bold">0</h1>
                             <p className="text-gray-400 whitespace-nowrap">Total this week</p>
                         </div>
