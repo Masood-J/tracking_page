@@ -24,6 +24,7 @@ import CalendarInput from "@/components/ui/CalendarInput";
 import { BsActivity } from "react-icons/bs";
 import DateSelect from "@/components/ui/DateSelect"
 import { Route } from "lucide-react";
+import { SiSpeedtest } from "react-icons/si";
 export default function main(props){
 
     const data = [
@@ -71,7 +72,7 @@ export default function main(props){
             <div className="flex flex-row justify-center gap-2 mt-4 text-black">
                 <Card title="Driver Safety Score" desc="Overall fleet safety rating" icon={<MdOutlineShield></MdOutlineShield>}>
                     <div className="flex flex-col items-center justify-center gap-2">
-<CircleBar>
+<CircleBar styles={`border-[#f1f5f9]`}>
 <div className="flex flex-col">
     <h1 className="text-center font-bold text-3xl">0</h1>
     <p>/100</p>
@@ -88,7 +89,7 @@ export default function main(props){
                 <Card title={`Activity Monitor`} desc={`Driver and vehicle activity`} icon={<BsActivity></BsActivity>}>
 <div className="flex flex-row gap-3 mt-3">
                     <FleetCard title={`Idling`} value={`0`} icon={<LuClock3 color={`orange`}></LuClock3>}></FleetCard>
-                    <FleetCard title={`Over Speed`} value={`0`} icon={<MdSpeed color={`red`}></MdSpeed>}></FleetCard>
+                    <FleetCard title={`Over Speed`} value={`0`} icon={<SiSpeedtest color={`red`}></SiSpeedtest>}></FleetCard>
 </div>
                 </Card>
             </div>

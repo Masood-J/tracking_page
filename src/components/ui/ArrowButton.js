@@ -1,16 +1,16 @@
-import { FaArrowLeft } from "react-icons/fa6";
-import { IoIosArrowBack } from "react-icons/io";
-export default function ArrowButton(props){
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-
-    return(
-
-        <button className="mr-4 ml-3 pl-3" onClick={props.onclickHandle}>
-            <IoIosArrowBack color="white" size={20} className=" transition hover:scale-120 transition-transform duration-300 ease-in-out"></IoIosArrowBack>
+export default function ArrowButton({ onclickHandle, navStatus }) {
+    return (
+        <button
+            className="mr-4 ml-3 pl-3"
+            onClick={onclickHandle}
+        >
+            {navStatus ? (
+                <ChevronLeft size={24} stroke="white" strokeWidth={2.5} />
+            ) : (
+                <ChevronRight size={24} stroke="white" strokeWidth={2.5} />
+            )}
         </button>
-
-
-    )
-
-
+    );
 }

@@ -1,0 +1,35 @@
+import {LuTruck} from "react-icons/lu";
+import DotProgress from "@/components/ui/DotProgress";
+import DotProgressV2 from "@/components/ui/DotProgressV2";
+import { FaRegUserCircle } from "react-icons/fa";
+export default function ProgressBarContainer(){
+
+    return(
+
+        <div>
+
+            <div className={`bg-[#eef2ff] p-3 border-2 rounded-xl border-[#c7d2fe]`}>
+                <div className={`flex flex-row justify-between`}>
+                    <div className={`flex flex-row gap-2 items-center`}>
+                        <FaRegUserCircle color={`#c7d2fe`}></FaRegUserCircle>
+                        <h2 className={`text-black font-semibold`}>FMB125</h2>
+                    </div>
+                    <h2>0h 43m</h2>
+                </div>
+                <div className={`flex flex-row justify-between text-[#a3a7b8] font-medium`}>
+                    <div className={`flex flex-row gap-2 items-center`}>
+                        <p>Started: 10:13 AM</p>
+                    </div>
+                    <p>Route: Unknown Route</p>
+                </div>
+                <DotProgressV2></DotProgressV2>
+                <div className={`flex flex-row justify-between mt-6 text-sm`}>
+
+                    <h3 className={`text-[#a3a7b8]`}>Start</h3>
+                    <h4 className={`text-[#a3a7b8]`}>In Progress</h4>
+                    <h4 className={`text-[#a3a7b8]`}>End</h4>
+                </div>
+            </div>
+        </div>
+    )
+}

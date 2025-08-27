@@ -23,24 +23,20 @@ import { LuUsers } from "react-icons/lu";
 import {User} from "lucide-react";
 
 export default function Navigation(){
-    const[navStatus,updateStatus]=useState("true");
-    function onClickHandle(){
-        if(navStatus==true) {
-            updateStatus(false);
-        }
-        else{
-            updateStatus(true);
-        }
+    const [navOpen, setNavOpen] = useState(true);
+    function onClickHandle() {
+        setNavOpen((prev) => !prev);
     }
 return (
     <div className="bg-white border-r-2 border-r-[#e2e8f0]">
 <div className={`sticky top-0 overflow-y-auto h-screen`} style={{scrollbarWidth: "none",}}>
         <div className="flex flex-row bg-[#2056df] justify-between">
-            {navStatus && (<img src="/logo.png" alt=""/>)}
-        <ArrowButton onclickHandle={onClickHandle}></ArrowButton>
+            {navOpen && (<img src="/logo.png" alt=""/>)}
+        <ArrowButton onclickHandle={onClickHandle} navStatus={navOpen}></ArrowButton>
         </div>
-        {navStatus && (
-        <div className="transition-all duration-500 ease-in-out w-58">
+        <div  className={`transition-all duration-500 ease-in-out ${
+            navOpen ? "w-58 opacity-100" : "w-0 opacity-0"
+        } overflow-hidden`}>
 
         <div className="relative left-1/12 top-2 flex flex-col gap-y-3 gap-2 mt-3">
             <h3 className="text-[#878f9a] font-semibold text-sm">NAVIGATION</h3>
@@ -85,8 +81,8 @@ return (
             </button>
 
         </div>
-    </div>)
-        }
+    </div>
+
     </div>
     </div>
     
