@@ -21,6 +21,7 @@ import { LuWrench } from "react-icons/lu";
 import {FileText} from "lucide-react";
 import { LuUsers } from "react-icons/lu";
 import {User} from "lucide-react";
+import Image from "next/image";
 
 export default function Navigation(){
     const [navOpen, setNavOpen] = useState(true);
@@ -31,7 +32,7 @@ return (
     <div className="bg-white border-r-2 border-r-[#e2e8f0]">
 <div className={`sticky top-0 overflow-y-auto h-screen`} style={{scrollbarWidth: "none",}}>
         <div className="flex flex-row bg-[#2056df] justify-between">
-            {navOpen && (<img src="/logo.png" alt=""/>)}
+            {navOpen && (<Image src="/logo.png" alt=""/>)}
         <ArrowButton onclickHandle={onClickHandle} navStatus={navOpen}></ArrowButton>
         </div>
         <div  className={`transition-all duration-500 ease-in-out ${
