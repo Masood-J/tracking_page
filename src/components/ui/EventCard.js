@@ -11,19 +11,19 @@ export default function ProgressBarContainer(){
             <div className={`bg-[#eef2ff] p-3 border-2 rounded-xl border-[#c7d2fe]`}>
                 <div className={`flex flex-row justify-between`}>
                     <div className={`flex flex-row gap-2 items-center`}>
-                        <FaRegUserCircle color={`#c7d2fe`}></FaRegUserCircle>
+                        <FaRegUserCircle color={`#797cf1`}></FaRegUserCircle>
                         <h2 className={`text-black font-semibold`}>FMB125</h2>
                     </div>
-                    <h2>0h 43m</h2>
+                    <h2 className={`bg-[#c7d2fe] text-[#534fc3] rounded-md p-1`}>0h 43m</h2>
                 </div>
-                <div className={`flex flex-row justify-between text-[#a3a7b8] font-medium`}>
+                <div className={`flex flex-row justify-between text-[#6d88a1] text-sm font-medium`}>
                     <div className={`flex flex-row gap-2 items-center`}>
                         <p>Started: 10:13 AM</p>
                     </div>
                     <p>Route: Unknown Route</p>
                 </div>
                 <DotProgressV2></DotProgressV2>
-                <div className={`flex flex-row justify-between mt-6 text-sm`}>
+                <div className={`flex flex-row justify-between mt-2 text-sm text-[#6d88a1]`}>
 
                     <h3 className={`text-[#a3a7b8]`}>Start</h3>
                     <h4 className={`text-[#a3a7b8]`}>In Progress</h4>

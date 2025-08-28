@@ -6,6 +6,7 @@ export default function WeekEventsV3(props){
 
         <div className="flex flex-row justify-between ml-3">
             <div className={`mt-3`}>
+                {props.children}
                 <h1 className="text-black text-2xl font-bold">{props.unit}</h1>
                 <p className="text-gray-400 whitespace-nowrap">{props.totalT}</p>
                 <h3 className="text-black font-semibold mt-3">{props.trend}</h3>

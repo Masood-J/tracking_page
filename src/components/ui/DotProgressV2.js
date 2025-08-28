@@ -12,14 +12,14 @@ export default function DotProgressV2() {
                 styles={{
                     rail: {
                         background: "linear-gradient(90deg, #919bf7, #6e6eee)",
-                        height: 20,
+                        height: 10,
                     },
                     handle: {
-                        borderColor: "#902445",
-                        height: 10,
-                        width: 10,
-                        backgroundColor: "",
-                        marginTop:1,
+                        borderColor: "#ffffff",
+                        height: 15,
+                        width: 15,
+                        backgroundColor: "#6366f1",
+                        marginTop:-2,
                     },
                     track: {
                         backgroundColor: "transparent",

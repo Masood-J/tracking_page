@@ -147,12 +147,6 @@ export default function main(props){
             </div>
             {props.children}
 
-            <div className="h-96">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
 
         </div>
     )

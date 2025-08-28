@@ -32,7 +32,7 @@ return (
     <div className="bg-white border-r-2 border-r-[#e2e8f0]">
 <div className={`sticky top-0 overflow-y-auto h-screen`} style={{scrollbarWidth: "none",}}>
         <div className="flex flex-row bg-[#2056df] justify-between">
-            {navOpen && (<Image src="/logo.png" alt=""/>)}
+            {navOpen && (<Image src="/logo.png" alt="" width={150} height={150}/>)}
         <ArrowButton onclickHandle={onClickHandle} navStatus={navOpen}></ArrowButton>
         </div>
         <div  className={`transition-all duration-500 ease-in-out ${
