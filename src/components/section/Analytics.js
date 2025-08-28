@@ -25,6 +25,8 @@ import { LuHexagon } from "react-icons/lu";
 import WeekEventsV2 from "@/components/ui/WeekEventsV2";
 import { FcRefresh } from "react-icons/fc";
 import WeekEventsV3 from "@/components/ui/WeekEventsV3";
+import ChartV3 from "@/components/ui/ChartV3";
+import Chart from "@/components/ui/Chart";
 export default function Analytics(){
 
 
@@ -38,19 +40,18 @@ export default function Analytics(){
 
 
     return(
-        <div>
-        <div className="flex flex-row gap-3  mt-4">
+        <div className={`flex flex-col gap-5`}>
+        <div className="flex flex-row gap-3 mt-4 w-full flex-wrap">
             <Card title={`Safety Incidents`} desc={`Breakdown of safety violations`} icon={<TiWarningOutline></TiWarningOutline>}>
                 <div>
-                    <ResponsiveContainer width={250} height={250} className="">
-                        <LineChart className="" data={data}>
-                            <XAxis dataKey="month" />
-                            <YAxis />
-                            <Tooltip />
-                            <Line type="monotone" dataKey="sales" stroke="#3b82f6" />
-                            <ReferenceLine x={0} stroke="gray" strokeDasharray="5 5" />
-                        </LineChart>
-                    </ResponsiveContainer>
+                    <ChartV3 data={[
+                        { date: '2025-08-15', mileage: '0' },
+                        { date: '2025-08-16', mileage: '250' },
+                        { date: '2025-08-17', mileage: '500' },
+                        { date: '2025-08-18', mileage: '750' },
+                        { date: '2025-08-19', mileage: '1000' },
+                        { date: '2025-08-20', mileage: null }
+                    ]} dataType={`No mileage data availaible for IMEI devices`}></ChartV3>
                     <div className="flex flex-row items-center whitespace-nowrap">
                         <div className="bg-blue-600 w-6 h-3 mr-2"></div>
                         <h6 className="mr-2 text-xs">idling</h6>
@@ -104,7 +105,7 @@ export default function Analytics(){
                 <WeeklyGraph Event_Status={true} GraphColor={`bg-[#f97316]`}></WeeklyGraph>
             </Card>
         </div>
-            <div className="flex flex-row gap-3 max-h-90 mt-4">
+            <div className="flex flex-row gap-3 mt-4 w-full flex-wrap">
                 <Card CustomP={`p-0`}  title={`Harsh Braking Events`} margin={`mt-6 ml-6 rounded-t-2xl`} borderType={`rounded-t-2xl`} gradient={`bg-gradient-to-r from-[#fef1f1] to-[#fee3e3] pb-3`} h={`h-[388px]`}>
 
                     <WeekEvents trends={`Weekly Trend`} totalT={`Total this week`} trend={`Weekly Trend`}></WeekEvents> <div>
@@ -113,7 +114,7 @@ export default function Analytics(){
                 </div>
 
                 </Card>
-<div className={`min-w-60`}>
+<div className={``}>
                 <Card CustomP={`p-0`}  title={`Harsh Cornering Events`} h={`h-[388px]`} margin={`mt-6 ml-6 rounded-t-2xl`} borderType={`rounded-t-2xl`} gradient={`bg-gradient-to-r from-[#fffbe9] to-[#fef4cb] pb-3`} >
 
                     <div className="flex flex-row justify-between ml-3">
@@ -141,13 +142,15 @@ export default function Analytics(){
 
                     <EventStatus MarginT={``}></EventStatus>
                 </Card>
+                <div className={`flex-1`}>
                 <Card CustomP={`p-0`}  title={`Vehicle Idling`} margin={`mt-6 ml-6 rounded-t-2xl`} borderType={`rounded-t-2xl`} gradient={`bg-gradient-to-r from-[#ebf4ff] to-[#dceafe] pb-3`} h={`h-[388px]`} icon={<FiPause className={`mt-6 ml-6 mr-4`} color={`purple`}></FiPause>}>
                     <WeekEvents unit={`m`} trend={`Weekly Idle Time (minutes)`} totalT={`Total idle time this week`} status={true} perc={`0`} StatusB={`bg-[#fee2e2] text-red-900 font-semibold`} icon={<TrendingUp className={`w-3 h-3`}></TrendingUp>}></WeekEvents>
                     <WGraphV2></WGraphV2>
                 </Card>
+                </div>
 
             </div>
-            <div className={`flex flex-row gap-3 max-h-90 mt-10`}>
+            <div className={`flex flex-row gap-3 mb-5 w-full flex-wrap` }>
                 <Card title={`Sharp Turns Events`} icon={<FaArrowTurnUp color={`#ecbc26`}></FaArrowTurnUp>}>
                     <WeekEvents trend={`Weekly Trend`} totalT={`Total this week`} info={``}></WeekEvents>
                     <div className={`flex justify-end`}>

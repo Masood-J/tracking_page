@@ -7,7 +7,7 @@ export default function Card(props){
 
 
     return(
-        <div className={`flex-1 text-black border-2 border-[#e2e8f0] rounded-2xl min-h-[150px] ${props.mt} ${props.h} ${props.flexSize}  ${props.SetOverflow}`}>
+        <div className={`flex-1 min-w-0 text-black border-2 border-[#e2e8f0] rounded-2xl ${props.mt} ${props.h} ${props.flexSize}  ${props.SetOverflow}`}>
             <div className={`p-5  ${props.CustomP}  `}
                  style={{ padding: props.CustomP === 'p-0' ? '0' : undefined }}>
                 <div className={`flex flex-row justify-between ${props.borderType}  ${props.gradient} ${props.marginB}`}>

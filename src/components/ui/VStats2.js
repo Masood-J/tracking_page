@@ -11,7 +11,7 @@ export default function VStats2(props){
                 <div>
                     <p>{props.name}</p>
                     <div className={`flex flex-row items-center gap-1`}>
-                        <p className="text-gray-400 text-sm font-bold">
+                        <p className="text-gray-400 text-sm font-bold nowrap">
                             {props.status}</p>
                     </div>
                 </div>
@@ -21,7 +21,7 @@ export default function VStats2(props){
                 <h4 className={`font-semibold ${props.StatColor}`}>
                     {props.stat}</h4>
             </div>
-                <p className={`text-gray-400 font-medium`}>{props.time}</p>
+                <p className={`text-gray-400 font-medium whitespace-nowrap`}>{props.time}</p>
             </div>
 
         </div>

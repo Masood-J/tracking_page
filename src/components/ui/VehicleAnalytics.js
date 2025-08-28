@@ -35,10 +35,10 @@ export default function VehicleAnalytics(){
 <div className={`border-2 border-[#e2e8f0] rounded-2xl mt-6 pb-4 pr-3`}>
 <WeekEventsV3 status={true} StatusB={`bg-[#dbeafe]`} ValueColor={`text-[#3d56bb]`} EventValue={`11 satellites`} icon={<Signal className={`h-4 w-4 text-[#3d56bb]`}></Signal>}></WeekEventsV3>
     <div className={`flex flex-row gap-2 w-full justify-between pl-3 pr-10 mt-3`}>
-<FuelStat f1={`Ignition:`} f2={`Fuel Level:`} f2Val={` 72%`} f3={`Engine Temperature:`} f3Val={` 590 C`}></FuelStat>
+<FuelStat f1={`Ignition:`} f2={`Fuel Level:`} f2Val={` 72%`} f3={`Engine Temperature:`} f3Val={` 590°C`}></FuelStat>
         <FuelStat f1={`Battery:`} f1Val={` 0%`} f2={`Fuel Consumed:`} f2Val={`77916 L`} f3={`Accelerator Pedal Position:`} f3Val={`0%`}></FuelStat>
         <FuelStat f1={`Movement:`} f1Val={`-`} f2={`Speed:`} f2Val={`6 km/h`} f3={`Total Mileage(Counted):`} f3Val={`29297965 km`}></FuelStat>
-        <FuelStat f1={`Engine RPM:`} f1Val={`495 rpm`} f2={`Total Mileage:`} f2Val={`638352145 km`} f3={`Engine Temperature:`} f3Val={` 590 C`}></FuelStat>
+        <FuelStat f1={`Engine RPM:`} f1Val={`495 rpm`} f2={`Total Mileage:`} f2Val={`638352145 km`} f3={`Engine Temperature:`} f3Val={` 590°C`}></FuelStat>
         <FuelStat f1={`Engine Load:`} f1Val={`0%`} f2={`Main Power:`} f2Val={`0 V`}></FuelStat>
         <FuelStat f1={`Total Odometer:`} f1Val={`75,209,619 m`} f2={`Crash Detection:`} f2Val={`Normal`}></FuelStat>
     </div>

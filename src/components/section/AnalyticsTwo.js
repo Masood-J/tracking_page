@@ -33,8 +33,8 @@ export default function AnalyticsTwo(){
 
     return(
 
-        <div>
-            <div className={`flex flex-row gap-3 min-h-[430px] mt-10`}>
+        <div className={`flex flex-col gap-5`}>
+            <div className={`flex flex-row flex-wrap gap-3 w-full`}>
                 <Card title={`Driving Without Gps Lock`} icon={<Satellite className={`h-4 w-4`} ></Satellite>} >
                     <WeekEventsV3 status={true} unit={`0`} totalT={`Total this week`} EventValue={`00:00 min`} EventType={`Total duration`} ValueColor={`text-black`}></WeekEventsV3>
                 </Card>
@@ -54,19 +54,19 @@ export default function AnalyticsTwo(){
                     <h2 className={`text-black font-semibold mt-3`}>Duration Breakdown</h2>
                         <div className={`flex flex-row justify-between items-center mt-3`}>
                             <p className={`font-medium`}>3-4h</p>
-                            <div className={`bg-[#e0e7ff] rounded-xl pl-60 pr-2`}>
+                            <div className={`bg-[#e0e7ff] rounded-xl w-50 pr-2`}>
                                 <p className={`text-black text-end`}>0</p>
                             </div>
                         </div>
                         <div className={`flex flex-row justify-between items-center mt-3`}>
                             <p className={`font-medium`}>4-5h</p>
-                            <div className={`bg-[#e0e7ff] rounded-xl pl-60 pr-2`}>
+                            <div className={`bg-[#e0e7ff] rounded-xl w-50 pr-2`}>
                                 <p className={`text-black text-end`}>0</p>
                             </div>
                         </div>
                         <div className={`flex flex-row justify-between items-center mt-3`}>
                             <p className={`font-medium`}>&gt;5h</p>
-                            <div className={`bg-[#e0e7ff] rounded-xl  pl-60 pr-2`}>
+                            <div className={`bg-[#e0e7ff] rounded-xl w-50 pr-2`}>
                                 <p className={`text-black text-end`}>0</p>
                             </div>
                         </div>
@@ -75,7 +75,7 @@ export default function AnalyticsTwo(){
                     <div className={`flex flex-row gap-2 items-center mt-5 bg-[#eef2ff] border-[#e2e8f0] border-2 rounded-xl p-2`}>
                         <Clock className={`w-3 h-4 shrink-0 text-[#797cf1]`}></Clock>
                         <h2 className={`font-semibold text-sm`}>Recommended break:</h2>
-                        <p>15 minutes every 2 hours</p>
+                        <p className={`text-sm`}>15 minutes every 2 hours</p>
                     </div>
                     <div className={`mt-3`}>
                         <h2>Latest Event</h2>
@@ -87,7 +87,7 @@ export default function AnalyticsTwo(){
                     <ProgressBarContainer></ProgressBarContainer>
                 </Card>
             </div>
-            <div className={`flex flex-row gap-3 min-h-[370px] mt-10`}>
+            <div className={`flex flex-row flex-wrap gap-3 w-full`}>
                 <Card title={`Recent Alerts`} desc={`Latest alerts from your devices`} icon={<Bell className={`w-4 h-4 text-[#939eae]`}></Bell>}>
 <VStats2 name={`Truck #103`} status={`Low fuel level detected`} active={true} stat={`warning`} time={`10 minutes ago`} StatColor={`text-white`} ></VStats2>
                     <VStats2 name={`Sensor #A45`} status={`Connection lost`} active={false} stat={`critical`} time={`25 minutes ago`} StatColor={`text-white`}></VStats2>
@@ -122,13 +122,13 @@ export default function AnalyticsTwo(){
                             <h2 className={`font-bold text-3xl`}>0</h2>
                         </div>
                     </div>
-                    <div className={`flex flex-row gap-2 text-green-600 font-medium items-center mt-6 w-90`}>
+                    <div className={`flex flex-row gap-2 text-green-600 font-medium items-center mt-6`}>
                         <IoMdArrowUp className={`shrink-0`}></IoMdArrowUp>
                         <p className={``}>Driving behavior is improved by 0% compared to last period</p>
                     </div>
             </Card>
             </div>
-            <div className={`flex flex-row gap-3 min-h-[400px] mt-10`}>
+            <div className={`flex flex-row flex-wrap gap-3 w-full`}>
                 <Card title={`Motion State`} desc={`Vehicle movement status`} icon={<div className={`bg-[#f0fdf4] pt-3 pl-1 pr-1 rounded-xl`}>
                     <h3 className={`text-green-600 text-sm font-semibold`}>ONLINE DATA</h3>
                 </div>}>
@@ -147,7 +147,7 @@ export default function AnalyticsTwo(){
                     </div>
                 </Card>
             </div>
-            <div className={`flex flex-row gap-3 min-h-[350px] mt-10`}>
+            <div className={`flex flex-row flex-wrap gap-3 w-full`}>
                 <Card title={`Connection State`} desc={`Device connectivity status`} icon={<div className={`bg-[#f0fdf4] pt-3 pl-1 pr-1 rounded-xl`}>
                     <h3 className={`text-green-600 text-sm font-semibold`}>ONLINE DATA</h3>
                 </div>}>
@@ -168,7 +168,7 @@ export default function AnalyticsTwo(){
                 </Card>
 
             </div>
-            <div className={`flex flex-row gap-3 min-h-[350px] mt-10`}>
+            <div className={`flex flex-row flex-wrap gap-3 w-full`}>
                 <Card title={`Fuel Consumption Chart`} desc={`Daily fuel consumption`}>
 <Chart data={[
     { date: '2025-08-15', mileage: '1' },
@@ -187,7 +187,7 @@ export default function AnalyticsTwo(){
     {value:0},{value:40},{value:80},{value:120},{value:160}]}></ChartV2>
             </Card>
             </div>
-            <div className={`flex flex-row gap-3 min-h-[350px] mt-10`}>
+            <div className={`flex flex-row flex-wrap gap-3 w-full`}>
                 <Card title={`Top Units By Mileage`} desc={`Vehicles with highes mileage`}>
                     <ChartV2 data={[
                         {value:6500},{value:6900},{value:7300},{value:8000}]}></ChartV2>

@@ -14,8 +14,8 @@ export default function WeekEventsV2(props){
             </div>
             {weekStatus && (
                 <div>
-                    <div className={`${props.StatusB} text-[#48505c] font-medium rounded-3xl mt-4 flex flex-row items-center`}>
-                        <h3 className={`font-bold`}>{props.EventType}</h3>
+                    <div className={`${props.StatusB} text-[#48505c] font-medium rounded-3xl mt-4 ml-12 flex flex-row items-center`}>
+                        <h3 className={`font-semibold`}>{props.EventType}</h3>
                         {props.icon}
                         {props.perc}
                     </div></div>
