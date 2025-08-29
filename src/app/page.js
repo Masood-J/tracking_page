@@ -6,8 +6,7 @@ import AnalyticsTwo from "@/components/section/AnalyticsTwo";
 
 export default function Home() {
   return (
-    <div className="flex flex-row">
-        <Navigation></Navigation>
+    <div className="flex">
         <Main>
             <Analytics></Analytics>
             <AnalyticsTwo></AnalyticsTwo>

@@ -1,3 +1,4 @@
+"use client";
 import {getImgProps} from "next/dist/shared/lib/get-img-props";
 import {bars4} from '@heroicons/react/24/outline';
 import {useState} from "react";
@@ -22,8 +23,10 @@ import {FileText} from "lucide-react";
 import { LuUsers } from "react-icons/lu";
 import {User} from "lucide-react";
 import Image from "next/image";
+import {usePathname} from "next/navigation"
 
 export default function Navigation(){
+    const pathname = usePathname();
     const [navOpen, setNavOpen] = useState(true);
     function onClickHandle() {
         setNavOpen((prev) => !prev);
@@ -41,7 +44,7 @@ return (
 
         <div className="relative left-1/12 top-2 flex flex-col gap-y-3 gap-2 mt-3">
             <h3 className="text-[#878f9a] font-semibold text-sm">NAVIGATION</h3>
-            <NavLink title={`Dashboard`} icon={<MdGridOn color={`black`}></MdGridOn>}></NavLink>
+            <NavLink title={`Dashboard`} navigationLink={`/`} linkStat={true} icon={<MdGridOn color={`black`}></MdGridOn>}></NavLink>
             <NavLink title={`Tracking Dashboard`} icon={<NavIc className={`w-4 h-4`}></NavIc>} >
                 <div className={`flex flex-row justify-end w-full`}>
                     <ChevronDown className={``}></ChevronDown>
@@ -56,7 +59,7 @@ return (
 
            </NavLink>
             <NavLink title={`Assets`} icon={<Package className={`h-4 w-4`}></Package>}></NavLink>
-            <NavLink title={`Drivers`} icon={<UserRound className={`h-4 w-4`}></UserRound>}></NavLink>
+            <NavLink title={`Drivers`} navigationLink={`/drivers`} linkStat={true} icon={<UserRound className={`h-4 w-4`}></UserRound>}></NavLink>
             <NavLink title={`Alerts`} icon={<FiAlertCircle></FiAlertCircle>}></NavLink>
             <NavLink title={`Configurations`} icon={<MdOutlineSettings></MdOutlineSettings>}></NavLink>
            <NavLink title={`SIM Cards`} icon={<LuCpu></LuCpu>}></NavLink>

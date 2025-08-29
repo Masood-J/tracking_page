@@ -115,7 +115,7 @@ export default function Analytics(){
 
                 </Card>
 <div className={``}>
-                <Card CustomP={`p-0`}  title={`Harsh Cornering Events`} h={`h-[388px]`} margin={`mt-6 ml-6 rounded-t-2xl`} borderType={`rounded-t-2xl`} gradient={`bg-gradient-to-r from-[#fffbe9] to-[#fef4cb] pb-3`} >
+                <Card CustomP={`p-0`}  title={`Harsh Cornering Events`} h={`h-[388px]`} margin={`mt-6 ml-6 pr-3 rounded-t-2xl`} borderType={`rounded-t-2xl`} gradient={`bg-gradient-to-r from-[#fffbe9] to-[#fef4cb] pb-3`} >
 
                     <div className="flex flex-row justify-between ml-3">
                         <WeekEvents totalT={`Total this week`}></WeekEvents>

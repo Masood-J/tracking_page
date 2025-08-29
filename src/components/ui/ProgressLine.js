@@ -6,11 +6,11 @@ let PercentVal=props.percent;
         <div>
             <div className={`flex flex-row justify-between ${props.TextColor} mb-2`}>
         <h3>{props.name}</h3>
-            <p>{PercentVal}</p>
+            <p>{PercentVal}{props.stat}</p>
         </div>
         <Line
             percent={props.percent}
-            strokeWidth={2}
+            strokeWidth={1}
             strokeColor={`${props.Color}`}
             trailColor="#f1f5f9"
         />

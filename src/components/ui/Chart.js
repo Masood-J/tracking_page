@@ -4,7 +4,7 @@ export default function Chart(props){
     const data =props.data;
     return(
         <div className={`flex flex-col justify-center items-center`}>
-            <LineChart width={600} height={300} data={data} margin={{ top: 5, right:0, bottom: 5, left: 0 }}>
+            <LineChart width={500} height={300} data={data} margin={{ top: 5, right:0, bottom: 5, left: 0 }}>
                 <CartesianGrid stroke="#aaa" strokeDasharray="5 5" vertical={false} />
                 <Line type="monotone" dataKey="mileage" stroke="transparent" strokeWidth={2} name="My data series name" />
                 <XAxis dataKey="date" tick={{ fontSize: 13 }}/>
