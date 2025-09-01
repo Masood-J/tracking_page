@@ -5,7 +5,7 @@ export default function ProgressLine(props){
     return(
         <div>
             <div className={`flex flex-row justify-between ${props.TextColor} mb-2`}>
-                <h3 className={`text-black font-light`}>{props.name}</h3>
+                <h3 className={`text-black font-light`}>Step {props.name} of 5</h3>
                 <p className={`text-gray-400 text-sm font-bold`}>{PercentVal}{props.stat}</p>
             </div>
             <Line
