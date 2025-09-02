@@ -9,6 +9,7 @@ import StepFour from "@/components/DriverUi/section/StepFour";
 import StepFive from "@/components/DriverUi/section/StepFive";
 import {ArrowLeft} from "lucide-react";
 import {ArrowRight} from "lucide-react";
+import {Save} from "lucide-react";
 export default function DriverForm({UpdateProgress,UpdateStep}){
 const [step,updateStep]=useState(0);
 const steps=[StepOne,StepTwo,StepThree,StepFour,StepFive];
@@ -146,6 +147,7 @@ trainingName:Yup.string().required(),
                 License: "",
                 IssueCountry: "",
                 IssueState: "",
+                IssueDate:"",
                 Expiry: "",
                 LicenseImg: null,
                 VisaType: "",
@@ -182,7 +184,7 @@ trainingName:Yup.string().required(),
             {({ isSubmitting,setFieldValue }) => (
                 <Form>
                     <StepComponent setFieldValue={setFieldValue}/>
-                    <div className={`border-t-2 border-[#e2e8f0] p-6 flex flex-row justify-between items-center`}>
+                    <div className={`border-t-2 border-[#e2e8f0] bg-[#f9fafc] p-6 flex flex-row justify-between items-center`}>
 
                             <button className={`disabled:opacity-50 border-[#e2e8f0] border-2 rounded-xl p-2 text-gray-600 font-bold`} type="button" disabled={step === 0} onClick={() =>{ updateStep(step - 1);
                             UpdateProgress(prevStat=>prevStat-20);
@@ -194,12 +196,12 @@ trainingName:Yup.string().required(),
                                 </div>
                             </button>
 
-                        <button className={`text-white font-semibold bg-[#2563eb] p-2 pl-3 pr-3 rounded-xl`} type="button" onClick={() =>{ updateStep(step + 1);
+                        <button className={`text-white font-semibold ${IslastStep ? "bg-[#1ca04c] ":"bg-[#2563eb]"} p-2 pl-3 pr-3 rounded-xl`} type="button" onClick={() =>{ updateStep(step + 1);
                         UpdateProgress(prevStat=>prevStat+20);
                         UpdateStep(prevState=>prevState+1);
                         window.scrollTo({ top: 0, behavior: "smooth" });}} disabled={isSubmitting}>
                             <div className={`flex flex-row items-center gap-2`}>
-                           <h3> {IslastStep ? "Submit" : "Next"}</h3>
+                           <h3 className={``}> {IslastStep ?<div className={`flex flex-row items-center gap-2`}><Save className={`h-4 w-4`}></Save> Update Driver</div>: "Next"}</h3>
                                 <ArrowRight className={`h-4 w-4`}></ArrowRight>
                             </div>
                         </button>
