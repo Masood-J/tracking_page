@@ -13,7 +13,7 @@ export default function DateSelect({placeholder}){
                 selected={selectedDate}
                 onChange={(date) => setSelectedDate(date)}
                 placeholderText="Pick a date"
-                className="flex-1 w-full outline-none font-medium placeholder-black"
+                className="flex-1 w-full outline-none font-medium placeholder-gray-300 min-w-30"
                 dateFormat="dd/MM/yyyy"      />
         </div>
     )

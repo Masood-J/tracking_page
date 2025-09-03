@@ -34,15 +34,16 @@ export default function Navigation(){
 return (
     <div className="bg-white border-r-2 border-r-[#e2e8f0]">
 <div className={`sticky top-0 overflow-y-auto h-screen`} style={{scrollbarWidth: "none",}}>
-        <div className="flex flex-row bg-[#2056df] justify-between">
-            {navOpen && (<Image src="/logo.png" alt="" width={150} height={150}/>)}
+        <div className={`fixed z-10 ${navOpen?"w-58":""} md:static flex flex-row bg-[#2056df] justify-between`}>
+            {navOpen && (
+                <div className={`flex shrink-0`}><Image src="/logo.png" alt="" width={150} height={150}/></div>)}
         <ArrowButton onclickHandle={onClickHandle} navStatus={navOpen}></ArrowButton>
         </div>
-        <div  className={`transition-all duration-500 ease-in-out ${
-            navOpen ? "w-58 opacity-100" : "w-0 opacity-0"
-        } overflow-hidden`}>
+        <div  className={`transition-all duration-500 ease-in-out bg-white opacity-100 ${
+            navOpen ? "fixed z-9 top-10 md:static w-58 opacity-100 overflow-hidden" : "w-0 opacity-0"
+        }h-screen overflow-y-auto`}>
 
-        <div className="relative left-1/12 top-2 flex flex-col gap-y-3 gap-2 mt-3">
+        <div className="relative left-1/12 top-2 flex flex-col gap-y-3 gap-2 mt-3 overflow-y-auto">
             <h3 className="text-[#878f9a] font-semibold text-sm">NAVIGATION</h3>
             <NavLink title={`Dashboard`} navigationLink={`/`} linkStat={true} icon={<MdGridOn color={`black`}></MdGridOn>}></NavLink>
             <NavLink title={`Tracking Dashboard`} icon={<NavIc className={`w-4 h-4`}></NavIc>} >

@@ -1,53 +1,75 @@
 import {FileText, Upload, User} from "lucide-react";
 import FormCard from "@/components/DriverUi/ui/FormCard";
 import {Award} from "lucide-react";
-import {ErrorMessage, Field} from "formik";
+import {ErrorMessage, Field,FieldArray} from "formik";
 import {Plus} from "lucide-react";
 import DateSelect from "@/components/DriverUi/ui/DateSelect";
-export default function StepFive(){
+import {X} from "lucide-react";
+export default function StepFive({setFieldValue,values}) {
 
     return(
         <div>
         <FormCard title={`Training & Certifications`} desc={`Professional development and qualifications`} icon={<Award className={`text-white`}></Award>}></FormCard>
             <div className={`flex flex-col  mt-6 gap-5 pl-8 pr-8 pb-8`}>
-                <div className={`flex flex-row items-center justify-between`}>
-                    <div className={`flex flex-row gap-2 items-center`}>
-                    <Award className={`h-5 w-5 text-[#c0a462]`}></Award>
-                    <h3 className={`text-black font-medium text-xl`}>Training & Certifications</h3>
-                </div>
-                    <button className={`flex flex-row gap-2 items-center border-[#e2e8f0] rounded-xl p-1 pl-2 pr-2 border-1 font-semibold text-black`}>
-                        <Plus className={`w-4 h-4`}></Plus>
-                        <h3>Add Training</h3>
-                    </button>
-                </div>
-                <div className={`flex flex-col gap-5 p-3 border-l-4 border-l-blue-600 border-2 rounded-xl border-[] rounded-l-xl`}>
 
-<h3 className={`text-black`}>Training Record #1</h3>
+                <FieldArray name={`trainings`}>
+
+                    {({push,remove})=>(
+
+<>
+    <div className={`flex flex-row items-center justify-between`}>
+        <div className={`flex flex-row gap-2 items-center`}>
+            <Award className={`h-5 w-5 text-[#c0a462]`}></Award>
+            <h3 className={`text-black font-medium text-xl`}>Training & Certifications</h3>
+        </div>
+        <button className={`flex flex-row gap-2 items-center border-[#e2e8f0] rounded-xl p-1 pl-2 pr-2 border-1 font-semibold text-black hover:bg-gray-200`}
+        onClick={()=> push({
+            trainingName: "",
+            TrainingProvider: "",
+            License: "",
+            IssueCountry: "",
+            TrainingCertImg: null,
+            AddNotes: ""
+        })}>
+            <Plus className={`w-4 h-4`}></Plus>
+            <h3>Add Training</h3>
+        </button>
+    </div>
+{values.trainings.map((training, index) => (
+                        <div key={index} className={`flex flex-col gap-5 p-3 border-l-4 border-l-blue-600 border-2 rounded-xl border-[] rounded-l-xl`}>
 
 
-                    <div className={`flex flex-row gap-2 justify-between w-full text-black`}>
+                            <div className={`flex flex-row justify-between mx-3`}>
+<h3 className={`text-black`}>Training Record #{index+1}</h3>
+
+                                <button onClick={()=>{remove(index)}}><X className={`w-4 h-4 text-red-700 rounded-md hover:bg-gray-200`}></X></button>
+
+                        </div>
+
+
+                    <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                         <div className={`flex-1`}>
                             <label htmlFor="trainingName" className={`block`}>Training Name<span className="text-red-500 ml-1">*</span></label>
-                            <Field name="trainingName" type="text" className="border border-gray-300 p-2 w-full rounded-xl"></Field>
+                            <Field name="trainingName" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
                             <ErrorMessage name="trainingName" component="span" className={`text-red-700`}></ErrorMessage>
                         </div>
                         <div className={`flex-1`}>
                             <label htmlFor="TrainingProvider" className={`block`}>Training Provider<span className="text-red-500 ml-1">*</span></label>
-                            <Field name="TrainingProvider" type="text" className="border border-gray-300 p-2 w-full rounded-xl"></Field>
+                            <Field name="TrainingProvider" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
                             <ErrorMessage name="TrainingProvider" component="span"></ErrorMessage>
                         </div>
                     </div>
-                    <div className={`flex flex-row gap-2 justify-between w-full text-black`}>
+                    <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                         <div className={`flex-1`}>
                             <label htmlFor="License" className={`block`}>Completion Date<span className="text-red-500 ml-1">*</span></label>
-                            <Field name="License" className="border border-gray-300 p-2 w-full rounded-xl">
+                            <Field name="License" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                                 {(field)=>(<DateSelect></DateSelect>)}
                             </Field>
                             <ErrorMessage name="License" component="span" className={`text-red-700`}></ErrorMessage>
                         </div>
                         <div className={`flex-1`}>
                             <label htmlFor="IssueCountry" className={`block`}>Expiry Date:</label>
-                            <Field name="IssueCountry" as="select" className="border border-gray-300 p-2 w-full rounded-xl">
+                            <Field name="IssueCountry" as="select" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                                 {(field)=>(<DateSelect></DateSelect>)}
                             </Field>
                             <ErrorMessage name="IssueCountry" component="span"></ErrorMessage>
@@ -71,15 +93,20 @@ export default function StepFive(){
                         />
                         <ErrorMessage name="TrainingCertImg" component="span"></ErrorMessage>
                     </div>
-                    <div className={`flex flex-row gap-2 justify-between w-full text-black`}>
+                    <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                         <div className={`flex-1`}>
                             <label htmlFor="AddNotes" className={`block`}>Additional Notes:</label>
-                            <Field placeholder={`Enter any additional notes or special requirments...`} name="AddNotes" type="text" className="border border-gray-300 p-2 w-full rounded-xl pb-15"></Field>
+                            <Field placeholder={`Enter any additional notes or special requirments...`} name="AddNotes" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl pb-15"></Field>
                             <ErrorMessage name="AddNotes" component="span" className={`text-red-700`}></ErrorMessage>
                         </div>
 
                     </div>
                 </div>
+        ))}
+            </>
+
+            )}
+                </FieldArray>
             </div>
         </div> )
 }

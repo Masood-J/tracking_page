@@ -11,15 +11,15 @@ export default function StepTwo(){
         <div>
         <FormCard title={`Address & Contact`} desc={`Location and Communication Information`} icon={<MapPin className={`text-white`}></MapPin>}></FormCard>
             <div className={`flex flex-col items-center mt-6 gap-5 p-8`}>
-                <div className={`flex flex-row gap-2 justify-between w-full text-black`}>
+                <div className={`flex flex-row gap-2 flex-wrap justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="email" className={`block`}>Email Address<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="email" type="text" className="border border-gray-300 p-2 w-full rounded-xl"></Field>
+                        <Field name="email" type="text" className="border border-gray-300 p-2 w-full rounded-xl min-w-30"></Field>
                         <ErrorMessage name="email" component="span" className={`text-red-700`}></ErrorMessage>
                     </div>
                     <div className={`flex-1`}>
                         <label htmlFor="phone" className={`block`}>Phone Number<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="phone">
+                        <Field name="phone" className={`min-w-30`}>
                             {({ field, form }) => (
                                 <PhoneInput
                                     country={"us"}                     // default country
@@ -34,7 +34,7 @@ export default function StepTwo(){
                         <ErrorMessage name="phone" component="span"></ErrorMessage>
                     </div>
                 </div>
-                <div className={`flex flex-row gap-2 justify-between w-full text-black`}>
+                <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="alt_phone" className={`block`}>Alternate Phone:</label>
                         <Field name="alt_phone" className="border border-gray-300 p-2 w-full rounded-xl">
@@ -51,21 +51,19 @@ export default function StepTwo(){
                         </Field>
                         <ErrorMessage name="alt_phone" component="span" className={`text-red-700`}></ErrorMessage>
                     </div>
-                    <div className={`flex-1`}>
 
-                    </div>
                 </div>
-                <div className={`flex flex-row gap-2 justify-between w-full text-black`}>
+                <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="Address" className={`block`}>Street Address<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="Address" type="text" className="border border-gray-300 p-2 w-full rounded-xl"></Field>
+                        <Field name="Address" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
                         <ErrorMessage name="Address" component="span" className={`text-red-700`}></ErrorMessage>
                     </div>
                 </div>
-                <div className={`flex flex-row gap-2 justify-between w-full text-black`}>
+                <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="Country" className={`block`}>Country<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="Country" as="select" className="border border-gray-300 p-2 w-full rounded-xl">
+                        <Field name="Country" as="select" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                             <option value="pk">Pakistan</option>
                             <option value="Kw">Kuwait</option>
                             <option value="UAE">UAE</option>
@@ -74,7 +72,7 @@ export default function StepTwo(){
                     </div>
                     <div className={`flex-1`}>
                         <label htmlFor="State" className={`block`}>State/Province<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="State" as="select" className="border border-gray-300 p-2 w-full rounded-xl">
+                        <Field name="State" as="select" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                             <option value="punjab">Punjab</option>
                             <option value="KPK">KPK</option>
                             <option value="Sindh">Sindh</option>
@@ -82,10 +80,10 @@ export default function StepTwo(){
                         <ErrorMessage name="State" component="span"></ErrorMessage>
                     </div>
                 </div>
-                <div className={`flex flex-row gap-2 justify-between w-full text-black`}>
+                <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="City" className={`block`}>City<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="City" as="select" className="border border-gray-300 p-2 w-full rounded-xl">
+                        <Field name="City" as="select" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                             <option value="lhr">Lahore</option>
                             <option value="bwp">Bahawalpur</option>
                             <option value="fsl">Faislabad</option>
@@ -95,7 +93,7 @@ export default function StepTwo(){
                     </div>
                     <div className={`flex-1`}>
                         <label htmlFor="ZIP" className={`block`}>ZIP/Postal Code:</label>
-                        <Field name="ZIP" type="text" className="border border-gray-300 p-2 w-full rounded-xl" placeholder={`Enter ZIP or postal code`}></Field>
+                        <Field name="ZIP" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl" placeholder={`Enter ZIP or postal code`}></Field>
                         <ErrorMessage name="ZIP" component="span"></ErrorMessage>
                     </div>
                 </div>

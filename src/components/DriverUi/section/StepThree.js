@@ -10,15 +10,15 @@ export default function StepThree(){
         <div>
         <FormCard title={`Employement Details`} desc={`Work-related information and position`} icon={<Briefcase className={`text-white`}></Briefcase>}></FormCard>
             <div className={`flex flex-col items-center mt-6 gap-5 p-8`}>
-                <div className={`flex flex-row gap-2 justify-between w-full text-black`}>
+                <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="EmployeeID" className={`block`}>Employee ID<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="EmployeeID" type="text" className="border border-gray-300 p-2 w-full rounded-xl"></Field>
+                        <Field name="EmployeeID" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
                         <ErrorMessage name="EmployeeID" component="span" className={`text-red-700`}></ErrorMessage>
                     </div>
                     <div className={`flex-1`}>
                         <label htmlFor="HireDate" className={`block`}>Hire Date<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="HireDate" type="date" className="border border-gray-300 p-2 w-full rounded-xl">
+                        <Field name="HireDate" type="date" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                             {(field)=>(
                                 <DateSelect></DateSelect>
                             )}
@@ -26,27 +26,27 @@ export default function StepThree(){
                         <ErrorMessage name="HireDate" component="span"></ErrorMessage>
                     </div>
                 </div>
-                <div className={`flex flex-row gap-2 justify-between w-full text-black`}>
+                <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="EmploymentType" className={`block`}>Employment Type<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="EmploymentType" type="text" className="border border-gray-300 p-2 w-full rounded-xl"></Field>
+                        <Field name="EmploymentType" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
                         <ErrorMessage name="EmploymentType" component="span" className={`text-red-700`}></ErrorMessage>
                     </div>
                     <div className={`flex-1`}>
                         <label htmlFor="Department" className={`block`}>Department<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="Department" type="text" className="border border-gray-300 p-2 w-full rounded-xl"></Field>
+                        <Field name="Department" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
                         <ErrorMessage name="Department" component="span"></ErrorMessage>
                     </div>
                 </div>
-                <div className={`flex flex-row gap-2 justify-between w-full text-black`}>
+                <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="Location" className={`block`}>Work Location:</label>
-                        <Field name="Location" type="text" className="border border-gray-300 p-2 w-full rounded-xl"></Field>
+                        <Field name="Location" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
                         <ErrorMessage name="Location" component="span" className={`text-red-700`}></ErrorMessage>
                     </div>
                     <div className={`flex-1`}>
                         <label htmlFor="ShiftPattern" className={`block`}>Phone Number:</label>
-                        <Field name="ShiftPattern" >
+                        <Field name="ShiftPattern" className={`min-w-30`} >
                             {({ field, form }) => (
                                 <PhoneInput
                                     country={"us"}                     // default country
@@ -61,13 +61,13 @@ export default function StepThree(){
                         <ErrorMessage name="ShiftPattern" component="span"></ErrorMessage>
                     </div>
                 </div>
-                <div className={`flex flex-row gap-2 justify-between w-full text-black`}>
+                <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="Salary" className={`block`}>Base Salary (Annual):</label>
-                        <Field name="Salary" type="text" className="border border-gray-300 p-2 w-full rounded-xl"></Field>
+                        <Field name="Salary" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
                         <ErrorMessage name="Salary" component="span" className={`text-red-700`}></ErrorMessage>
                     </div>
-                    <div className={`flex-1`}>
+                    <div className={`sm:flex-1`}>
                     </div>
                 </div>
             </div>

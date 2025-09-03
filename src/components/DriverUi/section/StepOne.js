@@ -49,19 +49,19 @@ export default function StepOne({setFieldValue}){
     <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
 <div className={`flex-1`}>
     <label htmlFor="firstName" className={`block`}>First Name<span className="text-red-500 ml-1">*</span></label>
-    <Field name="firstName" type="text" className="border border-gray-300 p-2 w-full rounded-xl"></Field>
+    <Field name="firstName" type="text" className="min-w-30 border border-gray-300 p-2 w-full rounded-xl"></Field>
     <ErrorMessage name="firstName" component="span" className={`text-red-700`}></ErrorMessage>
 </div>
     <div className={`flex-1`}>
         <label htmlFor="lastName" className={`block`}>Last Name<span className="text-red-500 ml-1">*</span></label>
-        <Field name="lastName" type="text" className="border border-gray-300 p-2 w-full rounded-xl"></Field>
+        <Field name="lastName" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
         <ErrorMessage name="lastName" component="span"></ErrorMessage>
     </div>
 </div>
     <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
         <div className={`flex-1`}>
             <label htmlFor="middleName" className={`block`}>Middle Name:</label>
-            <Field name="middleName" type="text" className="border border-gray-300 p-2 w-full rounded-xl"></Field>
+            <Field name="middleName" type="text" className="min-w-30 border border-gray-300 p-2 w-full rounded-xl"></Field>
             <ErrorMessage name="middleName" component="span"></ErrorMessage>
         </div>
         <div className={`flex-1`}>
@@ -95,7 +95,7 @@ export default function StepOne({setFieldValue}){
     <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
         <div className={`flex-1`}>
             <label htmlFor="National" className={`block`}>Nationality<span className="text-red-500 ml-1">*</span></label>
-            <Field name="National" as="select" className="border border-gray-300 p-2 w-full rounded-xl" placeholder="Select nationality">
+            <Field name="National" as="select" className="min-w-30 border border-gray-300 p-2 w-full rounded-xl" placeholder="Select nationality">
                 <option value="pakistan">Pakistani</option>
                 <option value="Kuwait">Kuwaitian</option>
             </Field>

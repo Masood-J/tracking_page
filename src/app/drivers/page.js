@@ -31,7 +31,7 @@ return(
             <div className={`border-2 border-[#e2e8f0] rounded-2xl min-h-50`}>
 <div className={`p-4`}>
 <ProgressLine name={step} percent={progress} Color={`#2563eb`} stat={`% Complete`}></ProgressLine>
-    <div className={`flex flex-row justify-between mt-3`}>
+    <div className={`flex flex-col justify-between mt-3 md:flex-row`}>
         <ProfileCard title={`Personal Information`} desc={`Basic personal details and identification`} stat={step==1} icon={<User className={``}></User>}></ProfileCard>
         <ProfileCard title={`Address & Contact`} desc={`Location and communication information`} stat={step==2} icon={<MapPin></MapPin>}></ProfileCard>
         <ProfileCard title={`Employment Details`} desc={`Work-related information and position`} stat={step==3} icon={<Briefcase></Briefcase>}></ProfileCard>

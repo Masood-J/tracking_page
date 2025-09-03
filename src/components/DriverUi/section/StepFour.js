@@ -16,15 +16,15 @@ export default function StepFour(){
                     <FileText className={`h-5 w-5 text-blue-500`}></FileText>
                     <h3 className={`text-black font-medium text-xl`}>Driver License Information</h3>
                 </div>
-                <div className={`flex flex-row gap-2 justify-between w-full text-black`}>
+                <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="License" className={`block`}>License Number<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="License" type="text" className="border border-gray-300 p-2 w-full rounded-xl"></Field>
+                        <Field name="License" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
                         <ErrorMessage name="License" component="span" className={`text-red-700`}></ErrorMessage>
                     </div>
                     <div className={`flex-1`}>
                         <label htmlFor="IssueCountry" className={`block`}>Issuing Country<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="IssueCountry" as="select" className="border border-gray-300 p-2 w-full rounded-xl">
+                        <Field name="IssueCountry" as="select" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                             <option value="pk">Pakistan</option>
                             <option value="afg">Afghanistan</option>
                             <option value="kwt">Kuwait</option>
@@ -33,10 +33,10 @@ export default function StepFour(){
                         <ErrorMessage name="IssueCountry" component="span"></ErrorMessage>
                     </div>
                 </div>
-                <div className={`flex flex-row gap-2 justify-between w-full text-black`}>
+                <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="IssueState" className={`block`}>State/Province<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="IssueState" as="select" className="border border-gray-300 p-2 w-full rounded-xl">
+                        <Field name="IssueState" as="select" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                             <option value="punjab">Punjab</option>
                             <option value="kpk">KPK</option>
                             <option value="Sindh">Sindh</option>
@@ -46,7 +46,7 @@ export default function StepFour(){
                     </div>
                     <div className={`flex-1`}>
                         <label htmlFor="IssueDate" className={`block`}>Issue Date<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="IssueDate" className="border border-gray-300 p-2 w-full rounded-xl">
+                        <Field name="IssueDate" className="border flex-wrap border-gray-300 p-2 w-full rounded-xl">
                             {(field)=>(
                                 <DateSelect/>
                             )}
@@ -54,10 +54,10 @@ export default function StepFour(){
                         <ErrorMessage name="IssueDate" component="span"></ErrorMessage>
                     </div>
                 </div>
-                <div className={`flex flex-row gap-2 justify-between w-full text-black`}>
+                <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="Expiry" className={`block`}>Expiry Date<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="Expiry" className="border border-gray-300 p-2 w-full rounded-xl">
+                        <Field name="Expiry" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                             {(field)=>(
                                 <DateSelect/>
                             )}
@@ -93,10 +93,10 @@ export default function StepFour(){
                     <FileText className={`h-5 w-5 text-blue-500`}></FileText>
                     <h3 className={`text-black font-medium text-xl`}>Visa Info</h3>
                 </div>
-                <div className={`flex flex-row gap-2 justify-between w-full text-black`}>
+                <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="VisaType" className={`block`}>Visa Type<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="VisaType" as="select" className="border border-gray-300 p-2 w-full rounded-xl">
+                        <Field name="VisaType" as="select" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                             <option value="work">Work</option>
                             <option value="Home">Travel</option>
                         </Field>
@@ -104,17 +104,17 @@ export default function StepFour(){
                     </div>
                     <div className={`flex-1`}>
                         <label htmlFor="Status" className={`block`}>Status<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="Status" as="select" className="border border-gray-300 p-2 w-full rounded-xl">
+                        <Field name="Status" as="select" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                             <option value="exp">Expired</option>
                             <option value="act">Active</option>
                         </Field>
                         <ErrorMessage name="IssueCountry" component="span"></ErrorMessage>
                     </div>
                 </div>
-                <div className={`flex flex-row gap-2 justify-between w-full text-black`}>
+                <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="VisaIssueCountry" className={`block`}>Issuing Country<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="VisaIssueCountry" as="select" className="border border-gray-300 p-2 w-full rounded-xl">
+                        <Field name="VisaIssueCountry" as="select" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                             <option value="pkr">Pakistan</option>
                             <option value="afg">Afghanistan</option>
                         </Field>
@@ -122,7 +122,7 @@ export default function StepFour(){
                     </div>
                     <div className={`flex-1`}>
                         <label htmlFor="VisaDate" className={`block`}>Issue Date<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="VisaDate" className="border border-gray-300 p-2 w-full rounded-xl">
+                        <Field name="VisaDate" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                             {(field)=>(
                                 <DateSelect></DateSelect>
                             )}
@@ -130,10 +130,10 @@ export default function StepFour(){
                         <ErrorMessage name="VisaDate" component="span"></ErrorMessage>
                     </div>
                 </div>
-                <div className={`flex flex-row gap-2 justify-between w-full text-black`}>
+                <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="VisaIssueCountry" className={`block`}>Expiry Date<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="VisaIssueCountry"  className="border border-gray-300 p-2 w-full rounded-xl">
+                        <Field name="VisaIssueCountry"  className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                             {(field)=>(
                                 <DateSelect></DateSelect>
                             )}
@@ -170,10 +170,10 @@ export default function StepFour(){
                     <FileText className={`h-5 w-5 text-green-600`}></FileText>
                     <h3 className={`text-black font-medium text-xl`}>Medical Information</h3>
                 </div>
-                <div className={`flex flex-row gap-2 justify-between w-full text-black`}>
+                <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="MedicalCertExpiry" className={`block`}>Medical Certificate Expiry<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="MedicalCertExpiry" type="date" className="border border-gray-300 p-2 w-full rounded-xl">
+                        <Field name="MedicalCertExpiry" type="date" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                             {(field)=>(
                                 <DateSelect></DateSelect>
                             )}
@@ -182,7 +182,7 @@ export default function StepFour(){
                     </div>
                     <div className={`flex-1`}>
                         <label htmlFor="BloodType" className={`block`}>Blood Type:</label>
-                        <Field name="BloodType" as="select" className="border border-gray-300 p-2 pb-3 w-full rounded-xl">
+                        <Field name="BloodType" as="select" className="border min-w-30 border-gray-300 p-2 pb-3 w-full rounded-xl">
                             <option value="a+">A+</option>
                             <option value="b+">B+</option>
                             <option value="O-">O-</option>
@@ -217,22 +217,22 @@ export default function StepFour(){
                     <User className={`h-5 w-5 text-red-600`}></User>
                     <h3 className={`text-black font-medium text-xl`}>Emergency Contact</h3>
                 </div>
-                <div className={`flex flex-row gap-2 justify-between w-full text-black`}>
+                <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="ContactName" className={`block`}>Contact Name<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="ContactName" type="text" className="border border-gray-300 p-2 w-full rounded-xl"></Field>
+                        <Field name="ContactName" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
                         <ErrorMessage name="ContactName" component="span" className={`text-red-700`}></ErrorMessage>
                     </div>
                     <div className={`flex-1`}>
                         <label htmlFor="Relationship" className={`block`}>Relationship<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="Relationship" type="text" className="border border-gray-300 p-2 w-full rounded-xl"></Field>
+                        <Field name="Relationship" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
                         <ErrorMessage name="Relationship" component="span"></ErrorMessage>
                     </div>
                 </div>
-                <div className={`flex flex-row gap-2 justify-between w-full text-black`}>
+                <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="Phone" className={`block`}>Contact Phone<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="Phone" >
+                        <Field name="Phone" className={`min-w-30`} >
                             {({ field, form }) => (
                                 <PhoneInput
                                     country={"us"}                     // default country
@@ -246,7 +246,7 @@ export default function StepFour(){
                         </Field>
                         <ErrorMessage name="Phone" component="span" className={`text-red-700`}></ErrorMessage>
                     </div>
-                    <div className={`flex-1`}>
+                    <div className={`sm:flex-1`}>
                       </div>
                 </div>
             </div>
