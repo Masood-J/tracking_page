@@ -6,7 +6,7 @@ import AnalyticsTwo from "@/components/section/AnalyticsTwo";
 
 export default function Home() {
   return (
-    <div className="flex">
+    <div className="flex-1 ">
         <Main>
             <Analytics></Analytics>
             <AnalyticsTwo></AnalyticsTwo>

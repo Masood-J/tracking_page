@@ -34,13 +34,13 @@ export default function Navigation(){
 return (
     <div className="bg-white border-r-2 border-r-[#e2e8f0]">
 <div className={`sticky top-0 overflow-y-auto h-screen`} style={{scrollbarWidth: "none",}}>
-        <div className={`fixed z-10 ${navOpen?"w-58":""} md:static flex flex-row bg-[#2056df] justify-between`}>
+        <div className={` ${navOpen?"w-58":""} md:static flex flex-row bg-[#2056df] justify-between`}>
             {navOpen && (
                 <div className={`flex shrink-0`}><Image src="/logo.png" alt="" width={150} height={150}/></div>)}
         <ArrowButton onclickHandle={onClickHandle} navStatus={navOpen}></ArrowButton>
         </div>
         <div  className={`transition-all duration-500 ease-in-out bg-white opacity-100 ${
-            navOpen ? "fixed z-9 top-10 md:static w-58 opacity-100 overflow-hidden" : "w-0 opacity-0"
+            navOpen ? "md:static w-58 opacity-100 overflow-hidden" : "w-0 opacity-0"
         }h-screen overflow-y-auto`}>
 
         <div className="relative left-1/12 top-2 flex flex-col gap-y-3 gap-2 mt-3 overflow-y-auto">
