@@ -41,7 +41,7 @@ export default function Analytics(){
 
     return(
         <div className={`flex flex-col gap-5`}>
-        <div className="flex flex-row gap-3 mt-4 w-full flex-wrap">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mt-4 w-full">
             <Card title={`Safety Incidents`} desc={`Breakdown of safety violations`} icon={<TiWarningOutline></TiWarningOutline>}>
                 <div>
                     <ChartV3 data={[
@@ -105,7 +105,7 @@ export default function Analytics(){
                 <WeeklyGraph Event_Status={true} GraphColor={`bg-[#f97316]`}></WeeklyGraph>
             </Card>
         </div>
-            <div className="flex flex-row gap-3 mt-4 w-full flex-wrap">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mt-4 w-full">
                 <Card CustomP={`p-0`}  title={`Harsh Braking Events`} margin={`mt-6 ml-6 rounded-t-2xl`} borderType={`rounded-t-2xl`} gradient={`bg-gradient-to-r from-[#fef1f1] to-[#fee3e3] pb-3`} h={`h-[388px]`}>
 
                     <WeekEvents trends={`Weekly Trend`} totalT={`Total this week`} trend={`Weekly Trend`}></WeekEvents> <div>
@@ -150,7 +150,7 @@ export default function Analytics(){
                 </div>
 
             </div>
-            <div className={`flex flex-row gap-3 mb-5 w-full flex-wrap` }>
+            <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mb-5 w-full` }>
                 <Card title={`Sharp Turns Events`} icon={<FaArrowTurnUp color={`#ecbc26`}></FaArrowTurnUp>}>
                     <WeekEvents trend={`Weekly Trend`} totalT={`Total this week`} info={``}></WeekEvents>
                     <div className={`flex justify-end`}>

@@ -61,15 +61,15 @@ export default function main(props){
                 </div>
             </header>
 
-            <Card mt={`mt-10`} h={`h-45`}  title="Fleet Summary" desc="Key metrics at a glance" icon={<LuTruck></LuTruck>}>
-                    <div className="flex flex-row flex-wrap gap-3 mt-3">
+            <Card mt={`mt-10`} h={``}  title="Fleet Summary" desc="Key metrics at a glance" icon={<LuTruck></LuTruck>}>
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 mt-3">
                         <FleetCard title="Total Distance" value="0 km" icon={<Route className={`text-blue-500 h-4 w-4`}/>}></FleetCard>
                         <FleetCard title="Fleet Size" value="2" icon={<LuTruck color="blue"/>}></FleetCard>
                         <FleetCard title="In Maintenance" value="0" icon={<LuWrench color="orange"/>}></FleetCard>
                     </div>
             </Card>
 
-            <div className="flex flex-row flex-wrap justify-center gap-2 mt-4 text-black">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mt-4 text-black">
                 <Card title="Driver Safety Score" desc="Overall fleet safety rating" icon={<MdOutlineShield></MdOutlineShield>}>
                     <div className="flex flex-col items-center justify-center gap-2">
 <CircleBar styles={`border-[#f1f5f9]`}>
@@ -93,7 +93,7 @@ export default function main(props){
 </div>
                 </Card>
             </div>
-            <div className="flex flex-row flex-wrap mt-3 rounded-md gap-3 h-[560px]" style={{}}>
+            <div className="grid grid-cols-1 lg:grid-cols-2 mt-3 rounded-md gap-3" style={{}}>
                 <Map></Map>
                 <Card CustomP={`p-0`} h={`h-full`}>
                     <div className="h-10 ml-5">

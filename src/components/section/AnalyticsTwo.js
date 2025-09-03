@@ -34,7 +34,7 @@ export default function AnalyticsTwo(){
     return(
 
         <div className={`flex flex-col gap-5`}>
-            <div className={`flex flex-row flex-wrap gap-3 w-full`}>
+            <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 w-full`}>
                 <Card title={`Driving Without Gps Lock`} icon={<Satellite className={`h-4 w-4`} ></Satellite>} >
                     <WeekEventsV3 status={true} unit={`0`} totalT={`Total this week`} EventValue={`00:00 min`} EventType={`Total duration`} ValueColor={`text-black`}></WeekEventsV3>
                 </Card>
@@ -87,7 +87,7 @@ export default function AnalyticsTwo(){
                     <ProgressBarContainer></ProgressBarContainer>
                 </Card>
             </div>
-            <div className={`flex flex-row flex-wrap gap-3 w-full`}>
+            <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 w-full`}>
                 <Card title={`Recent Alerts`} desc={`Latest alerts from your devices`} icon={<Bell className={`w-4 h-4 text-[#939eae]`}></Bell>}>
 <VStats2 name={`Truck #103`} status={`Low fuel level detected`} active={true} stat={`warning`} time={`10 minutes ago`} StatColor={`text-white`} ></VStats2>
                     <VStats2 name={`Sensor #A45`} status={`Connection lost`} active={false} stat={`critical`} time={`25 minutes ago`} StatColor={`text-white`}></VStats2>
@@ -128,7 +128,7 @@ export default function AnalyticsTwo(){
                     </div>
             </Card>
             </div>
-            <div className={`flex flex-row flex-wrap gap-3 w-full`}>
+            <div className={`grid grid-cols-1 md:grid-cols-2 gap-3 w-full`}>
                 <Card title={`Motion State`} desc={`Vehicle movement status`} icon={<div className={`bg-[#f0fdf4] pt-3 pl-1 pr-1 rounded-xl`}>
                     <h3 className={`text-green-600 text-sm font-semibold`}>ONLINE DATA</h3>
                 </div>}>
@@ -147,7 +147,7 @@ export default function AnalyticsTwo(){
                     </div>
                 </Card>
             </div>
-            <div className={`flex flex-row flex-wrap gap-3 w-full`}>
+            <div className={`grid grid-cols-1 md:grid-cols-2 gap-3 w-full`}>
                 <Card title={`Connection State`} desc={`Device connectivity status`} icon={<div className={`bg-[#f0fdf4] pt-3 pl-1 pr-1 rounded-xl`}>
                     <h3 className={`text-green-600 text-sm font-semibold`}>ONLINE DATA</h3>
                 </div>}>
@@ -168,7 +168,7 @@ export default function AnalyticsTwo(){
                 </Card>
 
             </div>
-            <div className={`flex flex-row flex-wrap gap-3 w-full`}>
+            <div className={`grid grid-cols-1 md:grid-cols-2 gap-3 w-full`}>
                 <Card title={`Fuel Consumption Chart`} desc={`Daily fuel consumption`}>
 <Chart data={[
     { date: '2025-08-15', mileage: '1' },
@@ -187,7 +187,7 @@ export default function AnalyticsTwo(){
     {value:0},{value:40},{value:80},{value:120},{value:160}]}></ChartV2>
             </Card>
             </div>
-            <div className={`flex flex-row flex-wrap gap-3 w-full`}>
+            <div className={`grid grid-cols-1 md:grid-cols-2 gap-3 w-full`}>
                 <Card title={`Top Units By Mileage`} desc={`Vehicles with highes mileage`}>
                     <ChartV2 data={[
                         {value:6500},{value:6900},{value:7300},{value:8000}]}></ChartV2>
