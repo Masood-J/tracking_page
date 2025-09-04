@@ -12,11 +12,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Tracking App",
-  description: "We are tracking you.",
-    viewport: "width=device-width, initial-scale=1.0",
+    title: "Tracking App",
+    description: "We are tracking you.",
 };
-
+export const viewport = {
+    width: "device-width",
+    initialScale: 1.0,
+    maximumScale: 1.0,
+    userScalable: false,
+};
 export default function RootLayout({ children }) {
   return (
     <html lang="en">

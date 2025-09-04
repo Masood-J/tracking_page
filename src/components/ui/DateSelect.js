@@ -8,7 +8,7 @@ export default function CalendarInput() {
     const [startDate, endDate] = dates;
 
     return (
-        <div className="p-2 border-1 border-gray-400 rounded-xl flex items-center gap-2 text-black w-75">
+        <div className="p-2 border-1 border-gray-400 rounded-xl flex items-center gap-2 text-black">
             <span className="text-gray-600"><FiCalendar color={`black`}></FiCalendar></span>
             <DatePicker
                 selectsRange={true}
@@ -16,7 +16,8 @@ export default function CalendarInput() {
                 endDate={endDate}
                 onChange={(update) => setDates(update)}
                 placeholderText="Pick a date range"
-                className="outline-none font-medium placeholder-black"
+                className="outline-none font-medium placeholder-black w-35 md:w-full"
+                portalId={null}
             />
         </div>
     );

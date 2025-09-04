@@ -37,26 +37,25 @@ export default function main(props){
 
     return (
         <div className="flex-1 bg-white px-5 min-h-screen">
-            <header className="pt-5 pl-5 flex flex-row justify-between">
+            <header className="pt-5 pl-0 md:pl-5 flex flex-row justify-between">
                 <div className="font-black">
-                    <h1 className="text-4xl text-black">Dashboard</h1>
-                    <p className="text-[gray] font-medium">Comprehensive Fleet Management & Analytics</p>
+                    <h1 className="sm:text-2xl md:text-4xl text-black">Dashboard</h1>
+                    <p className="text-xs text-[gray] md:text-base font-medium ">Comprehensive Fleet Management & Analytics</p>
                 </div>
                 <div className="Buttons flex flex-col gap-2">
-                    <div className="flex flex-row gap-3 mr-5">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mr-5">
                         <DashButton title={`Refresh Dashboard`}></DashButton>
                         <DashButton title={`Edit Layout`}></DashButton>
                         <DashButton1>
-<div className="flex flex-row items-center gap-4"><FiPlus />
-<p className={`text-nowrap`}>Add Widget</p>
+<div className="flex flex-row items-center gap-3">
+    <FiPlus />
+<p className={`text-xs md:text-base`}>Add Widget</p>
 </div></DashButton1>
 
                     </div>
-                    <div className="flex flex-row gap-3 mt-3 ml-8">
-
+                    <div className="flex flex-row flex-wrap justify-end gap-3 mt-3 mr-5">
                         <DateSelect></DateSelect>
-
-                        <button className="bg-blue-600 p-1.5 rounded-xl disabled:opacity-50 font-semibold" disabled >Apply Filters</button>
+                        <button className="bg-blue-600 p-1.5 rounded-xl disabled:opacity-50 font-xs md:font-semibold" disabled >Apply Filters</button>
                     </div>
                 </div>
             </header>
