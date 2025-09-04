@@ -33,19 +33,20 @@ export default function Navigation(){
     }
 return (
     <div className="bg-white border-r-2 border-r-[#e2e8f0]">
-<div className={`sticky top-0 overflow-y-auto h-screen`} style={{scrollbarWidth: "none",}}>
-        <div className={` ${navOpen?"w-58":""} md:static flex flex-row bg-[#2056df] justify-between`}>
+<div className={`fixed md:sticky top-0 overflow-y-auto h-screen`} style={{scrollbarWidth: "none",}}>
+        <div className={` ${navOpen?"w-58":""} md: flex flex-row bg-[#2056df] justify-between`}>
             {navOpen && (
                 <div className={`flex shrink-0`}><Image src="/logo.png" alt="" width={150} height={150}/></div>)}
         <ArrowButton onclickHandle={onClickHandle} navStatus={navOpen}></ArrowButton>
         </div>
+    <div>
         <div  className={`transition-all duration-500 ease-in-out bg-white opacity-100 ${
             navOpen ? "md:static w-58 opacity-100 overflow-hidden" : "w-0 opacity-0"
-        }h-screen overflow-y-auto`}>
+        } overflow-y-auto`}>
 
         <div className="relative left-1/12 top-2 flex flex-col gap-y-3 gap-2 mt-3 overflow-y-auto">
             <h3 className="text-[#878f9a] font-semibold text-sm">NAVIGATION</h3>
-            <NavLink title={`Dashboard`} navigationLink={`/`} linkStat={true} icon={<MdGridOn color={`black`}></MdGridOn>}></NavLink>
+            <NavLink title={`Dashboard`} navigationLink={`/`} setNavOp={setNavOpen} linkStat={true} icon={<MdGridOn color={`black`}></MdGridOn>}></NavLink>
             <NavLink title={`Tracking Dashboard`} icon={<NavIc className={`w-4 h-4`}></NavIc>} >
                 <div className={`flex flex-row justify-end w-full`}>
                     <ChevronDown className={``}></ChevronDown>
@@ -60,7 +61,7 @@ return (
 
            </NavLink>
             <NavLink title={`Assets`} icon={<Package className={`h-4 w-4`}></Package>}></NavLink>
-            <NavLink title={`Drivers`} navigationLink={`/drivers`} linkStat={true} icon={<UserRound className={`h-4 w-4`}></UserRound>}></NavLink>
+            <NavLink title={`Drivers`} navigationLink={`/drivers`} setNavOp={setNavOpen} linkStat={true} icon={<UserRound className={`h-4 w-4`}></UserRound>}></NavLink>
             <NavLink title={`Alerts`} icon={<FiAlertCircle></FiAlertCircle>}></NavLink>
             <NavLink title={`Configurations`} icon={<MdOutlineSettings></MdOutlineSettings>}></NavLink>
            <NavLink title={`SIM Cards`} icon={<LuCpu></LuCpu>}></NavLink>
@@ -87,7 +88,7 @@ return (
 
         </div>
     </div>
-
+</div>
     </div>
     </div>
     

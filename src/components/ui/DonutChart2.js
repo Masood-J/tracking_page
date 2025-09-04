@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell } from 'recharts';
+import { PieChart, Pie, Cell,ResponsiveContainer } from 'recharts';
 
 
 export default function DonutChart2(){
@@ -15,14 +15,15 @@ export default function DonutChart2(){
     return(
 
         <div className={`flex flex-row justify-center items-center mt-10`}>
-            <div className={``}>
-                <PieChart width={440} height={250}>
+            <ResponsiveContainer width={`100%`} height={250} className={``}>
+
+                <PieChart>
                     <Pie
                         data={data}
                         cx="50%"
                         cy="50%"
-                        innerRadius={60}
-                        outerRadius={90}
+                        innerRadius={`60%`}
+                        outerRadius={`90%`}
                         dataKey="value"
                         labelLine={false} // hides default line
                         label={({ x, y, name, value, index }) => (
@@ -56,7 +57,7 @@ export default function DonutChart2(){
                         {51}
                     </text>
                 </PieChart>
-            </div>
+            </ResponsiveContainer>
 
         </div>
     )

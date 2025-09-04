@@ -48,7 +48,7 @@ export default function main(props){
                         <DashButton title={`Edit Layout`}></DashButton>
                         <DashButton1>
 <div className="flex flex-row items-center gap-4"><FiPlus />
-<p>Add Widget</p>
+<p className={`text-nowrap`}>Add Widget</p>
 </div></DashButton1>
 
                     </div>

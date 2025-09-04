@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell } from 'recharts';
+import {PieChart, Pie, Cell, ResponsiveContainer} from 'recharts';
 
 
 export default function DonutChart(){
@@ -27,15 +27,15 @@ export default function DonutChart(){
     return(
 
         <div className={`flex flex-row justify-between mt-10`}>
-<div className={`ml-25`}>
-            <PieChart width={200} height={200}>
+<ResponsiveContainer width={`100%`} height={200} className={``}>
+            <PieChart>
                 <Pie
 
                     data={data}
                     cx="50%"
                     cy="50%"
-                    innerRadius={60}
-                    outerRadius={90}
+                    innerRadius={`60%`}
+                    outerRadius={`90%`}
                     dataKey="value"
                     labelLine={false}
                     label={({ cx, cy }) => (
@@ -56,17 +56,17 @@ export default function DonutChart(){
                     ))}
                 </Pie>
             </PieChart>
-</div>
+</ResponsiveContainer>
 <div>
 
 <div className={`flex flex-col gap-2`}>
     {dataType.map((value,index)=>{
-        return(<div key={index} className={`flex flex-row justify-between items-center gap-25`}><div  className={`flex flex-row items-center gap-2`}>
-            <div className={`h-3 w-3`} style={{backgroundColor:value.Color}}></div>
-            <p>{value.name}</p>
+        return(<div key={index} className={`flex flex-row justify-between items-center gap-10`}><div  className={`flex flex-row items-center gap-2`}>
+            <div className={`h-3 w-3 shrink-0`} style={{backgroundColor:value.Color}}></div>
+            <p className={`text-xs text-nowrap`}>{value.name}</p>
         </div>
-            <div>
-                <p>{value.value}</p>
+            <div >
+                <p className={`text-xs`}>{value.value}</p>
             </div>
         </div>)
     })}

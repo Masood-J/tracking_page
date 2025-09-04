@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 export default function ArrowButton({ onclickHandle, navStatus }) {
     return (
         <button
-            className="mr-4 ml-3 pl-3"
+            className={`flex justify-center items-center ${navStatus?"mr-5":""}`}
             onClick={onclickHandle}
         >
             {navStatus ? (
