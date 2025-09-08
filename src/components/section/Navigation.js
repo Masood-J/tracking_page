@@ -65,7 +65,7 @@ return (
             <NavLink title={`Alerts`} icon={<FiAlertCircle></FiAlertCircle>}></NavLink>
             <NavLink title={`Configurations`} icon={<MdOutlineSettings></MdOutlineSettings>}></NavLink>
            <NavLink title={`SIM Cards`} icon={<LuCpu></LuCpu>}></NavLink>
-            <NavLink title={`Reports`} icon={<FileText className={`h-4 w-4`}></FileText>}></NavLink>
+            <NavLink title={`Reports`} navigationLink={`/reports`} setNavOp={setNavOpen} linkStat={true} icon={<FileText className={`h-4 w-4`}></FileText>}></NavLink>
             <NavLink title={`Technicians`} icon={<LuWrench></LuWrench>}></NavLink>
         </div>
 

@@ -1,20 +1,34 @@
-import {FiCalendar} from "react-icons/fi";
+import { useState } from "react";
 import DatePicker from "react-datepicker";
-import {useState} from "react";
 import "react-datepicker/dist/react-datepicker.css";
-export default function DateSelect({placeholder}){
-    const [selectedDate, setSelectedDate] = useState(null);
+import { FiCalendar } from "react-icons/fi";
+import { format } from "date-fns";
 
-    return(
+export default function CalendarInput({onChange}) {
+    const [dates, setDates] = useState([null, null]);
+    const [startDate, endDate] = dates;
 
-        <div className="p-2 border-2 border-[#e2e8f0] rounded-xl flex items-center gap-2 text-black">
-            <span className="text-gray-600"><FiCalendar color={`black`}></FiCalendar></span>
+    const displayValue =
+        startDate && endDate
+            ? `${format(startDate, "MMM dd, yyyy")} - ${format(endDate, "MMM dd, yyyy")}`
+            : "";
+
+    return (
+        <div className="p-2 border border-gray-400 rounded-xl flex items-center gap-2 text-black">
+      <span className="text-gray-600">
+        <FiCalendar color="black" />
+      </span>
             <DatePicker
-                selected={selectedDate}
-                onChange={(date) => setSelectedDate(date)}
-                placeholderText="Pick a date"
-                className="flex-1 w-full outline-none font-medium placeholder-gray-300 min-w-30"
-                dateFormat="dd/MM/yyyy"      />
+                selectsRange
+                startDate={startDate}
+                endDate={endDate}
+                onChange={(update) => {setDates(update);
+                if(onChange) onChange({ startDate: update[0], endDate: update[1] });;}}
+                placeholderText="Pick a date range"
+                value={displayValue}
+                className="outline-none font-medium placeholder-black w-35 md:w-full"
+                portalId={null}
+            />
         </div>
-    )
+    );
 }

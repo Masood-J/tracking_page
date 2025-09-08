@@ -47,7 +47,7 @@ export default function main(props){
                         <DashButton title={`Refresh Dashboard`}></DashButton>
                         <DashButton title={`Edit Layout`}></DashButton>
                         <DashButton1>
-<div className="flex flex-row items-center gap-3">
+<div className="flex flex-row items-center justify-center gap-3">
     <FiPlus />
 <p className={`text-xs md:text-base`}>Add Widget</p>
 </div></DashButton1>
