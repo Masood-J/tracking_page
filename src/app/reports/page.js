@@ -25,128 +25,228 @@ export default function Reports() {
   const toggleDateExpanded = (id) => {
     setDateExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
   };
-    const dummyTrips = {
-        "Aug 04, 2025": [
-            {
-                sr: 1,
-                asset: "Toyota Corolla",
-                startTime: "08:00",
-                endTime: "09:30",
-                startLoc: "Raiwind",
-                endLoc: "Naz Town",
-                tripDuration: "1h 30m",
-                engineOn: "1h 40m",
-                inMotion: "1h 20m",
-                idling: "10m",
-                stops: "5m",
-                mileage: "20 km",
-            },
-            {
-                sr: 2,
-                asset: "Honda Civic",
-                startTime: "10:00",
-                endTime: "11:15",
-                startLoc: "Gulberg",
-                endLoc: "DHA",
-                tripDuration: "1h 15m",
-                engineOn: "1h 25m",
-                inMotion: "1h 10m",
-                idling: "15m",
-                stops: "2",
-                mileage: "18 km",
-            },
-        ],
-        "Aug 05, 2025": [
-            {
-                sr: 1,
-                asset: "Suzuki Swift",
-                startTime: "07:30",
-                endTime: "08:45",
-                startLoc: "Township",
-                endLoc: "Model Town",
-                tripDuration: "1h 15m",
-                engineOn: "1h 25m",
-                inMotion: "1h 10m",
-                idling: "10m",
-                stops: "1",
-                mileage: "22 km",
-            },
-            {
-                sr: 2,
-                asset: "Toyota Corolla",
-                startTime: "09:00",
-                endTime: "10:30",
-                startLoc: "Bahria Town",
-                endLoc: "Lahore Cantt",
-                tripDuration: "1h 30m",
-                engineOn: "1h 40m",
-                inMotion: "1h 20m",
-                idling: "15m",
-                stops: "3",
-                mileage: "25 km",
-            },
-        ],
-        "Aug 06, 2025": [
-            {
-                sr: 1,
-                asset: "Honda City",
-                startTime: "08:15",
-                endTime: "09:00",
-                startLoc: "Liberty",
-                endLoc: "Shalimar",
-                tripDuration: "45m",
-                engineOn: "50m",
-                inMotion: "40m",
-                idling: "10m",
-                stops: "1",
-                mileage: "12 km",
-            },
-        ],
-        "Aug 07, 2025": [
-            {
-                sr: 1,
-                asset: "Suzuki Alto",
-                startTime: "06:45",
-                endTime: "08:15",
-                startLoc: "Johar Town",
-                endLoc: "Garden Town",
-                tripDuration: "1h 30m",
-                engineOn: "1h 35m",
-                inMotion: "1h 25m",
-                idling: "10m",
-                stops: "2",
-                mileage: "28 km",
-            },
-            {
-                sr: 2,
-                asset: "Honda Civic",
-                startTime: "09:00",
-                endTime: "10:00",
-                startLoc: "Township",
-                endLoc: "DHA",
-                tripDuration: "1h",
-                engineOn: "1h 5m",
-                inMotion: "50m",
-                idling: "15m",
-                stops: "1",
-                mileage: "20 km",
-            },
-            {
-                sr: 3,
-                asset: "Toyota Corolla",
-                startTime: "11:00",
-                endTime: "12:30",
-                startLoc: "Gulberg",
-                endLoc: "Model Town",
-                tripDuration: "1h 30m",
-                engineOn: "1h 35m",
-                inMotion: "1h 20m",
-                idling: "15m",
-                stops: "3",
-                mileage: "25 km",
-            },
-        ],
-    };
+  const dummyTrips = {
+    1: {
+      // user value "1" = Noelle Simpson
+      "Aug 04, 2025": [
+        {
+          sr: 1,
+          asset: "Toyota Corolla",
+          startTime: "08:00",
+          endTime: "09:30",
+          startLoc: "Raiwind",
+          endLoc: "Naz Town",
+          tripDuration: "1h 30m",
+          engineOn: "1h 40m",
+          inMotion: "1h 20m",
+          idling: "10m",
+          stops: "5m",
+          mileage: "20 km",
+        },
+        {
+          sr: 2,
+          asset: "Honda Civic",
+          startTime: "10:00",
+          endTime: "11:15",
+          startLoc: "Gulberg",
+          endLoc: "DHA",
+          tripDuration: "1h 15m",
+          engineOn: "1h 25m",
+          inMotion: "1h 10m",
+          idling: "15m",
+          stops: "2",
+          mileage: "18 km",
+        },
+      ],
+      "Aug 05, 2025": [
+        {
+          sr: 1,
+          asset: "Suzuki Swift",
+          startTime: "07:30",
+          endTime: "08:45",
+          startLoc: "Township",
+          endLoc: "Model Town",
+          tripDuration: "1h 15m",
+          engineOn: "1h 25m",
+          inMotion: "1h 10m",
+          idling: "10m",
+          stops: "1",
+          mileage: "22 km",
+        },
+      ],
+    },
+    2: {
+      // user value "2" = Evan Allen
+      "Aug 04, 2025": [
+        {
+          sr: 1,
+          asset: "Honda City",
+          startTime: "09:00",
+          endTime: "10:00",
+          startLoc: "Liberty",
+          endLoc: "Shalimar",
+          tripDuration: "1h",
+          engineOn: "1h 10m",
+          inMotion: "50m",
+          idling: "10m",
+          stops: "1",
+          mileage: "15 km",
+        },
+      ],
+      "Aug 05, 2025": [
+        {
+          sr: 1,
+          asset: "Toyota Corolla",
+          startTime: "11:00",
+          endTime: "12:30",
+          startLoc: "Gulberg",
+          endLoc: "Model Town",
+          tripDuration: "1h 30m",
+          engineOn: "1h 35m",
+          inMotion: "1h 20m",
+          idling: "15m",
+          stops: "2",
+          mileage: "25 km",
+        },
+      ],
+    },
+    3: {
+      "Aug 04, 2025": [
+        {
+          sr: 1,
+          asset: "Honda City",
+          startTime: "09:00",
+          endTime: "10:00",
+          startLoc: "Liberty",
+          endLoc: "Shalimar",
+          tripDuration: "1h",
+          engineOn: "1h 10m",
+          inMotion: "50m",
+          idling: "10m",
+          stops: "1",
+          mileage: "15 km",
+        },
+      ],
+      "Aug 05, 2025": [
+        {
+          sr: 1,
+          asset: "Honda City",
+          startTime: "09:00",
+          endTime: "10:00",
+          startLoc: "Liberty",
+          endLoc: "Shalimar",
+          tripDuration: "1h",
+          engineOn: "1h 10m",
+          inMotion: "50m",
+          idling: "10m",
+          stops: "1",
+          mileage: "15 km",
+        },
+      ],
+    },
+    4: {
+      "Aug 04, 2025": [
+        {
+          sr: 1,
+          asset: "Honda City",
+          startTime: "09:00",
+          endTime: "10:00",
+          startLoc: "Liberty",
+          endLoc: "Shalimar",
+          tripDuration: "1h",
+          engineOn: "1h 10m",
+          inMotion: "50m",
+          idling: "10m",
+          stops: "1",
+          mileage: "15 km",
+        },
+      ],
+      "Aug 05, 2025": [
+        {
+          sr: 1,
+          asset: "Honda City",
+          startTime: "09:00",
+          endTime: "10:00",
+          startLoc: "Liberty",
+          endLoc: "Shalimar",
+          tripDuration: "1h",
+          engineOn: "1h 10m",
+          inMotion: "50m",
+          idling: "10m",
+          stops: "1",
+          mileage: "15 km",
+        },
+      ],
+    },
+    5: {
+      "Aug 04, 2025": [
+        {
+          sr: 1,
+          asset: "Honda City",
+          startTime: "09:00",
+          endTime: "10:00",
+          startLoc: "Liberty",
+          endLoc: "Shalimar",
+          tripDuration: "1h",
+          engineOn: "1h 10m",
+          inMotion: "50m",
+          idling: "10m",
+          stops: "1",
+          mileage: "15 km",
+        },
+      ],
+      "Aug 05, 2025": [
+        {
+          sr: 1,
+          asset: "Honda City",
+          startTime: "09:00",
+          endTime: "10:00",
+          startLoc: "Liberty",
+          endLoc: "Shalimar",
+          tripDuration: "1h",
+          engineOn: "1h 10m",
+          inMotion: "50m",
+          idling: "10m",
+          stops: "1",
+          mileage: "15 km",
+        },
+      ],
+    },
+    6: {
+      "Aug 04, 2025": [
+        {
+          sr: 1,
+          asset: "Honda City",
+          startTime: "09:00",
+          endTime: "10:00",
+          startLoc: "Liberty",
+          endLoc: "Shalimar",
+          tripDuration: "1h",
+          engineOn: "1h 10m",
+          inMotion: "50m",
+          idling: "10m",
+          stops: "1",
+          mileage: "15 km",
+        },
+      ],
+      "Aug 05, 2025": [
+        {
+          sr: 1,
+          asset: "Honda City",
+          startTime: "09:00",
+          endTime: "10:00",
+          startLoc: "Liberty",
+          endLoc: "Shalimar",
+          tripDuration: "1h",
+          engineOn: "1h 10m",
+          inMotion: "50m",
+          idling: "10m",
+          stops: "1",
+          mileage: "15 km",
+        },
+      ],
+    },
+  };
   let days = [];
   if (DateRanges.startDate && DateRanges.endDate) {
     days = eachDayOfInterval({
@@ -154,23 +254,22 @@ export default function Reports() {
       end: DateRanges.endDate,
     });
   }
-    const trips = [
-        {
-            sr: 1,
-            asset: "Toyota",
-            startTime: "08:00",
-            endTime: "09:30",
-            startLoc: "Raiwind",
-            endLoc: "Naz Town",
-            tripDuration: "1h 30m",
-            engineOn: "1h 40m",
-            inMotion: "1h 20m",
-            idling: "10m",
-            stops: "5m",
-            mileage: "20 km",
-        },
-
-    ];
+  const trips = [
+    {
+      sr: 1,
+      asset: "Toyota",
+      startTime: "08:00",
+      endTime: "09:30",
+      startLoc: "Raiwind",
+      endLoc: "Naz Town",
+      tripDuration: "1h 30m",
+      engineOn: "1h 40m",
+      inMotion: "1h 20m",
+      idling: "10m",
+      stops: "5m",
+      mileage: "20 km",
+    },
+  ];
   return (
     <div className={`bg-white flex-1`}>
       {/*Heading*/}
@@ -256,7 +355,7 @@ export default function Reports() {
                 onClick={() => {
                   toggleExpanded(item.value);
                 }}
-                className={`bg-[#2663e8] flex flex-row items-center justify-between p-2 rounded-xl`}
+                className={` flex flex-row items-center justify-between p-2 rounded-xl ${expanded[item.value] ? "bg-[#2663e8]" : "bg-gray-500 "}`}
               >
                 <div className={`flex flex-row items-center gap-2`}>
                   <Car className={`w-4 h-4 text-white`}></Car>
@@ -276,28 +375,41 @@ export default function Reports() {
               </div>
               {expanded[item.value] &&
                 days.map((day, i) => {
-                    const dateKey = `${item.value}-${format(day, "MMM dd, yyyy")}`;
-                    return(
-                  //Trip Date Section
+                  const dateKey = `${item.value}-${format(day, "MMM dd, yyyy")}`;
+                  return (
+                    //Trip Date Section
 
                     <div key={i}>
-                  <div
-                    className="p-2 border rounded-xl bg-[#2563ea] mt-2 mx-8 mb-2 flex flex-row justify-between"
-                    onClick={()=>(toggleDateExpanded(dateKey))}
-                  >
-                    <div
-                      className={`flex flex-row items-center gap-2 font-medium`}
-                    >
-                      <Calendar className={`w-4 h-4`}></Calendar>
-                      {format(day, "MMM dd, yyyy")}
-                    </div>
-                    <ChevronDown className={`w-4 h-4 text-white`}></ChevronDown>
-                  </div>
-                        {dateExpanded[dateKey] && (
-                            <TripAnalytics trips={dummyTrips[format(day, "MMM dd, yyyy")]} />
+                      <div
+                        className={`p-2 border rounded-xl mt-2 mx-8 mb-2 flex flex-row justify-between ${dateExpanded[dateKey] ? "bg-[#2663e8]" : "bg-gray-500"}`}
+                        onClick={() => toggleDateExpanded(dateKey)}
+                      >
+                        <div
+                          className={`flex flex-row items-center gap-2 font-medium`}
+                        >
+                          <Calendar className={`w-4 h-4`}></Calendar>
+                          {format(day, "MMM dd, yyyy")}
+                        </div>
+                        {dateExpanded[dateKey] ? (
+                          <ChevronUp
+                            className={`w-4 h-4 text-white`}
+                          ></ChevronUp>
+                        ) : (
+                          <ChevronDown className={`w-4 h-4 text-white`} />
                         )}
+                      </div>
+                      {dateExpanded[dateKey] && (
+                        <TripAnalytics
+                          trips={
+                            dummyTrips[item.value]?.[
+                              format(day, "MMM dd, yyyy")
+                            ]
+                          }
+                        />
+                      )}
                     </div>
-                )})}
+                  );
+                })}
             </div>
           ))}
         </div>
