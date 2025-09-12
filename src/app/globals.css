@@ -24,3 +24,12 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.ant-upload {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+.ant-upload-list {
+    text-align: center;
+}

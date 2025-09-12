@@ -38,7 +38,7 @@ const validationSchema=[
     //Step No.1
     Yup.object(
         {
-            ProfilePic:Yup.mixed()
+            profilePic:Yup.mixed()
                 .required()
                 .test(
                     "fileformat",
@@ -145,7 +145,7 @@ License:Yup.number().required(),
         <Formik
             initialValues={{
                 // Step 1
-                ProfilePic: null,
+                profilePic: null,
                 firstName: "",
                 lastName: "",
                 middleName:"",
@@ -198,11 +198,12 @@ License:Yup.number().required(),
             validationSchema={validationSchema[step]}
             onSubmit={(value,{setSubmitting}) => {
                 if(step<validationSchema.length-1){
+                    UpdateProgress(prevStat=>prevStat+20);
                     updateStep(step+1);
                     setSubmitting(false);
                 }
                 else{
-                    console.log("Form Submitted Successfully")
+                    console.log("Form Submitted Successfully",value)
                 }
             }}
        >
@@ -221,10 +222,7 @@ License:Yup.number().required(),
                                 </div>
                             </button>
 
-                        <button className={`text-white font-semibold ${IslastStep ? "bg-[#1ca04c] ":"bg-[#2563eb]"} py-2 pl-3 pr-3 rounded-xl`} type="button" onClick={() =>{
-                            if(step<4){updateStep(step + 1);
-                                UpdateProgress(prevStat=>prevStat+20);
-                                UpdateStep(prevState=>prevState+1);};
+                        <button className={`text-white font-semibold ${IslastStep ? "bg-[#1ca04c] ":"bg-[#2563eb]"} py-2 pl-3 pr-3 rounded-xl`} type="submit" onClick={() =>{
 
 
                         window.scrollTo({ top: 0, behavior: "smooth" });}} disabled={isSubmitting}>

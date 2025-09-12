@@ -11,7 +11,8 @@ import DateSingleSelect from "@/components/DriverUi/ui/DateSingleSelect";
 import ReactSelect from "@/components/DriverUi/ui/ReactSelect";
 import {useContext} from "react";
 import {ContextApi} from "@/components/DriverUi/section/DriverForm"
-export default function StepOne({setFieldValue}){
+import UploadPhoto from "@/components/DriverUi/ui/UploadPhoto";
+export default function StepOne({setFieldValue,values}){
 const nationalities = useContext(ContextApi);
     const [preview, setPreview] = useState(false);
     const GenderSelect=[
@@ -28,9 +29,9 @@ const nationalities = useContext(ContextApi);
         <div className={``}>
         <FormCard title={`Personal Information`} desc={`Basic personal details and identification`} icon={<User className={`text-white`}></User>}></FormCard>
 <div className={`flex flex-col items-center mt-6 gap-5 p-8`}>
-    <div className={`rounded-full bg-[#f3f4f6] ${preview?"":"p-5"} border-4 border-[#fefefe] shadow-md shadow-gray-300`}>
-        {preview?(<Image src={preview}
-                         alt="Profile Preview"
+    <div className={`rounded-full bg-[#f3f4f6] ${values.profilePic?"":"p-5"} border-4 border-[#fefefe] shadow-md shadow-gray-300`}>
+        {values.profilePic?(<Image src={URL.createObjectURL(values.profilePic)}
+                         alt="License Preview"
                          width={128}
                          height={128}
                          className="object-cover w-32 h-32 rounded-full"></Image>):(<CircleUser className={`w-20 h-20 text-gray-400`}></CircleUser>)}
@@ -51,11 +52,9 @@ const nationalities = useContext(ContextApi);
             type="file"
             className={`hidden`}
             onChange={(event) => {
-                const file = event.currentTarget.files[0];
-                setFieldValue("profilePic", event.currentTarget.files[0]);
-                if(file){
-              setPreview(URL.createObjectURL(file));
-            }}}
+                const file = event.currentTarget.files?.[0];
+                if (file) setFieldValue("profilePic", file);
+            }}
         />
         </div>
         <p className={`text-gray-400`}>JPG,PNG up to 5MB</p>
@@ -82,8 +81,11 @@ const nationalities = useContext(ContextApi);
         <div className={`flex-1`}>
             <label htmlFor="DOB" className={`block`}>Date of Birth<span className="text-red-500 ml-1">*</span></label>
             <Field name="DOB" >
-                {(field)=>(
-                    <DateSingleSelect/>
+                {({field,form})=>(
+                    <DateSingleSelect
+                        value={field.value}
+                        onChange={(date) => form.setFieldValue(field.name, date)}
+                        />
                 )}
             </Field>
             <ErrorMessage name="DOB" component="span"></ErrorMessage>
@@ -94,7 +96,7 @@ const nationalities = useContext(ContextApi);
             <label htmlFor="status" className={`block`}>Status:</label>
             <Field name="status" className="border border-gray-300 p-2 w-full rounded-xl">
                 {({field,form})=>(
-                    <ReactSelect options={StatusSelect}></ReactSelect>
+                    <ReactSelect options={StatusSelect} instanceId="status-select-l"></ReactSelect>
                 )}
             </Field>
             <ErrorMessage name="status" component="span"></ErrorMessage>
@@ -103,7 +105,7 @@ const nationalities = useContext(ContextApi);
             <label htmlFor="gender" className={`block`}>Gender</label>
             <Field name="gender" className="border border-gray-300 p-2 w-full rounded-xl">
                 {({field,form})=>(
-<ReactSelect options={GenderSelect}></ReactSelect>
+<ReactSelect options={GenderSelect} instanceId="gender-select"></ReactSelect>
                 )}
             </Field>
             <ErrorMessage name="gender" component="span"></ErrorMessage>
@@ -114,7 +116,8 @@ const nationalities = useContext(ContextApi);
             <label htmlFor="National" className={`block`}>Nationality<span className="text-red-500 ml-1">*</span></label>
             <Field name="National" className="min-w-30 border border-gray-300 p-2 w-full rounded-xl" placeholder="Select nationality">
                 {({field,form})=>(
-                    <ReactSelect options={nationalities}></ReactSelect>
+                    <ReactSelect instanceId="status-select" options={nationalities} value={nationalities.find(option => option.value === field.value)}
+                                 onChange={(option) => form.setFieldValue(field.name, option.value)}></ReactSelect>
                 )}
             </Field>
             <ErrorMessage name="National" component="span"></ErrorMessage>

@@ -1,10 +1,10 @@
 
 import Select from 'react-select'
-export default function ReactSelect({ options, instanceId = "default-select", ...props }){
+export default function ReactSelect({ options, instanceId,onChange,value = "default-select", ...props }){
 
     return(
 
-            <Select options={options} instanceId={instanceId}  styles={{
+            <Select onChange={(data)=>onChange(data)} options={options} instanceId={instanceId} value={value}  styles={{
                 control: (baseStyles, state) => ({
                     ...baseStyles,
                     borderRadius:'10px',

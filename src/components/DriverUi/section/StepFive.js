@@ -6,6 +6,7 @@ import {Plus} from "lucide-react";
 import DateSelect from "@/components/DriverUi/ui/DateSelect";
 import {X} from "lucide-react";
 import DateSingleSelect from "@/components/DriverUi/ui/DateSingleSelect";
+import UploadFiles from "@/components/DriverUi/ui/UploadFiles";
 export default function StepFive({setFieldValue,values}) {
 
     return(
@@ -79,19 +80,8 @@ export default function StepFive({setFieldValue,values}) {
                     <div className={`flex-1 border-[#e2e8f0] rounded-xl border-2 p-4`}>
                         <label htmlFor="TrainingCertImg" className={`block`}>
                             <div className={`flex flex-col items-center gap-2`}>
-                                <Upload className={`h-10 w-10 text-gray-400`}></Upload>
-                                <h3 className={`text-black font-bold`}>Click to upload certificate</h3>
-                                <p className={`text-gray-400`}>PNG, JPG up to 10MB</p>
-                            </div></label>
-                        <input
-                            id="TrainingCertImg"
-                            name="TrainingCertImg"
-                            type="file"
-                            className={`hidden`}
-                            onChange={(event) => {
-                                setFieldValue("TrainingCertImg", event.currentTarget.files[0]);
-                            }}
-                        />
+                                <UploadFiles altTitle={true}></UploadFiles>     </div></label>
+                       
                         <ErrorMessage name="TrainingCertImg" component="span"></ErrorMessage>
                     </div>
                     <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>

@@ -20,8 +20,10 @@ export default function StepThree(){
                     <div className={`flex-1`}>
                         <label htmlFor="HireDate" className={`block`}>Hire Date<span className="text-red-500 ml-1">*</span></label>
                         <Field name="HireDate" type="date" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
-                            {(field)=>(
-                                <DateSingleSelect></DateSingleSelect>
+                            {({field,form})=>(
+                                <DateSingleSelect
+                                    value={field.value}
+                                    onChange={(date) => form.setFieldValue(field.name, date)}></DateSingleSelect>
                             )}
                         </Field>
                         <ErrorMessage name="HireDate" component="span"></ErrorMessage>

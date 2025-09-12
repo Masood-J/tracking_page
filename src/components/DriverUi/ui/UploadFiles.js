@@ -1,32 +1,37 @@
-import React, { useState } from "react";
-import Uploady, { useUploady, useItemFinishListener } from "@rpldy/uploady";
-import UploadButton from "@rpldy/upload-button";
+import React from 'react';
+import { Upload as UploadIcon } from "lucide-react";
+import { message, Upload } from 'antd';
+import '@ant-design/v5-patch-for-react-19';
+const UploadFiles = ({ title, onFileChange, altTitle }) => {
+    const handleChange = (info) => {
+        if (info.file.status === 'done' || info.file.status === 'uploading') {
+            const file = info.file.originFileObj; // ✅ real File object
+            if (onFileChange) onFileChange(file);
+        }
 
-function UploadedFilesList() {
-    const [uploadedFiles, setUploadedFiles] = useState([]);
-
-    useItemFinishListener((item) => {
-        setUploadedFiles((prev) => [...prev, item.file.name]);
-    });
+        if (info.file.status === 'done') {
+            message.success(`${info.file.name} uploaded successfully`);
+        } else if (info.file.status === 'error') {
+            message.error(`${info.file.name} upload failed.`);
+        }
+    };
 
     return (
-        <div>
-            {uploadedFiles.map((fileName, index) => (
-                <div key={index} style={{ marginTop: "5px" }}>
-                    ✅ {fileName} uploaded successfully
-                </div>
-            ))}
-        </div>
-    );
-}
-
-export default function UploadFiles() {
-    return (
-        <Uploady
-            destination={{ url: "/api/upload" }} // your backend endpoint
+        <Upload
+            name="file"
+            action="http://localhost:3000/api/upload"
+            onChange={handleChange}
+            showUploadList={false} // ✅ hide AntD's default preview list
         >
-            <UploadButton>Upload File</UploadButton>
-            <UploadedFilesList />
-        </Uploady>
+            <div className="flex flex-col items-center gap-2">
+                <UploadIcon className="h-16 w-16 text-gray-400" />
+                <h3 className={`text-black ${altTitle ? "text-base" : "text-base font-bold"}`}>
+                    {altTitle ? "Click to upload certificate" : `Upload ${title} Image`}
+                </h3>
+                <p className="text-gray-400">PNG, JPG up to 10MB</p>
+            </div>
+        </Upload>
     );
-}
+};
+
+export default UploadFiles;

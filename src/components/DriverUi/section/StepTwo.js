@@ -142,7 +142,10 @@ export default function StepTwo() {
                             value: _country.id,
                             label: _country.name,
                         }))}
-                        onChange={(e) => setCountry(e.value)}
+                        onChange={(e) => {
+                            setCountry(e.value);
+                            form.setFieldValue("Country", e.label);
+                        }}
                         styles={{
                             control: (baseStyles) => ({
                                 ...baseStyles,
@@ -172,7 +175,8 @@ export default function StepTwo() {
                             value: _state.id,
                             label: _state.name,
                         }))}
-                        onChange={(e) => setcurrentState(e.value)}
+                        onChange={(e) => {setcurrentState(e.value);
+                        form.setFieldValue("State", e.label);}}
                         styles={{
                             control: (baseStyles) => ({
                                 ...baseStyles,
@@ -202,7 +206,8 @@ export default function StepTwo() {
                             value: _city.id,
                             label: _city.name,
                         }))}
-                        onChange={(e) => setCity(e.value)}
+                        onChange={(e) => {setCity(e.value);
+                        form.setFieldValue("City", e.label);}}
                         styles={{
                             control: (baseStyles) => ({
                                 ...baseStyles,

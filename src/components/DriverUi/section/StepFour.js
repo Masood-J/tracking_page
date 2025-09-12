@@ -1,4 +1,4 @@
-import {User} from "lucide-react";
+import { CircleUser, User } from "lucide-react";
 import FormCard from "@/components/DriverUi/ui/FormCard";
 import {FileText} from "lucide-react";
 import {ErrorMessage, Field} from "formik";
@@ -13,8 +13,9 @@ import React, { useState, useEffect } from "react";
 import { GetCountries, GetState } from "react-country-state-city";
 import Select from "react-select";
 import UploadFiles from "@/components/DriverUi/ui/UploadFiles";
+import Image from "next/image";
 
-export default function StepFour({setFieldValue}){
+export default function StepFour({setFieldValue,values}){
 const nationalities=useContext(ContextApi);
     const [country, setCountry] = useState(null);
     const [currentState, setcurrentState] = useState(null);
@@ -39,6 +40,16 @@ const nationalities=useContext(ContextApi);
         {value:"work",label:"Work"},
         {value:"travel",label:"Travel"},
     ]
+    const BloodGroupOptions=[
+        { "value": 1, "label": "A+" },
+        { "value": 2, "label": "A-" },
+        { "value": 3, "label": "B+" },
+        { "value": 4, "label": "B-" },
+        { "value": 5, "label": "AB+" },
+        { "value": 6, "label": "AB-" },
+        { "value": 7, "label": "O+" },
+        { "value": 8, "label": "O-" }
+    ];
     return(
         <div>
         <FormCard title={`License & Medical`} desc={`Driving credentials and health records`} icon={<FileText className={`text-white`}></FileText>}></FormCard>
@@ -63,7 +74,8 @@ const nationalities=useContext(ContextApi);
                                         value: _country.id,
                                         label: _country.name,
                                     }))}
-                                    onChange={(e) => setCountry(e.value)}
+                                    onChange={(e) => {setCountry(e.value);
+                                    form.setFieldValue(field.name, e.label);}}
                                     styles={{
                                         control: (baseStyles) => ({
                                             ...baseStyles,
@@ -86,7 +98,8 @@ const nationalities=useContext(ContextApi);
                                         value: _state.id,
                                         label: _state.name,
                                     }))}
-                                    onChange={(e) => setcurrentState(e.value)}
+                                    onChange={(e) => {setcurrentState(e.value);
+                                        form.setFieldValue(field.name, e.label);}}
                                     styles={{
                                         control: (baseStyles) => ({
                                             ...baseStyles,
@@ -101,8 +114,10 @@ const nationalities=useContext(ContextApi);
                     <div className={`flex-1`}>
                         <label htmlFor="IssueDate" className={`block`}>Issue Date<span className="text-red-500 ml-1">*</span></label>
                         <Field name="IssueDate" className="border flex-wrap border-gray-300 p-2 w-full rounded-xl">
-                            {(field)=>(
-                                <DateSingleSelect/>
+                            {({field,form})=>(
+                                <DateSingleSelect
+                                    value={field.value}
+                                    onChange={(date) => form.setFieldValue(field.name, date)}/>
                             )}
                         </Field>
                         <ErrorMessage name="IssueDate" component="span"></ErrorMessage>
@@ -112,8 +127,10 @@ const nationalities=useContext(ContextApi);
                     <div className={`flex-1`}>
                         <label htmlFor="Expiry" className={`block`}>Expiry Date<span className="text-red-500 ml-1">*</span></label>
                         <Field name="Expiry" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
-                            {(field)=>(
-                                <DateSingleSelect/>
+                            {({field,form})=>(
+                                <DateSingleSelect
+                                    value={field.value}
+                                    onChange={(date) => form.setFieldValue(field.name, date)}/>
                             )}
                         </Field>
                         <ErrorMessage name="Expiry" component="span"></ErrorMessage>
@@ -126,18 +143,30 @@ const nationalities=useContext(ContextApi);
                     <div className={`flex-1 border-[#e2e8f0] rounded-xl border-2 p-4`}>
                         <label htmlFor="LicenseImg" className={`block`}>
                         <div className={`flex flex-col items-center gap-2`}>
+                            <Field name="LicenseImg">
+                                {({ field, form }) => (
+                                    <div className="flex flex-col items-center gap-2">
+                                        {form.values.LicenseImg ? (
+                                            <Image
+                                                src={URL.createObjectURL(form.values.LicenseImg)}
+                                                alt="License Preview"
+                                                width={128}
+                                                height={128}
+                                                className="object-cover w-32 h-32"
+                                            />
 
-                            <UploadFiles></UploadFiles>
+                                        ) : (
+                                            <div />
+                                        )}
+
+                                        <UploadFiles
+                                            title="License"
+                                            onFileChange={(file) => form.setFieldValue("LicenseImg", file)}
+                                        />
+                                    </div>
+                                )}
+                            </Field>
                         </div></label>
-                        <input
-                            id="LicenseImg"
-                            name="LicenseImg"
-                            type="file"
-                            className={`hidden`}
-                            onChange={(event) => {
-                                setFieldValue("LicenseImg", event.currentTarget.files[0]);
-                            }}
-                        />
                         <ErrorMessage name="LicenseImg" component="span"></ErrorMessage>
                     </div>
                 </div>
@@ -151,7 +180,9 @@ const nationalities=useContext(ContextApi);
                         <label htmlFor="VisaType" className={`block`}>Visa Type<span className="text-red-500 ml-1">*</span></label>
                         <Field name="VisaType"  className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                             {({field,form})=>(
-                                <ReactSelect options={VisaTypeOptions}/>
+                                <ReactSelect options={VisaTypeOptions}
+                                             value={VisaTypeOptions.find(option => option.value === field.value)}
+                                             onChange={(option) => form.setFieldValue(field.name, option.value)}/>
                                 )}
                         </Field>
                         <ErrorMessage name="VisaType" component="span" className={`text-red-700`}></ErrorMessage>
@@ -160,7 +191,9 @@ const nationalities=useContext(ContextApi);
                         <label htmlFor="Status" className={`block`}>Status<span className="text-red-500 ml-1">*</span></label>
                         <Field name="Status" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                             {({field,form})=>(
-                                <ReactSelect options={StatusSelect}/>
+                                <ReactSelect options={StatusSelect}
+                                             value={StatusSelect.find(option => option.value === field.value)}
+                                             onChange={(option) => form.setFieldValue(field.name, option.value)}/>
                             )}
                         </Field>
                         <ErrorMessage name="IssueCountry" component="span"></ErrorMessage>
@@ -190,8 +223,10 @@ const nationalities=useContext(ContextApi);
                     <div className={`flex-1`}>
                         <label htmlFor="VisaDate" className={`block`}>Issue Date<span className="text-red-500 ml-1">*</span></label>
                         <Field name="VisaDate" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
-                            {(field)=>(
-                                <DateSingleSelect></DateSingleSelect>
+                            {({field,form})=>(
+                                <DateSingleSelect
+                                    value={field.value}
+                                    onChange={(date) => form.setFieldValue(field.name, date)}></DateSingleSelect>
                             )}
                         </Field>
                         <ErrorMessage name="VisaDate" component="span"></ErrorMessage>
@@ -201,8 +236,10 @@ const nationalities=useContext(ContextApi);
                     <div className={`flex-1`}>
                         <label htmlFor="VisaIssueCountry" className={`block`}>Expiry Date<span className="text-red-500 ml-1">*</span></label>
                         <Field name="VisaIssueCountry"  className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
-                            {(field)=>(
-                                <DateSingleSelect></DateSingleSelect>
+                            {({field,form})=>(
+                                <DateSingleSelect
+                                    value={field.value}
+                                    onChange={(date) => form.setFieldValue(field.name, date)}></DateSingleSelect>
                             )}
                         </Field>
                         <ErrorMessage name="VisaType" component="span" className={`text-red-700`}></ErrorMessage>
@@ -216,19 +253,7 @@ const nationalities=useContext(ContextApi);
                     <div className={`flex-1 border-[#e2e8f0] rounded-xl border-2 p-4`}>
                         <label htmlFor="VisaIMG" className={`block`}>
                             <div className={`flex flex-col items-center gap-2`}>
-                                <Upload className={`h-16 w-16 text-gray-400`}></Upload>
-                                <h3 className={`text-black font-bold`}>Upload Visa Image</h3>
-                                <p className={`text-gray-400`}>PNG, JPG up to 10MB</p>
-                            </div></label>
-                        <input
-                            id="VisaIMG"
-                            name="VisaIMG"
-                            type="file"
-                            className={`hidden`}
-                            onChange={(event) => {
-                                setFieldValue("VisaIMG", event.currentTarget.files[0]);
-                            }}
-                        />
+                                <UploadFiles title={`Visa`} onFileChange={(file) => setFieldValue("VisaIMG", file)}></UploadFiles>          </div></label>
                         <ErrorMessage name="VisaIMG" component="span"></ErrorMessage>
                     </div>
                 </div>
@@ -241,19 +266,22 @@ const nationalities=useContext(ContextApi);
                     <div className={`flex-1`}>
                         <label htmlFor="MedicalCertExpiry" className={`block`}>Medical Certificate Expiry<span className="text-red-500 ml-1">*</span></label>
                         <Field name="MedicalCertExpiry" type="date" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
-                            {(field)=>(
-                                <DateSingleSelect></DateSingleSelect>
+                            {({field,form})=>(
+                                <DateSingleSelect
+                                    value={field.value}
+                                    onChange={(date) => form.setFieldValue(field.name, date)}></DateSingleSelect>
                             )}
                         </Field>
                         <ErrorMessage name="MedicalCertExpiry" component="span" className={`text-red-700`}></ErrorMessage>
                     </div>
                     <div className={`flex-1`}>
                         <label htmlFor="BloodType" className={`block`}>Blood Type:</label>
-                        <Field name="BloodType" as="select" className="border min-w-30 border-gray-300 p-2 pb-3 w-full rounded-xl">
-                            <option value="a+">A+</option>
-                            <option value="b+">B+</option>
-                            <option value="O-">O-</option>
-                            <option value="O+"></option>
+                        <Field name="BloodType" className="border min-w-30 border-gray-300 p-2 pb-3 w-full rounded-xl">
+                            {({field,form})=>(
+                                <ReactSelect options={BloodGroupOptions}
+                                             value={BloodGroupOptions.find(option => option.value === field.value)}
+                                             onChange={(option) => form.setFieldValue(field.name, option.value)}></ReactSelect>
+                            )}
                         </Field>
                         <ErrorMessage name="BloodType" component="span"></ErrorMessage>
                     </div>
@@ -263,19 +291,9 @@ const nationalities=useContext(ContextApi);
                     <div className={`flex-1 border-[#e2e8f0] rounded-xl border-2 p-4`}>
                         <label htmlFor="LicenseImg" className={`block`}>
                             <div className={`flex flex-col items-center gap-2`}>
-                                <Upload className={`h-16 w-16 text-gray-400`}></Upload>
-                                <h3 className={`text-black font-bold`}>Upload Medical Certificate</h3>
-                                <p className={`text-gray-400`}>PNG, JPG up to 10MB</p>
+
+                                <UploadFiles title={`Medical`} onFileChange={(file) => setFieldValue("MedicalCertIMG", file)}></UploadFiles>
                             </div></label>
-                        <input
-                            id="MedicalCertIMG"
-                            name="MedicalCertIMG"
-                            type="file"
-                            className={`hidden`}
-                            onChange={(event,setFieldValue) => {
-                                setFieldValue("MedicalCertIMG", event.currentTarget.files[0]);
-                            }}
-                        />
                         <ErrorMessage name="MedicalCertIMG" component="span"></ErrorMessage>
                     </div>
                 </div>
