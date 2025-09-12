@@ -1,7 +1,7 @@
 
 import {Formik,Form,Field,ErrorMessage} from "formik";
 import * as Yup from "yup";
-import {useState} from "react";
+import { useEffect, useState } from "react";
 import StepOne from "@/components/DriverUi/section/StepOne";
 import StepTwo from "@/components/DriverUi/section/StepTwo";
 import StepThree from "@/components/DriverUi/section/StepThree";
@@ -10,11 +10,30 @@ import StepFive from "@/components/DriverUi/section/StepFive";
 import {ArrowLeft} from "lucide-react";
 import {ArrowRight} from "lucide-react";
 import {Save} from "lucide-react";
+import {createContext,useContext} from "react";
+export const ContextApi=createContext();
 export default function DriverForm({UpdateProgress,UpdateStep}){
 const [step,updateStep]=useState(0);
 const steps=[StepOne,StepTwo,StepThree,StepFour,StepFive];
 const StepComponent=steps[step];
+    const [nationalities, setNationalities] = useState([]);
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const res = await fetch(
+                    'https://gist.githubusercontent.com/tiveor/5444753e9919ffe74b41/raw/nationalities.json'
+                );
+                const data = await res.json();
 
+                // Convert to [{value,label}, ...] format
+                const formatted = data.map(item => ({ value: item, label: item }));
+                setNationalities(formatted);
+            } catch (err) {
+                console.error("Error fetching nationalities:", err);
+            }
+        }
+        fetchData();
+    }, []);
 const validationSchema=[
     //Step No.1
     Yup.object(
@@ -121,6 +140,7 @@ License:Yup.number().required(),
     const IslastStep=step===validationSchema.length-1;
 
     return(
+        <ContextApi.Provider value={nationalities}>
 <div className={`border-l-2 border-r-2 border-b-2 rounded-b-xl border-[#e2e8f0] rounded-t-xl`}>
         <Formik
             initialValues={{
@@ -218,5 +238,6 @@ License:Yup.number().required(),
             )}
         </Formik>
     </div>
+        </ContextApi.Provider>
     )
 }

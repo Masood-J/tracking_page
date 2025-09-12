@@ -5,8 +5,40 @@ import {ErrorMessage, Field} from "formik";
 import {Upload} from "lucide-react";
 import DateSelect from "@/components/DriverUi/ui/DateSelect";
 import PhoneInput from "react-phone-input-2";
-export default function StepFour(){
+import DateSingleSelect from "@/components/DriverUi/ui/DateSingleSelect";
+import ReactSelect from "@/components/DriverUi/ui/ReactSelect";
+import {ContextApi} from "@/components/DriverUi/section/DriverForm";
+import {useContext} from "react";
+import React, { useState, useEffect } from "react";
+import { GetCountries, GetState } from "react-country-state-city";
+import Select from "react-select";
+import UploadFiles from "@/components/DriverUi/ui/UploadFiles";
 
+export default function StepFour({setFieldValue}){
+const nationalities=useContext(ContextApi);
+    const [country, setCountry] = useState(null);
+    const [currentState, setcurrentState] = useState(null);
+    const [countriesList, setCountriesList] = useState([]);
+    const [stateList, setStateList] = useState([]);
+    useEffect(() => {
+        GetCountries().then((result) => {
+            setCountriesList(result);
+        });
+    }, []);
+    useEffect(() => {
+        if (country)
+            GetState(parseInt(country)).then((result) => {
+                setStateList(result);
+            });
+    }, [country]);
+    const StatusSelect=[
+        {value:"active",label:"Active"},
+        {value:"expired",label:"Expired"},
+    ]
+    const VisaTypeOptions=[
+        {value:"work",label:"Work"},
+        {value:"travel",label:"Travel"},
+    ]
     return(
         <div>
         <FormCard title={`License & Medical`} desc={`Driving credentials and health records`} icon={<FileText className={`text-white`}></FileText>}></FormCard>
@@ -24,11 +56,22 @@ export default function StepFour(){
                     </div>
                     <div className={`flex-1`}>
                         <label htmlFor="IssueCountry" className={`block`}>Issuing Country<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="IssueCountry" as="select" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
-                            <option value="pk">Pakistan</option>
-                            <option value="afg">Afghanistan</option>
-                            <option value="kwt">Kuwait</option>
-                            <option value="uae">UAE</option>
+                        <Field name="IssueCountry"  className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
+                            {({ field, form }) => (
+                                <Select
+                                    options={countriesList.map((_country) => ({
+                                        value: _country.id,
+                                        label: _country.name,
+                                    }))}
+                                    onChange={(e) => setCountry(e.value)}
+                                    styles={{
+                                        control: (baseStyles) => ({
+                                            ...baseStyles,
+                                            borderRadius: "10px",
+                                        }),
+                                    }}
+                                />
+                            )}
                         </Field>
                         <ErrorMessage name="IssueCountry" component="span"></ErrorMessage>
                     </div>
@@ -36,11 +79,22 @@ export default function StepFour(){
                 <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="IssueState" className={`block`}>State/Province<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="IssueState" as="select" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
-                            <option value="punjab">Punjab</option>
-                            <option value="kpk">KPK</option>
-                            <option value="Sindh">Sindh</option>
-                            <option value="Balochistan">Balochistan</option>
+                        <Field name="IssueState" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
+                            {({ field, form }) => (
+                                <Select
+                                    options={stateList.map((_state) => ({
+                                        value: _state.id,
+                                        label: _state.name,
+                                    }))}
+                                    onChange={(e) => setcurrentState(e.value)}
+                                    styles={{
+                                        control: (baseStyles) => ({
+                                            ...baseStyles,
+                                            borderRadius: "10px",
+                                        }),
+                                    }}
+                                />
+                            )}
                         </Field>
                         <ErrorMessage name="IssueState" component="span" className={`text-red-700`}></ErrorMessage>
                     </div>
@@ -48,7 +102,7 @@ export default function StepFour(){
                         <label htmlFor="IssueDate" className={`block`}>Issue Date<span className="text-red-500 ml-1">*</span></label>
                         <Field name="IssueDate" className="border flex-wrap border-gray-300 p-2 w-full rounded-xl">
                             {(field)=>(
-                                <DateSelect/>
+                                <DateSingleSelect/>
                             )}
                         </Field>
                         <ErrorMessage name="IssueDate" component="span"></ErrorMessage>
@@ -59,7 +113,7 @@ export default function StepFour(){
                         <label htmlFor="Expiry" className={`block`}>Expiry Date<span className="text-red-500 ml-1">*</span></label>
                         <Field name="Expiry" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                             {(field)=>(
-                                <DateSelect/>
+                                <DateSingleSelect/>
                             )}
                         </Field>
                         <ErrorMessage name="Expiry" component="span"></ErrorMessage>
@@ -72,6 +126,7 @@ export default function StepFour(){
                     <div className={`flex-1 border-[#e2e8f0] rounded-xl border-2 p-4`}>
                         <label htmlFor="LicenseImg" className={`block`}>
                         <div className={`flex flex-col items-center gap-2`}>
+
                             <Upload className={`h-16 w-16 text-gray-400`}></Upload>
                             <h3 className={`text-black font-bold`}>Upload License Image</h3>
                             <p className={`text-gray-400`}>PNG, JPG up to 10MB</p>
@@ -96,17 +151,19 @@ export default function StepFour(){
                 <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="VisaType" className={`block`}>Visa Type<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="VisaType" as="select" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
-                            <option value="work">Work</option>
-                            <option value="Home">Travel</option>
+                        <Field name="VisaType"  className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
+                            {({field,form})=>(
+                                <ReactSelect options={VisaTypeOptions}/>
+                                )}
                         </Field>
                         <ErrorMessage name="VisaType" component="span" className={`text-red-700`}></ErrorMessage>
                     </div>
                     <div className={`flex-1`}>
                         <label htmlFor="Status" className={`block`}>Status<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="Status" as="select" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
-                            <option value="exp">Expired</option>
-                            <option value="act">Active</option>
+                        <Field name="Status" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
+                            {({field,form})=>(
+                                <ReactSelect options={StatusSelect}/>
+                            )}
                         </Field>
                         <ErrorMessage name="IssueCountry" component="span"></ErrorMessage>
                     </div>
@@ -114,9 +171,21 @@ export default function StepFour(){
                 <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="VisaIssueCountry" className={`block`}>Issuing Country<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="VisaIssueCountry" as="select" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
-                            <option value="pkr">Pakistan</option>
-                            <option value="afg">Afghanistan</option>
+                        <Field name="VisaIssueCountry" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
+                            {({ field, form }) => (
+                                <Select
+                                    options={countriesList.map((_country) => ({
+                                        value: _country.id,
+                                        label: _country.name,
+                                    }))}
+                                    styles={{
+                                        control: (baseStyles) => ({
+                                            ...baseStyles,
+                                            borderRadius: "10px",
+                                        }),
+                                    }}
+                                />
+                            )}
                         </Field>
                         <ErrorMessage name="VisaType" component="span" className={`text-red-700`}></ErrorMessage>
                     </div>
@@ -124,7 +193,7 @@ export default function StepFour(){
                         <label htmlFor="VisaDate" className={`block`}>Issue Date<span className="text-red-500 ml-1">*</span></label>
                         <Field name="VisaDate" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                             {(field)=>(
-                                <DateSelect></DateSelect>
+                                <DateSingleSelect></DateSingleSelect>
                             )}
                         </Field>
                         <ErrorMessage name="VisaDate" component="span"></ErrorMessage>
@@ -135,7 +204,7 @@ export default function StepFour(){
                         <label htmlFor="VisaIssueCountry" className={`block`}>Expiry Date<span className="text-red-500 ml-1">*</span></label>
                         <Field name="VisaIssueCountry"  className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                             {(field)=>(
-                                <DateSelect></DateSelect>
+                                <DateSingleSelect></DateSingleSelect>
                             )}
                         </Field>
                         <ErrorMessage name="VisaType" component="span" className={`text-red-700`}></ErrorMessage>
@@ -175,7 +244,7 @@ export default function StepFour(){
                         <label htmlFor="MedicalCertExpiry" className={`block`}>Medical Certificate Expiry<span className="text-red-500 ml-1">*</span></label>
                         <Field name="MedicalCertExpiry" type="date" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                             {(field)=>(
-                                <DateSelect></DateSelect>
+                                <DateSingleSelect></DateSingleSelect>
                             )}
                         </Field>
                         <ErrorMessage name="MedicalCertExpiry" component="span" className={`text-red-700`}></ErrorMessage>
@@ -239,7 +308,7 @@ export default function StepFour(){
                                     value={field.value || ""}          // bind Formik state
                                     onChange={(val) => form.setFieldValue(field.name, val)}
                                     inputClass="!w-full !border !border-gray-300 p-5 !rounded-xl "
-                                    buttonClass="!border !border-gray-300 !rounded-xl !bg-white" // style the flag button
+                                    buttonClass="!border-gray-300 !bg-white" // style the flag button
                                     containerClass="w-full"
                                 />
                             )}

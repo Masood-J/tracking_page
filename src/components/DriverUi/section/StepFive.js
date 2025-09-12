@@ -5,6 +5,7 @@ import {ErrorMessage, Field,FieldArray} from "formik";
 import {Plus} from "lucide-react";
 import DateSelect from "@/components/DriverUi/ui/DateSelect";
 import {X} from "lucide-react";
+import DateSingleSelect from "@/components/DriverUi/ui/DateSingleSelect";
 export default function StepFive({setFieldValue,values}) {
 
     return(
@@ -63,14 +64,14 @@ export default function StepFive({setFieldValue,values}) {
                         <div className={`flex-1`}>
                             <label htmlFor="License" className={`block`}>Completion Date<span className="text-red-500 ml-1">*</span></label>
                             <Field name="License" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
-                                {(field)=>(<DateSelect></DateSelect>)}
+                                {(field)=>(<DateSingleSelect></DateSingleSelect>)}
                             </Field>
                             <ErrorMessage name="License" component="span" className={`text-red-700`}></ErrorMessage>
                         </div>
                         <div className={`flex-1`}>
                             <label htmlFor="IssueCountry" className={`block`}>Expiry Date:</label>
                             <Field name="IssueCountry" as="select" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
-                                {(field)=>(<DateSelect></DateSelect>)}
+                                {(field)=>(<DateSingleSelect></DateSingleSelect>)}
                             </Field>
                             <ErrorMessage name="IssueCountry" component="span"></ErrorMessage>
                         </div>
@@ -103,6 +104,31 @@ export default function StepFive({setFieldValue,values}) {
                     </div>
                 </div>
         ))}
+    {values.trainings.length===0 && <div className={`bg-[#f9fafc] min-h-65 border-1 border-gray-400 rounded-md`}>
+
+
+<div className={`flex flex-col items-center justify-center gap-2 mt-6`}>
+
+<Award className={`text-gray-400 w-20 h-20`}></Award>
+    <h3 className={`text-black`}>No training records added yet</h3>
+    <p className={`text-gray-400`}>Add training records and certifications to complete the profile</p>
+    <button className={`flex flex-row gap-2 items-center border-[#e2e8f0] rounded-xl p-1 pl-2 pr-2 border-1 font-semibold text-black hover:bg-gray-200`}
+            onClick={()=> push({
+                trainingName: "",
+                TrainingProvider: "",
+                License: "",
+                IssueCountry: "",
+                TrainingCertImg: null,
+                AddNotes: ""
+            })}>
+        <Plus className={`w-4 h-4`}></Plus>
+        <h3>Add First Training</h3>
+    </button>
+</div>
+
+
+
+    </div>}
             </>
 
             )}

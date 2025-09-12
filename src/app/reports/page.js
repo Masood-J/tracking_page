@@ -11,10 +11,7 @@ import { eachDayOfInterval, format } from "date-fns";
 import { Calendar } from "lucide-react";
 import TripAnalytics from "@/components/ReportsUi/ui/TripAnalytics";
 export default function Reports() {
-  const [selectedPeople, UpdatePeople] = useState([
-    { value: "1", label: "Noelle Simpson" },
-    { value: "2", label: "Evan Allen" },
-  ]);
+  const [selectedPeople, UpdatePeople] = useState([]);
   const [DateRanges, setDateRanges] = useState({});
   const [button, setButton] = useState("one");
   const [expanded, setExpanded] = useState({});

@@ -4,6 +4,7 @@ import {Briefcase} from "lucide-react";
 import {ErrorMessage, Field} from "formik";
 import DateSelect from "@/components/DriverUi/ui/DateSelect";
 import PhoneInput from "react-phone-input-2";
+import DateSingleSelect from "@/components/DriverUi/ui/DateSingleSelect";
 export default function StepThree(){
 
     return(
@@ -20,7 +21,7 @@ export default function StepThree(){
                         <label htmlFor="HireDate" className={`block`}>Hire Date<span className="text-red-500 ml-1">*</span></label>
                         <Field name="HireDate" type="date" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl">
                             {(field)=>(
-                                <DateSelect></DateSelect>
+                                <DateSingleSelect></DateSingleSelect>
                             )}
                         </Field>
                         <ErrorMessage name="HireDate" component="span"></ErrorMessage>
@@ -53,7 +54,7 @@ export default function StepThree(){
                                     value={field.value || ""}          // bind Formik state
                                     onChange={(val) => form.setFieldValue(field.name, val)}
                                     inputClass="!w-full !border !border-gray-300 p-5 !rounded-xl "
-                                    buttonClass="!border !border-gray-300 !rounded-xl !bg-white" // style the flag button
+                                    buttonClass="!border-gray-300 !bg-white" // style the flag button
                                     containerClass="w-full"
                                 />
                             )}
