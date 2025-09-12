@@ -127,9 +127,7 @@ const nationalities=useContext(ContextApi);
                         <label htmlFor="LicenseImg" className={`block`}>
                         <div className={`flex flex-col items-center gap-2`}>
 
-                            <Upload className={`h-16 w-16 text-gray-400`}></Upload>
-                            <h3 className={`text-black font-bold`}>Upload License Image</h3>
-                            <p className={`text-gray-400`}>PNG, JPG up to 10MB</p>
+                            <UploadFiles></UploadFiles>
                         </div></label>
                         <input
                             id="LicenseImg"

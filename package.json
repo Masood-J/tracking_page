@@ -16,6 +16,8 @@
     "@mui/material": "^7.3.2",
     "@mui/x-date-pickers-pro": "^8.11.1",
     "@react-google-maps/api": "^2.20.7",
+    "@rpldy/upload-button": "^1.11.0",
+    "@rpldy/uploady": "^1.11.0",
     "antd": "^5.27.3",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.18",

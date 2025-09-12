@@ -5,7 +5,6 @@ import UploadButton from "@rpldy/upload-button";
 function UploadedFilesList() {
     const [uploadedFiles, setUploadedFiles] = useState([]);
 
-    // Listen for successful upload events
     useItemFinishListener((item) => {
         setUploadedFiles((prev) => [...prev, item.file.name]);
     });
@@ -21,10 +20,10 @@ function UploadedFilesList() {
     );
 }
 
-export default function App() {
+export default function UploadFiles() {
     return (
         <Uploady
-            destination={{ url: "/upload" }} // your backend endpoint
+            destination={{ url: "/api/upload" }} // your backend endpoint
         >
             <UploadButton>Upload File</UploadButton>
             <UploadedFilesList />
