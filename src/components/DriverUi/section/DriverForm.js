@@ -39,28 +39,28 @@ const validationSchema=[
     Yup.object(
         {
             profilePic:Yup.mixed()
-                .required()
+                .required(`Profile Picture is required`)
                 .test(
                     "fileformat",
                     "JPG,PNG up to 5MB",
                     (value)=>value && ["image/jpeg","image/png"].includes(value.type)
                 ),
-            firstName:Yup.string().required(),
-            lastName:Yup.string().required(),
+            firstName:Yup.string().required(`First name is required`),
+            lastName:Yup.string().required(`Last name is required`),
             middleName:Yup.string(),
-            DOB:Yup.string().required(),
-            National:Yup.string().required(),
+            DOB:Yup.string().required(`DOB is required`),
+            National:Yup.string().required(`National is required`),
         }
     ),
     //Step No.2
     Yup.object(
         {
-email:Yup.string().required(),
-            phone:Yup.string().required(),
-            Address:Yup.string().required(),
-            Country:Yup.string().required(),
-            State:Yup.string().required(),
-            City:Yup.string().required(),
+email:Yup.string().required(`Email is a required`),
+            phone:Yup.string().required(`Phone number is required`),
+            Address:Yup.string().required(`Address is required`),
+            Country:Yup.string().required(`Country is required`),
+            State:Yup.string().required(`State is required`),
+            City:Yup.string().required(`City is required`),
 
         }
     ),
@@ -83,34 +83,39 @@ EmployeeID:Yup.string().required(),
 License:Yup.number().required(),
             IssueCountry:Yup.string().required(),
             IssueState:Yup.string().required(),
+            IssueDate:Yup.string().required(),
             Expiry:Yup.string().required(),
-            LicenseImg:Yup.mixed()
-                .required()
-                .test(
-                    "fileformat",
-                    "PNG,JPG upto 10MB",
-                    (value)=>value && ["image/jpg","image/png"].includes(value.type)
-                ),
+            LicenseImg: Yup.mixed().required().test(
+                "fileformat",
+                "PNG,JPG upto 10MB",
+                (value) => {
+                    if (!value) return true; // allow empty
+                    return ["image/jpeg", "image/png","image/jpg"].includes(value.type);
+                }
+            ),
             VisaType:Yup.string().required(),
             Status:Yup.string().required(),
-            VisaIssueCountry:Yup.string().required(),
-            VisaDate:Yup.string().required(),
+            VisaIssueCountry:Yup.string(),
+            VisaDate:Yup.date().required(),
             VisaExp:Yup.string().required(),
-            VisaIMG:Yup.mixed().required()
-                .test(
-                    "fileformat",
-                    "Only JPG And PNG Allowed",
-                    (value)=>value && ["image/jpg","image/png"].includes(value.type)
-                ),
+            VisaIMG: Yup.mixed().required().test(
+                "fileformat",
+                "Only JPG And PNG Allowed",
+                (value) => {
+                    if (!value) return true;
+                    return ["image/jpeg", "image/jpg", "image/png"].includes(value.type);
+                }
+            ),
             MedicalCertExpiry:Yup.string().required(),
-            BloodType:Yup.string().required(),
-            MedicalCertIMG:Yup.mixed()
-                .required()
-                .test(
-                    "fileformat",
-                    "Only JPG And PNG Allowed",
-                    (value)=>value && ["image/jpg","image/png"].includes(value.type)
-                ),
+            BloodType:Yup.string(),
+            MedicalCertIMG: Yup.mixed().required().test(
+                "fileformat",
+                "Only JPG And PNG Allowed",
+                (value) => {
+                    if (!value) return true;
+                    return ["image/jpeg", "image/jpg", "image/png"].includes(value.type);
+                }
+            ),
             ContactName:Yup.string().required(),
             Relationship:Yup.string().required(),
             Phone:Yup.string().required(),
@@ -121,18 +126,18 @@ License:Yup.number().required(),
     Yup.object({
         trainings: Yup.array().of(
             Yup.object({
-                trainingName: Yup.string().required(),
-                TrainingProvider: Yup.string().required(),
-                CompleteDate: Yup.string().required(),
-                ExpiryDate: Yup.string().required(),
+                trainingName: Yup.string().required(`Training Name Is Required`),
+                TrainingProvider: Yup.string().required(`Training Provider Is Required`),
+                CompleteDate: Yup.string().required(`Complete Date Is Required`),
+                ExpiryDate: Yup.string().required(`Expiry Date Is Required`),
                 TrainingCertImg: Yup.mixed()
-                    .required()
+                    .required(`You must upload Training Certificate Image`)
                     .test(
                         "fileformat",
-                        "Only JPG or PNG required",
-                        (value) => value && ["image/jpg", "image/png"].includes(value.type)
+                        "Only JPG,PNG or PDF required",
+                        (value) => value && ["image/jpg","image/png","application/pdf","image/jpeg"].includes(value.type)
                     ),
-                AddNotes: Yup.string().required(),
+                AddNotes: Yup.string().required(`Please Write Additional Notes`),
             })
         ),
     }),
@@ -172,16 +177,16 @@ License:Yup.number().required(),
                 IssueState: "",
                 IssueDate:"",
                 Expiry: "",
-                LicenseImg: null,
+                LicenseImg: "",
                 VisaType: "",
                 Status: "",
                 VisaIssueCountry: "",
                 VisaDate: "",
                 VisaExp: "",
-                VisaIMG: null,
+                VisaIMG: "",
                 MedicalCertExpiry: "",
                 BloodType: "",
-                MedicalCertIMG: null,
+                MedicalCertIMG: "",
                 ContactName: "",
                 Relationship: "",
                 Phone: "",
@@ -200,12 +205,16 @@ License:Yup.number().required(),
                 if(step<validationSchema.length-1){
                     UpdateProgress(prevStat=>prevStat+20);
                     updateStep(step+1);
+                    UpdateStep((prev)=>(prev+1));
+                    window.scrollTo({ top: 0, behavior: "smooth" });
                     setSubmitting(false);
+                    console.log(value)
                 }
                 else{
                     console.log("Form Submitted Successfully",value)
                 }
             }}
+
        >
             {({ isSubmitting,setFieldValue,values }) => (
                 <Form>
@@ -222,16 +231,17 @@ License:Yup.number().required(),
                                 </div>
                             </button>
 
-                        <button className={`text-white font-semibold ${IslastStep ? "bg-[#1ca04c] ":"bg-[#2563eb]"} py-2 pl-3 pr-3 rounded-xl`} type="submit" onClick={() =>{
-
-
-                        window.scrollTo({ top: 0, behavior: "smooth" });}} disabled={isSubmitting}>
+                        <button className={`text-white font-semibold ${IslastStep ? "bg-[#1ca04c] ":"bg-[#2563eb]"} py-2 pl-3 pr-3 rounded-xl`} type="submit" disabled={isSubmitting}>
                             <div className={`flex flex-row items-center gap-2`}>
                            <h3 className={``}> {IslastStep ?<div className={`flex flex-row items-center gap-2`}><Save className={`h-4 w-4`}></Save> Update Driver</div>: "Next"}</h3>
                                 <ArrowRight className={`h-4 w-4`}></ArrowRight>
                             </div>
                         </button>
                     </div>
+                    <button onClick={()=>{
+                    updateStep(prev=>prev+1);
+                    UpdateStep(prev=>prev+1);
+                    UpdateProgress(prev=>prev+20)}}>Skip Validation</button>
                 </Form>
             )}
         </Formik>

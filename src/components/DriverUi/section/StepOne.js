@@ -58,7 +58,7 @@ const nationalities = useContext(ContextApi);
         />
         </div>
         <p className={`text-gray-400`}>JPG,PNG up to 5MB</p>
-        <ErrorMessage name="profilePic" component="div" className="text-red-500" />
+        <ErrorMessage name="profilePic" component="div" className="text-red-700" />
     </div>
     <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
 <div className={`flex-1`}>
@@ -69,7 +69,7 @@ const nationalities = useContext(ContextApi);
     <div className={`flex-1`}>
         <label htmlFor="lastName" className={`block`}>Last Name<span className="text-red-500 ml-1">*</span></label>
         <Field name="lastName" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
-        <ErrorMessage name="lastName" component="span"></ErrorMessage>
+        <ErrorMessage name="lastName" component="span" className={`text-red-700`}></ErrorMessage>
     </div>
 </div>
     <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
@@ -88,7 +88,7 @@ const nationalities = useContext(ContextApi);
                         />
                 )}
             </Field>
-            <ErrorMessage name="DOB" component="span"></ErrorMessage>
+            <ErrorMessage name="DOB" component="span" className={`text-red-700`}></ErrorMessage>
         </div>
     </div>
     <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
@@ -96,7 +96,9 @@ const nationalities = useContext(ContextApi);
             <label htmlFor="status" className={`block`}>Status:</label>
             <Field name="status" className="border border-gray-300 p-2 w-full rounded-xl">
                 {({field,form})=>(
-                    <ReactSelect options={StatusSelect} instanceId="status-select-l"></ReactSelect>
+                    <ReactSelect options={StatusSelect} instanceId="status-select-l"
+                                 value={StatusSelect.find(option => option.value === field.value)}
+                                 onChange={(option) => form.setFieldValue(field.name, option.value)}></ReactSelect>
                 )}
             </Field>
             <ErrorMessage name="status" component="span"></ErrorMessage>
@@ -105,7 +107,9 @@ const nationalities = useContext(ContextApi);
             <label htmlFor="gender" className={`block`}>Gender</label>
             <Field name="gender" className="border border-gray-300 p-2 w-full rounded-xl">
                 {({field,form})=>(
-<ReactSelect options={GenderSelect} instanceId="gender-select"></ReactSelect>
+<ReactSelect options={GenderSelect} instanceId="gender-select"
+             value={GenderSelect.find(option => option.value === field.value)}
+             onChange={(option) => form.setFieldValue(field.name, option.value)}></ReactSelect>
                 )}
             </Field>
             <ErrorMessage name="gender" component="span"></ErrorMessage>
@@ -120,7 +124,7 @@ const nationalities = useContext(ContextApi);
                                  onChange={(option) => form.setFieldValue(field.name, option.value)}></ReactSelect>
                 )}
             </Field>
-            <ErrorMessage name="National" component="span"></ErrorMessage>
+            <ErrorMessage name="National" component="span" className={`text-red-700`}></ErrorMessage>
         </div>
         <div className={`flex-1`}>
         </div>
