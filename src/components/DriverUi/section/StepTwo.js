@@ -6,9 +6,10 @@ import { MapPin } from "lucide-react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/high-res.css";
 import React, { useState, useEffect } from "react";
+import ShowError from "@/components/DriverUi/ui/ShowError";
 import { GetCountries, GetState, GetCity } from "react-country-state-city";
 import Select from "react-select";
-export default function StepTwo() {
+export default function StepTwo({values,setFieldValue}) {
   const [country, setCountry] = useState(null);
   const [currentState, setcurrentState] = useState(null);
   const [city, setCity] = useState(null);
@@ -44,6 +45,7 @@ export default function StepTwo() {
           className={`flex flex-row gap-2 flex-wrap justify-between w-full text-black`}
         >
           <div className={`flex-1`}>
+
             <label htmlFor="email" className={`block`}>
               Email Address<span className="text-red-500 ml-1">*</span>
             </label>
@@ -52,11 +54,8 @@ export default function StepTwo() {
               type="text"
               className="border border-gray-300 p-2 w-full rounded-xl min-w-30"
             ></Field>
-            <ErrorMessage
-              name="email"
-              component="span"
-              className={`text-red-700`}
-            ></ErrorMessage>
+            <ShowError name={`email`}></ShowError>
+
           </div>
           <div className={`flex-1`}>
             <label htmlFor="phone" className={`block`}>
@@ -74,8 +73,7 @@ export default function StepTwo() {
                 />
               )}
             </Field>
-            <ErrorMessage name="phone" component="span"></ErrorMessage>
-          </div>
+              <ShowError name={`phone`}></ShowError>    </div>
         </div>
         <div
           className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}
@@ -99,11 +97,7 @@ export default function StepTwo() {
                 />
               )}
             </Field>
-            <ErrorMessage
-              name="alt_phone"
-              component="span"
-              className={`text-red-700`}
-            ></ErrorMessage>
+              <ShowError name={`alt_phone`}></ShowError>
           </div>
         </div>
         <div
@@ -118,11 +112,7 @@ export default function StepTwo() {
               type="text"
               className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"
             ></Field>
-            <ErrorMessage
-              name="Address"
-              component="span"
-              className={`text-red-700`}
-            ></ErrorMessage>
+              <ShowError name={`Address`}></ShowError>
           </div>
         </div>
         <div
@@ -155,11 +145,7 @@ export default function StepTwo() {
                     />
                 )}
             </Field>
-            <ErrorMessage
-              name="Country"
-              component="span"
-              className={`text-red-700`}
-            ></ErrorMessage>
+              <ShowError name={`Country`}></ShowError>
           </div>
           <div className={`flex-1`}>
             <label htmlFor="State" className={`block`}>
@@ -186,8 +172,7 @@ export default function StepTwo() {
                     />
                 )}
             </Field>
-            <ErrorMessage name="State" component="span"></ErrorMessage>
-          </div>
+              <ShowError name={`State`}></ShowError> </div>
         </div>
         <div
           className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}
@@ -217,11 +202,7 @@ export default function StepTwo() {
                     />
                 )}
             </Field>
-            <ErrorMessage
-              name="City"
-              component="span"
-              className={`text-red-700`}
-            ></ErrorMessage>
+              <ShowError name={`City`}></ShowError>
           </div>
           <div className={`flex-1`}>
             <label htmlFor="ZIP" className={`block`}>
@@ -233,8 +214,7 @@ export default function StepTwo() {
               className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"
               placeholder={`Enter ZIP or postal code`}
             ></Field>
-            <ErrorMessage name="ZIP" component="span"></ErrorMessage>
-          </div>
+              <ShowError name={`ZIP`}></ShowError>  </div>
         </div>
       </div>
     </div>

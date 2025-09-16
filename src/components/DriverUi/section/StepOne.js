@@ -12,6 +12,7 @@ import ReactSelect from "@/components/DriverUi/ui/ReactSelect";
 import {useContext} from "react";
 import {ContextApi} from "@/components/DriverUi/section/DriverForm"
 import UploadPhoto from "@/components/DriverUi/ui/UploadPhoto";
+import ShowError from "@/components/DriverUi/ui/ShowError";
 export default function StepOne({setFieldValue,values}){
 const nationalities = useContext(ContextApi);
     const [preview, setPreview] = useState(false);
@@ -58,25 +59,25 @@ const nationalities = useContext(ContextApi);
         />
         </div>
         <p className={`text-gray-400`}>JPG,PNG up to 5MB</p>
-        <ErrorMessage name="profilePic" component="div" className="text-red-700" />
+        <ShowError name={`profilePic`}></ShowError>
     </div>
     <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
 <div className={`flex-1`}>
     <label htmlFor="firstName" className={`block`}>First Name<span className="text-red-500 ml-1">*</span></label>
     <Field name="firstName" type="text" className="min-w-30 border border-gray-300 p-2 w-full rounded-xl"></Field>
-    <ErrorMessage name="firstName" component="span" className={`text-red-700`}></ErrorMessage>
+   <ShowError name={`firstName`}></ShowError>
 </div>
     <div className={`flex-1`}>
         <label htmlFor="lastName" className={`block`}>Last Name<span className="text-red-500 ml-1">*</span></label>
         <Field name="lastName" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
-        <ErrorMessage name="lastName" component="span" className={`text-red-700`}></ErrorMessage>
+       <ShowError name={`lastName`}></ShowError>
     </div>
 </div>
     <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
         <div className={`flex-1`}>
             <label htmlFor="middleName" className={`block`}>Middle Name:</label>
             <Field name="middleName" type="text" className="min-w-30 border border-gray-300 p-2 w-full rounded-xl"></Field>
-            <ErrorMessage name="middleName" component="span"></ErrorMessage>
+            <ShowError name={`middleName`}></ShowError>
         </div>
         <div className={`flex-1`}>
             <label htmlFor="DOB" className={`block`}>Date of Birth<span className="text-red-500 ml-1">*</span></label>
@@ -88,7 +89,7 @@ const nationalities = useContext(ContextApi);
                         />
                 )}
             </Field>
-            <ErrorMessage name="DOB" component="span" className={`text-red-700`}></ErrorMessage>
+            <ShowError name={`DOB`}></ShowError>
         </div>
     </div>
     <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
@@ -101,7 +102,7 @@ const nationalities = useContext(ContextApi);
                                  onChange={(option) => form.setFieldValue(field.name, option.value)}></ReactSelect>
                 )}
             </Field>
-            <ErrorMessage name="status" component="span"></ErrorMessage>
+           <ShowError name={`status`}></ShowError>
         </div>
         <div className={`flex-1`}>
             <label htmlFor="gender" className={`block`}>Gender</label>
@@ -112,7 +113,7 @@ const nationalities = useContext(ContextApi);
              onChange={(option) => form.setFieldValue(field.name, option.value)}></ReactSelect>
                 )}
             </Field>
-            <ErrorMessage name="gender" component="span"></ErrorMessage>
+          <ShowError name={`gender`}></ShowError>
         </div>
     </div>
     <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
@@ -124,7 +125,7 @@ const nationalities = useContext(ContextApi);
                                  onChange={(option) => form.setFieldValue(field.name, option.value)}></ReactSelect>
                 )}
             </Field>
-            <ErrorMessage name="National" component="span" className={`text-red-700`}></ErrorMessage>
+           <ShowError name={`National`}></ShowError>
         </div>
         <div className={`flex-1`}>
         </div>

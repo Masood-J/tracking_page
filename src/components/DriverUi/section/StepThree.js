@@ -5,6 +5,7 @@ import {ErrorMessage, Field} from "formik";
 import DateSelect from "@/components/DriverUi/ui/DateSelect";
 import PhoneInput from "react-phone-input-2";
 import DateSingleSelect from "@/components/DriverUi/ui/DateSingleSelect";
+import ShowError from "@/components/DriverUi/ui/ShowError";
 export default function StepThree(){
 
     return(
@@ -15,7 +16,7 @@ export default function StepThree(){
                     <div className={`flex-1`}>
                         <label htmlFor="EmployeeID" className={`block`}>Employee ID<span className="text-red-500 ml-1">*</span></label>
                         <Field name="EmployeeID" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
-                        <ErrorMessage name="EmployeeID" component="span" className={`text-red-700`}></ErrorMessage>
+                     <ShowError name={`EmployeeID`}></ShowError>
                     </div>
                     <div className={`flex-1`}>
                         <label htmlFor="HireDate" className={`block`}>Hire Date<span className="text-red-500 ml-1">*</span></label>
@@ -26,26 +27,26 @@ export default function StepThree(){
                                     onChange={(date) => form.setFieldValue(field.name, date)}></DateSingleSelect>
                             )}
                         </Field>
-                        <ErrorMessage name="HireDate" component="span"></ErrorMessage>
+                       <ShowError name={`HireDate`}></ShowError>
                     </div>
                 </div>
                 <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="EmploymentType" className={`block`}>Employment Type<span className="text-red-500 ml-1">*</span></label>
                         <Field name="EmploymentType" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
-                        <ErrorMessage name="EmploymentType" component="span" className={`text-red-700`}></ErrorMessage>
+                       <ShowError name={`EmploymentType`}></ShowError>
                     </div>
                     <div className={`flex-1`}>
                         <label htmlFor="Department" className={`block`}>Department<span className="text-red-500 ml-1">*</span></label>
                         <Field name="Department" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
-                        <ErrorMessage name="Department" component="span"></ErrorMessage>
+                       <ShowError name={`Department`}></ShowError>
                     </div>
                 </div>
                 <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="Location" className={`block`}>Work Location:</label>
                         <Field name="Location" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
-                        <ErrorMessage name="Location" component="span" className={`text-red-700`}></ErrorMessage>
+                        <ShowError name={`Location`}></ShowError>
                     </div>
                     <div className={`flex-1`}>
                         <label htmlFor="ShiftPattern" className={`block`}>Phone Number:</label>
@@ -61,14 +62,14 @@ export default function StepThree(){
                                 />
                             )}
                         </Field>
-                        <ErrorMessage name="ShiftPattern" component="span"></ErrorMessage>
+                        <ShowError name={`ShiftPattern`}></ShowError>
                     </div>
                 </div>
                 <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="Salary" className={`block`}>Base Salary (Annual):</label>
                         <Field name="Salary" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
-                        <ErrorMessage name="Salary" component="span" className={`text-red-700`}></ErrorMessage>
+                        <ShowError name={`Salary`}></ShowError>
                     </div>
                     <div className={`sm:flex-1`}>
                     </div>

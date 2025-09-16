@@ -9,6 +9,13 @@ import DateSingleSelect from "@/components/DriverUi/ui/DateSingleSelect";
 import UploadFiles from "@/components/DriverUi/ui/UploadFiles";
 import React from "react";
 import Image from "next/image";
+import ShowError from "@/components/DriverUi/ui/ShowError";
+import dynamic from 'next/dynamic';
+const PDFViewer = dynamic(
+    () => import('@/components/DriverUi/ui/PDFViewer'),
+    { ssr: false }
+);
+
 export default function StepFive({ setFieldValue, values }) {
   return (
     <div>
@@ -79,11 +86,9 @@ export default function StepFive({ setFieldValue, values }) {
                         type="text"
                         className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"
                       ></Field>
-                      <ErrorMessage
+                      <ShowError
                         name={`trainings.${index}.trainingName`}
-                        component="span"
-                        className={`text-red-700`}
-                      ></ErrorMessage>
+                      ></ShowError>
                     </div>
                     <div className={`flex-1`}>
                       <label htmlFor="TrainingProvider" className={`block`}>
@@ -95,11 +100,9 @@ export default function StepFive({ setFieldValue, values }) {
                         type="text"
                         className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"
                       ></Field>
-                      <ErrorMessage
+                      <ShowError
                         name={`trainings.${index}.TrainingProvider`}
-                        component="span"
-                        className={`text-red-700`}
-                      ></ErrorMessage>
+                      ></ShowError>
                     </div>
                   </div>
                   <div
@@ -123,11 +126,9 @@ export default function StepFive({ setFieldValue, values }) {
                           ></DateSingleSelect>
                         )}
                       </Field>
-                      <ErrorMessage
+                      <ShowError
                         name={`trainings.${index}.CompleteDate`}
-                        component="span"
-                        className={`text-red-700`}
-                      ></ErrorMessage>
+                      ></ShowError>
                     </div>
                     <div className={`flex-1`}>
                       <label htmlFor="ExpiryDate" className={`block`}>
@@ -147,11 +148,9 @@ export default function StepFive({ setFieldValue, values }) {
                           ></DateSingleSelect>
                         )}
                       </Field>
-                      <ErrorMessage
+                      <ShowError
                         name={`trainings.${index}.ExpiryDate`}
-                        component="span"
-                        className={`text-red-700`}
-                      ></ErrorMessage>
+                      ></ShowError>
                     </div>
                   </div>
                   <div
@@ -166,13 +165,7 @@ export default function StepFive({ setFieldValue, values }) {
                         <div className="flex flex-col items-center gap-2">
                           {field.value ? (
                             field.value.type === "application/pdf" ? (
-                              <embed
-                                src={URL.createObjectURL(field.value)}
-                                type="application/pdf"
-                                width="200"
-                                height="200"
-                                className="border rounded"
-                              />
+                                <PDFViewer file={field.value}></PDFViewer>
                             ) : (
                               <Image
                                 src={URL.createObjectURL(field.value)}
@@ -199,12 +192,9 @@ export default function StepFive({ setFieldValue, values }) {
                         </div>
                       )}
                     </Field>
-
-                    <ErrorMessage
+                    <ShowError
                       name={`trainings.${index}.TrainingCertImg`}
-                      component="span"
-                      className={`text-red-700`}
-                    ></ErrorMessage>
+                    ></ShowError>
                   </div>
                   <div
                     className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}
@@ -219,11 +209,9 @@ export default function StepFive({ setFieldValue, values }) {
                         type="text"
                         className="border min-w-30 border-gray-300 p-2 w-full rounded-xl pb-15"
                       ></Field>
-                      <ErrorMessage
+                      <ShowError
                         name={`trainings.${index}.AddNotes`}
-                        component="span"
-                        className={`text-red-700`}
-                      ></ErrorMessage>
+                      ></ShowError>
                     </div>
                   </div>
                 </div>
@@ -249,8 +237,8 @@ export default function StepFive({ setFieldValue, values }) {
                         push({
                           trainingName: "",
                           TrainingProvider: "",
-                          License: "",
-                          IssueCountry: "",
+                          CompleteDate: "",
+                          ExpiryDate: "",
                           TrainingCertImg: null,
                           AddNotes: "",
                         })

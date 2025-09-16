@@ -14,7 +14,7 @@ import { GetCountries, GetState } from "react-country-state-city";
 import Select from "react-select";
 import UploadFiles from "@/components/DriverUi/ui/UploadFiles";
 import Image from "next/image";
-
+import ShowError from "@/components/DriverUi/ui/ShowError";
 export default function StepFour({ setFieldValue, values }) {
   const nationalities = useContext(ContextApi);
   const [country, setCountry] = useState(null);
@@ -82,11 +82,7 @@ export default function StepFour({ setFieldValue, values }) {
               type="number"
               className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"
             ></Field>
-            <ErrorMessage
-              name="License"
-              component="span"
-              className={`text-red-700`}
-            ></ErrorMessage>
+              <ShowError name={`License`}></ShowError>
           </div>
           <div className={`flex-1`}>
             <label htmlFor="IssueCountry" className={`block`}>
@@ -124,8 +120,7 @@ export default function StepFour({ setFieldValue, values }) {
                 />
               )}
             </Field>
-            <ErrorMessage name="IssueCountry" component="span"></ErrorMessage>
-          </div>
+              <ShowError name={`IssueCountry`}></ShowError>       </div>
         </div>
         <div
           className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}
@@ -157,11 +152,7 @@ export default function StepFour({ setFieldValue, values }) {
                 />
               )}
             </Field>
-            <ErrorMessage
-              name="IssueState"
-              component="span"
-              className={`text-red-700`}
-            ></ErrorMessage>
+              <ShowError name={`IssueState`}></ShowError>
           </div>
           <div className={`flex-1`}>
             <label htmlFor="IssueDate" className={`block`}>
@@ -178,8 +169,7 @@ export default function StepFour({ setFieldValue, values }) {
                 />
               )}
             </Field>
-            <ErrorMessage name="IssueDate" component="span"></ErrorMessage>
-          </div>
+              <ShowError name={`IssueDate`}></ShowError>  </div>
         </div>
         <div
           className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}
@@ -199,8 +189,7 @@ export default function StepFour({ setFieldValue, values }) {
                 />
               )}
             </Field>
-            <ErrorMessage name="Expiry" component="span"></ErrorMessage>
-          </div>
+              <ShowError name={`Expiry`}></ShowError>  </div>
           <div className={`flex-1`}></div>
         </div>
         <div
@@ -233,8 +222,7 @@ export default function StepFour({ setFieldValue, values }) {
                 </div>
               )}
             </Field>
-            <ErrorMessage name="LicenseImg" component="span"></ErrorMessage>
-          </div>
+              <ShowError name={`LicenseImg`}></ShowError>  </div>
         </div>
         <hr />
         <div className={`flex flex-row items-center gap-2 `}>
@@ -264,11 +252,7 @@ export default function StepFour({ setFieldValue, values }) {
                 />
               )}
             </Field>
-            <ErrorMessage
-              name="VisaType"
-              component="span"
-              className={`text-red-700`}
-            ></ErrorMessage>
+              <ShowError name={`VisaType`}></ShowError>
           </div>
           <div className={`flex-1`}>
             <label htmlFor="Status" className={`block`}>
@@ -290,8 +274,7 @@ export default function StepFour({ setFieldValue, values }) {
                 />
               )}
             </Field>
-            <ErrorMessage name="Status" component="span"></ErrorMessage>
-          </div>
+              <ShowError name={`Status`}></ShowError> </div>
         </div>
         <div
           className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}
@@ -319,11 +302,7 @@ export default function StepFour({ setFieldValue, values }) {
                 />
               )}
             </Field>
-            <ErrorMessage
-              name="VisaType"
-              component="span"
-              className={`text-red-700`}
-            ></ErrorMessage>
+              <ShowError name={`VisaType`}></ShowError>
           </div>
           <div className={`flex-1`}>
             <label htmlFor="VisaDate" className={`block`}>
@@ -340,8 +319,7 @@ export default function StepFour({ setFieldValue, values }) {
                 ></DateSingleSelect>
               )}
             </Field>
-            <ErrorMessage name="VisaDate" component="span"></ErrorMessage>
-          </div>
+              <ShowError name={`VisaDate`}></ShowError>  </div>
         </div>
         <div
           className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}
@@ -361,11 +339,7 @@ export default function StepFour({ setFieldValue, values }) {
                 ></DateSingleSelect>
               )}
             </Field>
-            <ErrorMessage
-              name="VisaExp"
-              component="span"
-              className={`text-red-700`}
-            ></ErrorMessage>
+              <ShowError name={`VisaExp`}></ShowError>
           </div>
           <div className={`flex-1`}></div>
         </div>
@@ -397,8 +371,7 @@ export default function StepFour({ setFieldValue, values }) {
                 </div>
               )}
             </Field>
-            <ErrorMessage name="VisaIMG" component="span"></ErrorMessage>{" "}
-          </div>
+              <ShowError name={`VisaIMG`}></ShowError>   </div>
         </div>
         <hr />
         <div className={`flex flex-row items-center gap-2`}>
@@ -427,11 +400,7 @@ export default function StepFour({ setFieldValue, values }) {
                 ></DateSingleSelect>
               )}
             </Field>
-            <ErrorMessage
-              name="MedicalCertExpiry"
-              component="span"
-              className={`text-red-700`}
-            ></ErrorMessage>
+              <ShowError name={`MedicalCertExpiry`}></ShowError>
           </div>
           <div className={`flex-1`}>
             <label htmlFor="BloodType" className={`block`}>
@@ -453,8 +422,7 @@ export default function StepFour({ setFieldValue, values }) {
                 ></ReactSelect>
               )}
             </Field>
-            <ErrorMessage name="BloodType" component="span"></ErrorMessage>
-          </div>
+              <ShowError name={`BloodType`}></ShowError>  </div>
         </div>
         <div
           className={`flex flex-col gap-2 justify-between w-full text-black`}
@@ -486,10 +454,7 @@ export default function StepFour({ setFieldValue, values }) {
                 </div>
               )}
             </Field>
-            <ErrorMessage
-              name="LicenseImg"
-              component="span"
-            ></ErrorMessage>{" "}
+              <ShowError name={`MedicalCertIMG`}></ShowError>
           </div>
         </div>
         <hr />
@@ -511,11 +476,7 @@ export default function StepFour({ setFieldValue, values }) {
               type="text"
               className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"
             ></Field>
-            <ErrorMessage
-              name="ContactName"
-              component="span"
-              className={`text-red-700`}
-            ></ErrorMessage>
+              <ShowError name={`ContactName`}></ShowError>
           </div>
           <div className={`flex-1`}>
             <label htmlFor="Relationship" className={`block`}>
@@ -526,8 +487,7 @@ export default function StepFour({ setFieldValue, values }) {
               type="text"
               className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"
             ></Field>
-            <ErrorMessage name="Relationship" component="span"></ErrorMessage>
-          </div>
+              <ShowError name={`Relationship`}></ShowError> </div>
         </div>
         <div
           className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}
@@ -548,11 +508,7 @@ export default function StepFour({ setFieldValue, values }) {
                 />
               )}
             </Field>
-            <ErrorMessage
-              name="Phone"
-              component="span"
-              className={`text-red-700`}
-            ></ErrorMessage>
+              <ShowError name={`Phone`}></ShowError>
           </div>
           <div className={`sm:flex-1`}></div>
         </div>
