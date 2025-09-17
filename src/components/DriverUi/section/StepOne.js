@@ -13,6 +13,7 @@ import {useContext} from "react";
 import {ContextApi} from "@/components/DriverUi/section/DriverForm"
 import UploadPhoto from "@/components/DriverUi/ui/UploadPhoto";
 import ShowError from "@/components/DriverUi/ui/ShowError";
+import { useFormikContext } from "formik";
 export default function StepOne({setFieldValue,values}){
 const nationalities = useContext(ContextApi);
     const [preview, setPreview] = useState(false);
@@ -24,6 +25,8 @@ const nationalities = useContext(ContextApi);
         {value:"active",label:"Active"},
         {value:"pending",label:"Pending"},
     ]
+    const { errors } = useFormikContext();
+
 
 
     return(
@@ -64,12 +67,13 @@ const nationalities = useContext(ContextApi);
     <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
 <div className={`flex-1`}>
     <label htmlFor="firstName" className={`block`}>First Name<span className="text-red-500 ml-1">*</span></label>
-    <Field name="firstName" type="text" className="min-w-30 border border-gray-300 p-2 w-full rounded-xl"></Field>
+    <Field name="firstName" type="text" className={`min-w-30 border border-gray-300 p-2 w-full rounded-xl 
+    ${errors.firstName ? "border-red-500" : ""}`}></Field>
    <ShowError name={`firstName`}></ShowError>
 </div>
     <div className={`flex-1`}>
         <label htmlFor="lastName" className={`block`}>Last Name<span className="text-red-500 ml-1">*</span></label>
-        <Field name="lastName" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
+        <Field name="lastName" type="text" className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${errors.lastName ? "border-red-500" : ""}`}></Field>
        <ShowError name={`lastName`}></ShowError>
     </div>
 </div>
@@ -81,13 +85,15 @@ const nationalities = useContext(ContextApi);
         </div>
         <div className={`flex-1`}>
             <label htmlFor="DOB" className={`block`}>Date of Birth<span className="text-red-500 ml-1">*</span></label>
-            <Field name="DOB" >
+            <Field name="DOB">
                 {({field,form})=>(
                     <DateSingleSelect
                         value={field.value}
                         onChange={(date) => form.setFieldValue(field.name, date)}
+                        FieldName={`DOB`}
                         />
                 )}
+
             </Field>
             <ShowError name={`DOB`}></ShowError>
         </div>
@@ -119,10 +125,13 @@ const nationalities = useContext(ContextApi);
     <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
         <div className={`flex-1`}>
             <label htmlFor="National" className={`block`}>Nationality<span className="text-red-500 ml-1">*</span></label>
-            <Field name="National" className="min-w-30 border border-gray-300 p-2 w-full rounded-xl" placeholder="Select nationality">
+            <Field name="National" className={`min-w-30 border border-gray-300 p-2 w-full rounded-xl`} placeholder="Select nationality">
                 {({field,form})=>(
                     <ReactSelect instanceId="status-select" options={nationalities} value={nationalities.find(option => option.value === field.value)}
-                                 onChange={(option) => form.setFieldValue(field.name, option.value)}></ReactSelect>
+                                 onChange={(option) => form.setFieldValue(field.name, option.value)}
+                                 errors={errors.National}
+
+                    ></ReactSelect>
                 )}
             </Field>
            <ShowError name={`National`}></ShowError>

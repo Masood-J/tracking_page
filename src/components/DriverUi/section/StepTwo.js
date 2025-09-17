@@ -9,6 +9,8 @@ import React, { useState, useEffect } from "react";
 import ShowError from "@/components/DriverUi/ui/ShowError";
 import { GetCountries, GetState, GetCity } from "react-country-state-city";
 import Select from "react-select";
+import {useFormikContext} from "formik";
+
 export default function StepTwo({values,setFieldValue}) {
   const [country, setCountry] = useState(null);
   const [currentState, setcurrentState] = useState(null);
@@ -16,6 +18,7 @@ export default function StepTwo({values,setFieldValue}) {
   const [countriesList, setCountriesList] = useState([]);
   const [stateList, setStateList] = useState([]);
   const [citiesList, setCitiesList] = useState([]);
+  const {errors}=useFormikContext();
   useEffect(() => {
     GetCountries().then((result) => {
       setCountriesList(result);
@@ -52,7 +55,7 @@ export default function StepTwo({values,setFieldValue}) {
             <Field
               name="email"
               type="text"
-              className="border border-gray-300 p-2 w-full rounded-xl min-w-30"
+              className={`border border-gray-300 p-2 w-full rounded-xl min-w-30 ${errors.email?"border-red-500":""}`}
             ></Field>
             <ShowError name={`email`}></ShowError>
 
@@ -67,9 +70,10 @@ export default function StepTwo({values,setFieldValue}) {
                   country={"us"} // default country
                   value={field.value || ""} // bind Formik state
                   onChange={(val) => form.setFieldValue(field.name, val)}
-                  inputClass="!w-full !border !border-gray-300 p-5 !rounded-xl "
-                  buttonClass="!border-gray-300 !bg-white" // style the flag button
-                  containerClass="w-full"
+                  inputClass="!w-full p-5 !rounded-xl "
+                  buttonClass="!border-gray-300 !border-r-1 !border-l-0 !rounded-l-md !bg-white"
+                  containerClass={`!w-full !border-1 !rounded-l-md !border-gray-300 !rounded-r-xl !border-[#e2e8f0] focus-within:!border-red-500 ${errors.phone?"!border-red-500":""}`}
+
                 />
               )}
             </Field>
@@ -91,9 +95,10 @@ export default function StepTwo({values,setFieldValue}) {
                   country={"us"} // default country
                   value={field.value || ""} // bind Formik state
                   onChange={(val) => form.setFieldValue(field.name, val)}
-                  inputClass="!w-full !border !border-gray-300 p-5 !rounded-xl "
-                  buttonClass="!border-gray-300 !bg-white" // style the flag button
-                  containerClass="w-full"
+                  inputClass="!w-full p-5 !rounded-xl "
+                  buttonClass="!border-gray-300 !border-r-1 !border-l-0 !rounded-l-md !bg-white"
+                  containerClass="!w-full !border-1 !rounded-l-md !border-gray-300 !rounded-r-xl !border-[#e2e8f0] focus-within:!border-red-500"
+
                 />
               )}
             </Field>
@@ -110,7 +115,7 @@ export default function StepTwo({values,setFieldValue}) {
             <Field
               name="Address"
               type="text"
-              className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"
+              className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${errors.Address?"border-red-500":""}`}
             ></Field>
               <ShowError name={`Address`}></ShowError>
           </div>
@@ -134,12 +139,18 @@ export default function StepTwo({values,setFieldValue}) {
                         }))}
                         onChange={(e) => {
                             setCountry(e.value);
-                            form.setFieldValue("Country", e.label);
+                            form.setFieldValue("Country", {name:e.label,id:e.value});
                         }}
+                        value={
+                            form.values.Country
+                                ? { value: form.values.Country.id, label: form.values.Country.name }
+                                : null
+                        }
                         styles={{
                             control: (baseStyles) => ({
                                 ...baseStyles,
                                 borderRadius: "10px",
+                                borderColor:errors.Country?"#ef4444":"#d1d5dc",
                             }),
                         }}
                     />
@@ -162,11 +173,17 @@ export default function StepTwo({values,setFieldValue}) {
                             label: _state.name,
                         }))}
                         onChange={(e) => {setcurrentState(e.value);
-                        form.setFieldValue("State", e.label);}}
+                        form.setFieldValue("State", {name:e.label,id:e.value});}}
+                        value={
+                            form.values.State
+                                ? { value: form.values.State.id, label: form.values.State.name }
+                                : null
+                        }
                         styles={{
                             control: (baseStyles) => ({
                                 ...baseStyles,
                                 borderRadius: "10px",
+                                borderColor:errors.State?"#ef4444":"#d1d5dc",
                             }),
                         }}
                     />
@@ -192,11 +209,17 @@ export default function StepTwo({values,setFieldValue}) {
                             label: _city.name,
                         }))}
                         onChange={(e) => {setCity(e.value);
-                        form.setFieldValue("City", e.label);}}
+                        form.setFieldValue("City", {name:e.label,value:e.value});}}
+                        value={
+                            form.values.City
+                                ? { value: form.values.City.id, label: form.values.City.name }
+                                : null
+                        }
                         styles={{
                             control: (baseStyles) => ({
                                 ...baseStyles,
                                 borderRadius: "10px",
+                                borderColor:errors.City?"#ef4444":"#d1d5dc",
                             }),
                         }}
                     />

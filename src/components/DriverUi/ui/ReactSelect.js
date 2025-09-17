@@ -1,6 +1,6 @@
 
 import Select from 'react-select'
-export default function ReactSelect({ options, instanceId,onChange,value = "default-select", ...props }){
+export default function ReactSelect({ options, instanceId,onChange,value = "default-select",errors, ...props }){
 
     return(
 
@@ -8,6 +8,8 @@ export default function ReactSelect({ options, instanceId,onChange,value = "defa
                 control: (baseStyles, state) => ({
                     ...baseStyles,
                     borderRadius:'10px',
+                    padding: "2px",
+borderColor:errors? "#ef4444":"#d1d5dc",
                 }),
             }}/>
 

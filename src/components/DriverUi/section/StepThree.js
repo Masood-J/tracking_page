@@ -6,8 +6,10 @@ import DateSelect from "@/components/DriverUi/ui/DateSelect";
 import PhoneInput from "react-phone-input-2";
 import DateSingleSelect from "@/components/DriverUi/ui/DateSingleSelect";
 import ShowError from "@/components/DriverUi/ui/ShowError";
-export default function StepThree(){
+import {useFormikContext} from "formik";
 
+export default function StepThree(){
+const {errors} = useFormikContext();
     return(
         <div>
         <FormCard title={`Employement Details`} desc={`Work-related information and position`} icon={<Briefcase className={`text-white`}></Briefcase>}></FormCard>
@@ -15,7 +17,7 @@ export default function StepThree(){
                 <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="EmployeeID" className={`block`}>Employee ID<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="EmployeeID" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
+                        <Field name="EmployeeID" type="text" className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${errors.EmployeeID?"border-red-500":""}`}></Field>
                      <ShowError name={`EmployeeID`}></ShowError>
                     </div>
                     <div className={`flex-1`}>
@@ -24,7 +26,8 @@ export default function StepThree(){
                             {({field,form})=>(
                                 <DateSingleSelect
                                     value={field.value}
-                                    onChange={(date) => form.setFieldValue(field.name, date)}></DateSingleSelect>
+                                    onChange={(date) => form.setFieldValue(field.name, date)}
+                                    FieldName={`HireDate`}></DateSingleSelect>
                             )}
                         </Field>
                        <ShowError name={`HireDate`}></ShowError>
@@ -33,12 +36,12 @@ export default function StepThree(){
                 <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="EmploymentType" className={`block`}>Employment Type<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="EmploymentType" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
+                        <Field name="EmploymentType" type="text" className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${errors.EmploymentType?"border-red-500":""}`}></Field>
                        <ShowError name={`EmploymentType`}></ShowError>
                     </div>
                     <div className={`flex-1`}>
                         <label htmlFor="Department" className={`block`}>Department<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="Department" type="text" className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"></Field>
+                        <Field name="Department" type="text" className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${errors.Department?"border-red-500":""}`}></Field>
                        <ShowError name={`Department`}></ShowError>
                     </div>
                 </div>
@@ -56,9 +59,9 @@ export default function StepThree(){
                                     country={"us"}                     // default country
                                     value={field.value || ""}          // bind Formik state
                                     onChange={(val) => form.setFieldValue(field.name, val)}
-                                    inputClass="!w-full !border !border-gray-300 p-5 !rounded-xl "
-                                    buttonClass="!border-gray-300 !bg-white" // style the flag button
-                                    containerClass="w-full"
+                                    inputClass="!w-full p-5 !rounded-xl "
+                                    buttonClass="!border-gray-300 !border-r-1 !border-l-0 !rounded-l-md !bg-white"
+                                    containerClass="!w-full !border-1 !rounded-l-md !border-gray-300 !rounded-r-xl !border-[#e2e8f0] focus-within:!border-red-500"
                                 />
                             )}
                         </Field>

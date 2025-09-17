@@ -54,9 +54,9 @@ export default function DriverForm({ UpdateProgress, UpdateStep }) {
       email: Yup.string().required(`Email is a required`),
       phone: Yup.string().required(`Phone number is required`),
       Address: Yup.string().required(`Address is required`),
-      Country: Yup.string().required(`Country is required`),
-      State: Yup.string().required(`State is required`),
-      City: Yup.string().required(`City is required`),
+      Country: Yup.object().required(`Country is required`),
+      State: Yup.object().required(`State is required`),
+      City: Yup.object().required(`City is required`),
     }),
     //Step No.3
     Yup.object({
@@ -70,39 +70,39 @@ export default function DriverForm({ UpdateProgress, UpdateStep }) {
     }),
     //Step No.4
     Yup.object({
-      License: Yup.number().required(),
-      IssueCountry: Yup.string().required(),
-      IssueState: Yup.string().required(),
-      IssueDate: Yup.string().required(),
-      Expiry: Yup.string().required(),
+      License: Yup.number().required(`License Number Is Required`),
+      IssueCountry: Yup.string().required(`Issue Country Is Required`),
+      IssueState: Yup.string().required(`Issue State Is Required`),
+      IssueDate: Yup.string().required(`Issue Date Is Required`),
+      Expiry: Yup.string().required(`Expiry Date Is Required`),
       LicenseImg: Yup.mixed()
-        .required()
+        .required(`License Image Is Required`)
         .test("fileformat", "PNG,JPG upto 10MB", (value) => {
           if (!value) return true;
           return ["image/jpeg", "image/png", "image/jpg"].includes(value.type);
         }),
-      VisaType: Yup.string().required(),
-      Status: Yup.string().required(),
-      VisaIssueCountry: Yup.string(),
-      VisaDate: Yup.date().required(),
-      VisaExp: Yup.string().required(),
+      VisaType: Yup.string().required(`Visa Type Is Required`),
+      Status: Yup.string().required(`Status Is Required`),
+      VisaIssueCountry: Yup.string().required(`Visa Issue Country Is Required`),
+      VisaDate: Yup.date().required(`Visa Issue Date Is Required`),
+      VisaExp: Yup.string().required(`Visa Expiry Date Is Required`),
       VisaIMG: Yup.mixed()
-        .required()
+        .required(`Visa Image Is Required`)
         .test("fileformat", "Only JPG And PNG Allowed", (value) => {
           if (!value) return true;
           return ["image/jpeg", "image/jpg", "image/png"].includes(value.type);
         }),
-      MedicalCertExpiry: Yup.string().required(),
+      MedicalCertExpiry: Yup.string().required(`Medical Certificate Expiry Date Is Required`),
       BloodType: Yup.string(),
       MedicalCertIMG: Yup.mixed()
-        .required()
+        .required(`Medical Certificate Is Required`)
         .test("fileformat", "Only JPG And PNG Allowed", (value) => {
           if (!value) return true;
           return ["image/jpeg", "image/jpg", "image/png"].includes(value.type);
         }),
-      ContactName: Yup.string().required(),
-      Relationship: Yup.string().required(),
-      Phone: Yup.string().required(),
+      ContactName: Yup.string().required(`Contact Name Is Required`),
+      Relationship: Yup.string().required(`Relationship Is Required`),
+      Phone: Yup.string().required(`Contact Number Is Required`),
     }),
     //Step No.5
     Yup.object({
@@ -188,8 +188,8 @@ export default function DriverForm({ UpdateProgress, UpdateStep }) {
               {
                 trainingName: "",
                 TrainingProvider: "",
-                CompleteDate: "",
-                ExpiryDate: "",
+                CompleteDate: null,
+                ExpiryDate: null,
                 TrainingCertImg: null,
                 AddNotes: "",
               },
@@ -260,6 +260,7 @@ export default function DriverForm({ UpdateProgress, UpdateStep }) {
                 </button>
               </div>
               <button
+                  className={`text-black`}
                 onClick={() => {
                     if(step<4){
                   updateStep((prev) => prev + 1);

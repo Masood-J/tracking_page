@@ -6,17 +6,21 @@ import { Plus } from "lucide-react";
 import DateSelect from "@/components/DriverUi/ui/DateSelect";
 import { X } from "lucide-react";
 import DateSingleSelect from "@/components/DriverUi/ui/DateSingleSelect";
+import DateSingleSelectV2 from "@/components/DriverUi/ui/DateSingleSelectV2";
 import UploadFiles from "@/components/DriverUi/ui/UploadFiles";
 import React from "react";
 import Image from "next/image";
 import ShowError from "@/components/DriverUi/ui/ShowError";
+import ShowErrorV2 from "@/components/DriverUi/ui/ShowErrorV2";
 import dynamic from 'next/dynamic';
+import {useFormikContext,getIn} from "formik";
 const PDFViewer = dynamic(
     () => import('@/components/DriverUi/ui/PDFViewer'),
     { ssr: false }
 );
 
 export default function StepFive({ setFieldValue, values }) {
+    const {errors}=useFormikContext();
   return (
     <div>
       <FormCard
@@ -47,12 +51,16 @@ export default function StepFive({ setFieldValue, values }) {
                       AddNotes: "",
                     })
                   }
+                  type={`button`}
                 >
                   <Plus className={`w-4 h-4`}></Plus>
                   <h3>Add Training</h3>
                 </button>
               </div>
-              {values.trainings.map((training, index) => (
+              {values.trainings.map((training, index) => {
+                  const fieldName = `trainings.${index}.trainingName`;
+                  const error = getIn(errors, fieldName);
+                  return(
                 <div
                   key={index}
                   className={`flex flex-col gap-5 p-3 border-l-4 border-l-blue-600 border-2 rounded-xl border-[] rounded-l-xl`}
@@ -84,11 +92,13 @@ export default function StepFive({ setFieldValue, values }) {
                       <Field
                         name={`trainings.${index}.trainingName`}
                         type="text"
-                        className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"
+                        className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${
+                            error ? "border-red-500" : "border-gray-300"
+                        }`}
                       ></Field>
-                      <ShowError
+                      <ShowErrorV2
                         name={`trainings.${index}.trainingName`}
-                      ></ShowError>
+                      ></ShowErrorV2>
                     </div>
                     <div className={`flex-1`}>
                       <label htmlFor="TrainingProvider" className={`block`}>
@@ -98,11 +108,11 @@ export default function StepFive({ setFieldValue, values }) {
                       <Field
                         name={`trainings.${index}.TrainingProvider`}
                         type="text"
-                        className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"
+                        className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${error?"border-red-500":"border-gray-300"}`}
                       ></Field>
-                      <ShowError
+                      <ShowErrorV2
                         name={`trainings.${index}.TrainingProvider`}
-                      ></ShowError>
+                      ></ShowErrorV2>
                     </div>
                   </div>
                   <div
@@ -115,20 +125,21 @@ export default function StepFive({ setFieldValue, values }) {
                       </label>
                       <Field
                         name={`trainings.${index}.CompleteDate`}
-                        className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"
+                        className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl`}
                       >
                         {({ field, form }) => (
-                          <DateSingleSelect
+                          <DateSingleSelectV2
                             value={field.value}
                             onChange={(date) =>
                               form.setFieldValue(field.name, date)
                             }
-                          ></DateSingleSelect>
+                            FieldName={field.name}
+                          ></DateSingleSelectV2>
                         )}
                       </Field>
-                      <ShowError
+                      <ShowErrorV2
                         name={`trainings.${index}.CompleteDate`}
-                      ></ShowError>
+                      ></ShowErrorV2>
                     </div>
                     <div className={`flex-1`}>
                       <label htmlFor="ExpiryDate" className={`block`}>
@@ -140,17 +151,18 @@ export default function StepFive({ setFieldValue, values }) {
                         className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"
                       >
                         {({ field, form }) => (
-                          <DateSingleSelect
+                          <DateSingleSelectV2
                             value={field.value}
                             onChange={(date) =>
                               form.setFieldValue(field.name, date)
                             }
-                          ></DateSingleSelect>
+                            FieldName={field.name}
+                          ></DateSingleSelectV2>
                         )}
                       </Field>
-                      <ShowError
+                      <ShowErrorV2
                         name={`trainings.${index}.ExpiryDate`}
-                      ></ShowError>
+                      ></ShowErrorV2>
                     </div>
                   </div>
                   <div
@@ -192,9 +204,9 @@ export default function StepFive({ setFieldValue, values }) {
                         </div>
                       )}
                     </Field>
-                    <ShowError
+                    <ShowErrorV2
                       name={`trainings.${index}.TrainingCertImg`}
-                    ></ShowError>
+                    ></ShowErrorV2>
                   </div>
                   <div
                     className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}
@@ -207,15 +219,15 @@ export default function StepFive({ setFieldValue, values }) {
                         name={`trainings.${index}.AddNotes`}
                         placeholder={`Enter any additional notes or special requirments...`}
                         type="text"
-                        className="border min-w-30 border-gray-300 p-2 w-full rounded-xl pb-15"
+                        className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl pb-15 ${error ? "border-red-500" : ""}`}
                       ></Field>
-                      <ShowError
+                      <ShowErrorV2
                         name={`trainings.${index}.AddNotes`}
-                      ></ShowError>
+                      ></ShowErrorV2>
                     </div>
                   </div>
-                </div>
-              ))}
+                </div>)
+          })}
               {values.trainings.length === 0 && (
                 <div
                   className={`bg-[#f9fafc] min-h-65 border-1 border-gray-400 rounded-md`}
@@ -243,6 +255,7 @@ export default function StepFive({ setFieldValue, values }) {
                           AddNotes: "",
                         })
                       }
+                      type={`button`}
                     >
                       <Plus className={`w-4 h-4`}></Plus>
                       <h3>Add First Training</h3>

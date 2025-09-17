@@ -15,7 +15,9 @@ import Select from "react-select";
 import UploadFiles from "@/components/DriverUi/ui/UploadFiles";
 import Image from "next/image";
 import ShowError from "@/components/DriverUi/ui/ShowError";
+import {useFormikContext} from "formik"
 export default function StepFour({ setFieldValue, values }) {
+    const {errors} = useFormikContext();
   const nationalities = useContext(ContextApi);
   const [country, setCountry] = useState(null);
   const [currentState, setcurrentState] = useState(null);
@@ -80,7 +82,7 @@ export default function StepFour({ setFieldValue, values }) {
             <Field
               name="License"
               type="number"
-              className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"
+              className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${errors.License?"border-red-500":""}`}
             ></Field>
               <ShowError name={`License`}></ShowError>
           </div>
@@ -106,6 +108,8 @@ export default function StepFour({ setFieldValue, values }) {
                     control: (baseStyles) => ({
                       ...baseStyles,
                       borderRadius: "10px",
+                        padding: "2px",
+                        borderColor:errors.IssueCountry?"#ef4444":"#d1d5dc",
                     }),
                   }}
                   value={
@@ -147,6 +151,8 @@ export default function StepFour({ setFieldValue, values }) {
                     control: (baseStyles) => ({
                       ...baseStyles,
                       borderRadius: "10px",
+                        padding: "2px",
+                        borderColor:errors.IssueState?"#ef4444":"#d1d5dc",
                     }),
                   }}
                 />
@@ -166,6 +172,7 @@ export default function StepFour({ setFieldValue, values }) {
                 <DateSingleSelect
                   value={field.value}
                   onChange={(date) => form.setFieldValue(field.name, date)}
+                  FieldName={`IssueDate`}
                 />
               )}
             </Field>
@@ -186,6 +193,7 @@ export default function StepFour({ setFieldValue, values }) {
                 <DateSingleSelect
                   value={field.value}
                   onChange={(date) => form.setFieldValue(field.name, date)}
+                  FieldName={`Expiry`}
                 />
               )}
             </Field>
@@ -249,6 +257,7 @@ export default function StepFour({ setFieldValue, values }) {
                   onChange={(option) =>
                     form.setFieldValue(field.name, option.value)
                   }
+                  errors={errors.VisaType}
                 />
               )}
             </Field>
@@ -271,6 +280,7 @@ export default function StepFour({ setFieldValue, values }) {
                   onChange={(option) =>
                     form.setFieldValue(field.name, option.value)
                   }
+                  errors={errors.Status}
                 />
               )}
             </Field>
@@ -293,16 +303,22 @@ export default function StepFour({ setFieldValue, values }) {
                     value: _country.id,
                     label: _country.name,
                   }))}
+                  onChange={(e) => {
+                      setcurrentState(e.value);
+                      form.setFieldValue(field.name, e.label);
+                  }}
                   styles={{
                     control: (baseStyles) => ({
                       ...baseStyles,
                       borderRadius: "10px",
+                        padding: "2px",
+                        borderColor:errors.VisaIssueCountry?"#ef4444":"#d1d5dc",
                     }),
                   }}
                 />
               )}
             </Field>
-              <ShowError name={`VisaType`}></ShowError>
+              <ShowError name={`VisaIssueCountry`}></ShowError>
           </div>
           <div className={`flex-1`}>
             <label htmlFor="VisaDate" className={`block`}>
@@ -316,6 +332,7 @@ export default function StepFour({ setFieldValue, values }) {
                 <DateSingleSelect
                   value={field.value}
                   onChange={(date) => form.setFieldValue(field.name, date)}
+                  FieldName={`VisaDate`}
                 ></DateSingleSelect>
               )}
             </Field>
@@ -336,6 +353,7 @@ export default function StepFour({ setFieldValue, values }) {
                 <DateSingleSelect
                   value={field.value}
                   onChange={(date) => form.setFieldValue(field.name, date)}
+                  FieldName={`VisaExp`}
                 ></DateSingleSelect>
               )}
             </Field>
@@ -397,6 +415,7 @@ export default function StepFour({ setFieldValue, values }) {
                 <DateSingleSelect
                   value={field.value}
                   onChange={(date) => form.setFieldValue(field.name, date)}
+                  FieldName={`MedicalCertExpiry`}
                 ></DateSingleSelect>
               )}
             </Field>
@@ -408,7 +427,7 @@ export default function StepFour({ setFieldValue, values }) {
             </label>
             <Field
               name="BloodType"
-              className="border min-w-30 border-gray-300 p-2 pb-3 w-full rounded-xl"
+              className="min-w-30 border-gray-300 border-2 p-2 pb-3 w-full rounded-xl"
             >
               {({ field, form }) => (
                 <ReactSelect
@@ -474,7 +493,7 @@ export default function StepFour({ setFieldValue, values }) {
             <Field
               name="ContactName"
               type="text"
-              className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"
+              className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${errors.ContactName?"border-red-500":""}`}
             ></Field>
               <ShowError name={`ContactName`}></ShowError>
           </div>
@@ -485,7 +504,7 @@ export default function StepFour({ setFieldValue, values }) {
             <Field
               name="Relationship"
               type="text"
-              className="border min-w-30 border-gray-300 p-2 w-full rounded-xl"
+              className={`border-1 min-w-30 border-gray-300 p-2 w-full rounded-xl ${errors.Relationship?"border-red-500":""}`}
             ></Field>
               <ShowError name={`Relationship`}></ShowError> </div>
         </div>
@@ -502,9 +521,9 @@ export default function StepFour({ setFieldValue, values }) {
                   country={"us"} // default country
                   value={field.value || ""} // bind Formik state
                   onChange={(val) => form.setFieldValue(field.name, val)}
-                  inputClass="!w-full !border !border-gray-300 p-5 !rounded-xl "
-                  buttonClass="!border-gray-300 !bg-white" // style the flag button
-                  containerClass="w-full"
+                  inputClass="!w-full p-5 !rounded-xl "
+                  buttonClass="!border-gray-300 !border-r-1 !border-l-0 !rounded-l-md !bg-white"
+                  containerClass={`!w-full !border-1 !rounded-l-md !rounded-r-xl !border-gray-300 focus-within:!border-red-500 ${errors.Phone?"!border-red-500":""}`}
                 />
               )}
             </Field>
