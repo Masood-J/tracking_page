@@ -42,3 +42,12 @@ body {
     border: none !important;
     box-shadow: none !important;
 }
+.react-tel-input .special-label {
+    display: none !important;
+}
+.react-tel-input .form-control {
+    font-size: 14px !important; /* smaller text */
+    padding-top:5px !important ;
+    padding-bottom:5px !important;
+    height: auto !important; /* let padding control height */
+}

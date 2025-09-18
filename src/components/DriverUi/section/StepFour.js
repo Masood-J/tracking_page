@@ -8,7 +8,7 @@ import PhoneInput from "react-phone-input-2";
 import DateSingleSelect from "@/components/DriverUi/ui/DateSingleSelect";
 import ReactSelect from "@/components/DriverUi/ui/ReactSelect";
 import { ContextApi } from "@/components/DriverUi/section/DriverForm";
-import { useContext } from "react";
+import { useContext} from "react";
 import React, { useState, useEffect } from "react";
 import { GetCountries, GetState } from "react-country-state-city";
 import Select from "react-select";
@@ -57,6 +57,24 @@ export default function StepFour({ setFieldValue, values }) {
     { value: 7, label: "O+" },
     { value: 8, label: "O-" },
   ];
+  const[licensePicker, setLicensePicker] = useState();
+  const[medicalCertificate, setMedicalCertificate] = useState();
+  const[visaImg, setVisaImg] = useState();
+    useEffect(() => {
+if(values.LicenseImg){
+    const LicensePrev=URL.createObjectURL(values.LicenseImg)
+    setLicensePicker(LicensePrev);
+}
+if(values.MedicalCertIMG){
+    const MedicalPrev=URL.createObjectURL(values.MedicalCertIMG)
+    setMedicalCertificate(MedicalPrev);
+}
+if(values.VisaIMG){
+    const VisaPrev=URL.createObjectURL(values.VisaIMG)
+    setVisaImg(VisaPrev)
+}
+
+    }, [values.LicenseImg, values.MedicalCertIMG, values.VisaIMG]);
   return (
     <div>
       <FormCard
@@ -82,7 +100,8 @@ export default function StepFour({ setFieldValue, values }) {
             <Field
               name="License"
               type="number"
-              className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${errors.License?"border-red-500":""}`}
+              className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${errors.License?"border-red-500":""} focus:outline-none focus:border-blue-500
+           focus:ring-1 focus:ring-blue-400 focus:shadow hover:border-gray-400`}
             ></Field>
               <ShowError name={`License`}></ShowError>
           </div>
@@ -105,11 +124,11 @@ export default function StepFour({ setFieldValue, values }) {
                     form.setFieldValue(field.name, e.label);
                   }}
                   styles={{
-                    control: (baseStyles) => ({
+                    control: (baseStyles,state) => ({
                       ...baseStyles,
                       borderRadius: "10px",
                         padding: "2px",
-                        borderColor:errors.IssueCountry?"#ef4444":"#d1d5dc",
+                        borderColor:errors.IssueCountry?state.isFocused?"#2b7fff":"#ef4444":"#d1d5dc",
                     }),
                   }}
                   value={
@@ -148,13 +167,14 @@ export default function StepFour({ setFieldValue, values }) {
                     form.setFieldValue(field.name, e.label);
                   }}
                   styles={{
-                    control: (baseStyles) => ({
+                    control: (baseStyles,state) => ({
                       ...baseStyles,
                       borderRadius: "10px",
                         padding: "2px",
-                        borderColor:errors.IssueState?"#ef4444":"#d1d5dc",
+                        borderColor:errors.IssueState?state.isFocused?"#2b7fff":"#ef4444":"#d1d5dc",
                     }),
                   }}
+                  noOptionsMessage={() => "Please select a country first"}
                 />
               )}
             </Field>
@@ -204,14 +224,14 @@ export default function StepFour({ setFieldValue, values }) {
           className={`flex flex-col gap-2 justify-between w-full text-black`}
         >
           <h3>License Image:</h3>
-          <div className={`flex-1 border-[#e2e8f0] rounded-xl border-2 p-4`}>
+          <div className={`flex-1 border-gray-300 hover:border-gray-400 ${errors.LicenseImg?"border-red-500":""} rounded-xl border-1 p-4`}>
             <label htmlFor="LicenseImg" className={`block`}></label>
             <Field name="LicenseImg">
               {({ field, form }) => (
                 <div className="flex flex-col items-center gap-2">
-                  {form.values.LicenseImg ? (
+                  {form.values.LicenseImg && licensePicker ? (
                     <Image
-                      src={URL.createObjectURL(form.values.LicenseImg)}
+                      src={licensePicker}
                       alt="License Preview"
                       width={128}
                       height={128}
@@ -226,6 +246,7 @@ export default function StepFour({ setFieldValue, values }) {
                     onFileChange={(file) =>
                       form.setFieldValue("LicenseImg", file)
                     }
+
                   />
                 </div>
               )}
@@ -308,11 +329,11 @@ export default function StepFour({ setFieldValue, values }) {
                       form.setFieldValue(field.name, e.label);
                   }}
                   styles={{
-                    control: (baseStyles) => ({
+                    control: (baseStyles,state) => ({
                       ...baseStyles,
                       borderRadius: "10px",
                         padding: "2px",
-                        borderColor:errors.VisaIssueCountry?"#ef4444":"#d1d5dc",
+                        borderColor:errors.VisaIssueCountry?state.isFocused?"#2b7fff":"#ef4444":"#d1d5dc",
                     }),
                   }}
                 />
@@ -365,15 +386,15 @@ export default function StepFour({ setFieldValue, values }) {
           className={`flex flex-col gap-2 justify-between w-full text-black`}
         >
           <h3>Visa Image:</h3>
-          <div className={`flex-1 border-[#e2e8f0] rounded-xl border-2 p-4`}>
+          <div className={`flex-1 border-gray-300 hover:border-gray-400 ${errors.VisaIMG?"border-red-500":""} rounded-xl border-1 p-4`}>
             <label htmlFor="VisaIMG" className={`block`}></label>
             <Field name="VisaIMG">
               {({ field, form }) => (
                 <div className="flex flex-col items-center gap-2">
-                  {form.values.VisaIMG ? (
+                  {form.values.VisaIMG && visaImg ? (
                     <Image
-                      src={URL.createObjectURL(form.values.VisaIMG)}
-                      alt="License Preview"
+                      src={visaImg}
+                      alt="Visa Preview"
                       width={128}
                       height={128}
                       className="object-cover w-32 h-32"
@@ -447,14 +468,14 @@ export default function StepFour({ setFieldValue, values }) {
           className={`flex flex-col gap-2 justify-between w-full text-black`}
         >
           <h3>Medical Certificate</h3>
-          <div className={`flex-1 border-[#e2e8f0] rounded-xl border-2 p-4`}>
+          <div className={`flex-1 border-gray-300 hover:border-gray-400 ${errors.MedicalCertIMG?"border-red-500":""} rounded-xl border-1 p-4`}>
             <label htmlFor="MedicalCertIMG" className={`block`}></label>
             <Field name="MedicalCertIMG">
               {({ field, form }) => (
                 <div className="flex flex-col items-center gap-2">
-                  {form.values.MedicalCertIMG ? (
+                  {form.values.MedicalCertIMG && medicalCertificate ? (
                     <Image
-                      src={URL.createObjectURL(form.values.MedicalCertIMG)}
+                      src={medicalCertificate}
                       alt="License Preview"
                       width={128}
                       height={128}
@@ -493,7 +514,8 @@ export default function StepFour({ setFieldValue, values }) {
             <Field
               name="ContactName"
               type="text"
-              className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${errors.ContactName?"border-red-500":""}`}
+              className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${errors.ContactName?"border-red-500":""} focus:outline-none focus:border-blue-500
+           focus:ring-1 focus:ring-blue-400 focus:shadow hover:border-gray-400`}
             ></Field>
               <ShowError name={`ContactName`}></ShowError>
           </div>
@@ -504,7 +526,8 @@ export default function StepFour({ setFieldValue, values }) {
             <Field
               name="Relationship"
               type="text"
-              className={`border-1 min-w-30 border-gray-300 p-2 w-full rounded-xl ${errors.Relationship?"border-red-500":""}`}
+              className={`border-1 min-w-30 border-gray-300 p-2 w-full rounded-xl ${errors.Relationship?"border-red-500":""} focus:outline-none focus:border-blue-500
+           focus:ring-1 focus:ring-blue-400 focus:shadow hover:border-gray-400`}
             ></Field>
               <ShowError name={`Relationship`}></ShowError> </div>
         </div>
@@ -523,7 +546,7 @@ export default function StepFour({ setFieldValue, values }) {
                   onChange={(val) => form.setFieldValue(field.name, val)}
                   inputClass="!w-full p-5 !rounded-xl "
                   buttonClass="!border-gray-300 !border-r-1 !border-l-0 !rounded-l-md !bg-white"
-                  containerClass={`!w-full !border-1 !rounded-l-md !rounded-r-xl !border-gray-300 focus-within:!border-red-500 ${errors.Phone?"!border-red-500":""}`}
+                  containerClass={`!w-full !border-1 !rounded-l-md !rounded-r-xl !border-gray-300 ${errors.Phone?"!border-red-500":""} focus-within:!border-blue-500 !border-[#e2e8f0] focus:!outline-none focus:!border-blue-500 focus-within:!ring-1 focus-within:!ring-blue-400 focus-within:!shadow hover:!border-gray-400`}
                 />
               )}
             </Field>

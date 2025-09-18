@@ -51,7 +51,7 @@ export default function DriverForm({ UpdateProgress, UpdateStep }) {
     }),
     //Step No.2
     Yup.object({
-      email: Yup.string().required(`Email is a required`),
+      email: Yup.string().email(`Please enter a valid Email`).required(`Email is a required`),
       phone: Yup.string().required(`Phone number is required`),
       Address: Yup.string().required(`Address is required`),
       Country: Yup.object().required(`Country is required`),
@@ -143,7 +143,7 @@ export default function DriverForm({ UpdateProgress, UpdateStep }) {
         <Formik
           initialValues={{
             // Step 1
-            profilePic: null,
+            profilePic: "",
             firstName: "",
             lastName: "",
             middleName: "",
@@ -188,9 +188,9 @@ export default function DriverForm({ UpdateProgress, UpdateStep }) {
               {
                 trainingName: "",
                 TrainingProvider: "",
-                CompleteDate: null,
-                ExpiryDate: null,
-                TrainingCertImg: null,
+                CompleteDate: "",
+                ExpiryDate: "",
+                TrainingCertImg: "",
                 AddNotes: "",
               },
             ],
@@ -266,7 +266,9 @@ export default function DriverForm({ UpdateProgress, UpdateStep }) {
                   updateStep((prev) => prev + 1);
                   UpdateStep((prev) => prev + 1);
                   UpdateProgress((prev) => prev + 20);
+
                 }}}
+                  type={`button`}
               >
                 Skip Validation
               </button>

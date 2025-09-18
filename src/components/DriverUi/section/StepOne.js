@@ -26,120 +26,209 @@ const nationalities = useContext(ContextApi);
         {value:"pending",label:"Pending"},
     ]
     const { errors } = useFormikContext();
+    const[picPreview,setPicPreview]=useState();
+
+    useEffect(() => {
+        if (values.profilePic) {
+            const objectUrl = URL.createObjectURL(values.profilePic);
+            setPicPreview(objectUrl);
+
+            // cleanup to avoid memory leaks
+            return () => URL.revokeObjectURL(objectUrl);
+        }
+    }, [values.profilePic]);
 
 
-
-    return(
-        <div className={``}>
-        <FormCard title={`Personal Information`} desc={`Basic personal details and identification`} icon={<User className={`text-white`}></User>}></FormCard>
-<div className={`flex flex-col items-center mt-6 gap-5 p-8`}>
-    <div className={`rounded-full bg-[#f3f4f6] ${values.profilePic?"":"p-5"} border-4 border-[#fefefe] shadow-md shadow-gray-300`}>
-        {values.profilePic?(<Image src={URL.createObjectURL(values.profilePic)}
-                         alt="License Preview"
-                         width={128}
-                         height={128}
-                         className="object-cover w-32 h-32 rounded-full"></Image>):(<CircleUser className={`w-20 h-20 text-gray-400`}></CircleUser>)}
-
-    </div>
-    <div className={`flex flex-col items-center gap-2  text-black`}>
-        <h3>Profile Photo<span className="text-red-500 ml-1">*</span></h3>
-        <div className={`border-2 border-[#e2e8f0] p-1 rounded-xl`}>
-        <label htmlFor="profilePic">
-            <div className={`flex flex-row gap-2 items-center`}>
-                <Upload className={`w-4 h-4 text-black`}></Upload>
-                <h3>Upload Photo</h3>
+const errorClass="border-red-500 focus:ring-1 focus:ring-red-400 ";
+const normalClass =
+  "focus:border-blue-500 focus:ring-1 focus:ring-blue-400 focus:shadow hover:border-gray-400";
+    return (
+      <div className={``}>
+        <FormCard
+          title={`Personal Information`}
+          desc={`Basic personal details and identification`}
+          icon={<User className={`text-white`}></User>}
+        ></FormCard>
+        <div className={`flex flex-col items-center mt-6 gap-5 p-8`}>
+          <div
+            className={`rounded-full bg-[#f3f4f6] ${values.profilePic ? "" : "p-5"} border-4 border-[#fefefe] shadow-md shadow-gray-300`}
+          >
+            {values.profilePic && picPreview ? (
+              <Image
+                src={picPreview}
+                alt="License Preview"
+                width={128}
+                height={128}
+                className="object-cover w-32 h-32 rounded-full"
+              ></Image>
+            ) : (
+              <CircleUser className={`w-20 h-20 text-gray-400`}></CircleUser>
+            )}
+          </div>
+          <div className={`flex flex-col items-center gap-2  text-black`}>
+            <h3>
+              Profile Photo<span className="text-red-500 ml-1">*</span>
+            </h3>
+            <div className={`border-2 border-[#e2e8f0] p-1 rounded-xl`}>
+              <label htmlFor="profilePic">
+                <div className={`flex flex-row gap-2 items-center`}>
+                  <Upload className={`w-4 h-4 text-black`}></Upload>
+                  <h3>Upload Photo</h3>
+                </div>
+              </label>
+              <input
+                id="profilePic"
+                name="profilePic"
+                type="file"
+                className={`hidden`}
+                onChange={(event) => {
+                  const file = event.currentTarget.files?.[0];
+                  if (file) setFieldValue("profilePic", file);
+                }}
+              />
             </div>
-        </label>
-        <input
-            id="profilePic"
-            name="profilePic"
-            type="file"
-            className={`hidden`}
-            onChange={(event) => {
-                const file = event.currentTarget.files?.[0];
-                if (file) setFieldValue("profilePic", file);
-            }}
-        />
-        </div>
-        <p className={`text-gray-400`}>JPG,PNG up to 5MB</p>
-        <ShowError name={`profilePic`}></ShowError>
-    </div>
-    <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
-<div className={`flex-1`}>
-    <label htmlFor="firstName" className={`block`}>First Name<span className="text-red-500 ml-1">*</span></label>
-    <Field name="firstName" type="text" className={`min-w-30 border border-gray-300 p-2 w-full rounded-xl 
-    ${errors.firstName ? "border-red-500" : ""}`}></Field>
-   <ShowError name={`firstName`}></ShowError>
-</div>
-    <div className={`flex-1`}>
-        <label htmlFor="lastName" className={`block`}>Last Name<span className="text-red-500 ml-1">*</span></label>
-        <Field name="lastName" type="text" className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${errors.lastName ? "border-red-500" : ""}`}></Field>
-       <ShowError name={`lastName`}></ShowError>
-    </div>
-</div>
-    <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
-        <div className={`flex-1`}>
-            <label htmlFor="middleName" className={`block`}>Middle Name:</label>
-            <Field name="middleName" type="text" className="min-w-30 border border-gray-300 p-2 w-full rounded-xl"></Field>
-            <ShowError name={`middleName`}></ShowError>
-        </div>
-        <div className={`flex-1`}>
-            <label htmlFor="DOB" className={`block`}>Date of Birth<span className="text-red-500 ml-1">*</span></label>
-            <Field name="DOB">
-                {({field,form})=>(
-                    <DateSingleSelect
-                        value={field.value}
-                        onChange={(date) => form.setFieldValue(field.name, date)}
-                        FieldName={`DOB`}
-                        />
+            <p className={`text-gray-400`}>JPG,PNG up to 5MB</p>
+            <ShowError name={`profilePic`}></ShowError>
+          </div>
+          <div
+            className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}
+          >
+            <div className={`flex-1`}>
+              <label htmlFor="firstName" className={`block`}>
+                First Name<span className="text-red-500 ml-1">*</span>
+              </label>
+              <Field
+                name="firstName"
+                type="text"
+                className={`min-w-30 border border-gray-300 p-2 w-full rounded-xl focus:outline-none 
+    ${errors.firstName ? errorClass : normalClass}`}
+              ></Field>
+              <ShowError name={`firstName`}></ShowError>
+            </div>
+            <div className={`flex-1`}>
+              <label htmlFor="lastName" className={`block`}>
+                Last Name<span className="text-red-500 ml-1">*</span>
+              </label>
+              <Field
+                name="lastName"
+                type="text"
+                className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl focus:outline-none ${errors.lastName ? errorClass : normalClass}`}
+              ></Field>
+              <ShowError name={`lastName`}></ShowError>
+            </div>
+          </div>
+          <div
+            className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}
+          >
+            <div className={`flex-1`}>
+              <label htmlFor="middleName" className={`block`}>
+                Middle Name:
+              </label>
+              <Field
+                name="middleName"
+                type="text"
+                className={`min-w-30 border border-gray-300 p-2 w-full rounded-xl focus:outline-none focus:border-blue-500 
+           focus:ring-1 focus:ring-blue-400 focus:shadow hover:border-gray-400`}
+              ></Field>
+              <ShowError name={`middleName`}></ShowError>
+            </div>
+            <div className={`flex-1`}>
+              <label htmlFor="DOB" className={`block`}>
+                Date of Birth<span className="text-red-500 ml-1">*</span>
+              </label>
+              <Field name="DOB">
+                {({ field, form }) => (
+                  <DateSingleSelect
+                    value={field.value}
+                    onChange={(date) => form.setFieldValue(field.name, date)}
+                    FieldName={`DOB`}
+                  />
                 )}
-
-            </Field>
-            <ShowError name={`DOB`}></ShowError>
-        </div>
-    </div>
-    <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
-        <div className={`flex-1`}>
-            <label htmlFor="status" className={`block`}>Status:</label>
-            <Field name="status" className="border border-gray-300 p-2 w-full rounded-xl">
-                {({field,form})=>(
-                    <ReactSelect options={StatusSelect} instanceId="status-select-l"
-                                 value={StatusSelect.find(option => option.value === field.value)}
-                                 onChange={(option) => form.setFieldValue(field.name, option.value)}></ReactSelect>
+              </Field>
+              <ShowError name={`DOB`}></ShowError>
+            </div>
+          </div>
+          <div
+            className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}
+          >
+            <div className={`flex-1`}>
+              <label htmlFor="status" className={`block`}>
+                Status:
+              </label>
+              <Field
+                name="status"
+                className="border border-gray-300 p-2 w-full rounded-xl"
+              >
+                {({ field, form }) => (
+                  <ReactSelect
+                    options={StatusSelect}
+                    instanceId="status-select-l"
+                    value={StatusSelect.find(
+                      (option) => option.value === field.value,
+                    )}
+                    onChange={(option) =>
+                      form.setFieldValue(field.name, option.value)
+                    }
+                  ></ReactSelect>
                 )}
-            </Field>
-           <ShowError name={`status`}></ShowError>
-        </div>
-        <div className={`flex-1`}>
-            <label htmlFor="gender" className={`block`}>Gender</label>
-            <Field name="gender" className="border border-gray-300 p-2 w-full rounded-xl">
-                {({field,form})=>(
-<ReactSelect options={GenderSelect} instanceId="gender-select"
-             value={GenderSelect.find(option => option.value === field.value)}
-             onChange={(option) => form.setFieldValue(field.name, option.value)}></ReactSelect>
+              </Field>
+              <ShowError name={`status`}></ShowError>
+            </div>
+            <div className={`flex-1`}>
+              <label htmlFor="gender" className={`block`}>
+                Gender
+              </label>
+              <Field
+                name="gender"
+                className="border border-gray-300 p-2 w-full rounded-xl"
+              >
+                {({ field, form }) => (
+                  <ReactSelect
+                    options={GenderSelect}
+                    instanceId="gender-select"
+                    value={GenderSelect.find(
+                      (option) => option.value === field.value,
+                    )}
+                    onChange={(option) =>
+                      form.setFieldValue(field.name, option.value)
+                    }
+                  ></ReactSelect>
                 )}
-            </Field>
-          <ShowError name={`gender`}></ShowError>
-        </div>
-    </div>
-    <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
-        <div className={`flex-1`}>
-            <label htmlFor="National" className={`block`}>Nationality<span className="text-red-500 ml-1">*</span></label>
-            <Field name="National" className={`min-w-30 border border-gray-300 p-2 w-full rounded-xl`} placeholder="Select nationality">
-                {({field,form})=>(
-                    <ReactSelect instanceId="status-select" options={nationalities} value={nationalities.find(option => option.value === field.value)}
-                                 onChange={(option) => form.setFieldValue(field.name, option.value)}
-                                 errors={errors.National}
-
-                    ></ReactSelect>
+              </Field>
+              <ShowError name={`gender`}></ShowError>
+            </div>
+          </div>
+          <div
+            className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}
+          >
+            <div className={`flex-1`}>
+              <label htmlFor="National" className={`block`}>
+                Nationality<span className="text-red-500 ml-1">*</span>
+              </label>
+              <Field
+                name="National"
+                className={`min-w-30 border border-gray-300 p-2 w-full rounded-xl`}
+                placeholder="Select nationality"
+              >
+                {({ field, form }) => (
+                  <ReactSelect
+                    instanceId="status-select"
+                    options={nationalities}
+                    value={nationalities.find(
+                      (option) => option.value === field.value,
+                    )}
+                    onChange={(option) =>
+                      form.setFieldValue(field.name, option.value)
+                    }
+                    errors={errors.National}
+                  ></ReactSelect>
                 )}
-            </Field>
-           <ShowError name={`National`}></ShowError>
+              </Field>
+              <ShowError name={`National`}></ShowError>
+            </div>
+            <div className={`flex-1`}></div>
+          </div>
         </div>
-        <div className={`flex-1`}>
-        </div>
-    </div>
-</div>
-    </div>
-    )
+      </div>
+    );
 }

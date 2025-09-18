@@ -60,6 +60,7 @@ export default function StepFive({ setFieldValue, values }) {
               {values.trainings.map((training, index) => {
                   const fieldName = `trainings.${index}.trainingName`;
                   const error = getIn(errors, fieldName);
+                  const trainingImgErr=getIn(errors,`trainings.${index}.TrainingCertImg`);
                   return(
                 <div
                   key={index}
@@ -94,7 +95,8 @@ export default function StepFive({ setFieldValue, values }) {
                         type="text"
                         className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${
                             error ? "border-red-500" : "border-gray-300"
-                        }`}
+                        } focus:outline-none focus:border-blue-500
+           focus:ring-1 focus:ring-blue-400 focus:shadow hover:border-gray-400`}
                       ></Field>
                       <ShowErrorV2
                         name={`trainings.${index}.trainingName`}
@@ -108,7 +110,8 @@ export default function StepFive({ setFieldValue, values }) {
                       <Field
                         name={`trainings.${index}.TrainingProvider`}
                         type="text"
-                        className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${error?"border-red-500":"border-gray-300"}`}
+                        className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${error?"border-red-500":"border-gray-300"} focus:outline-none focus:border-blue-500
+           focus:ring-1 focus:ring-blue-400 focus:shadow hover:border-gray-400`}
                       ></Field>
                       <ShowErrorV2
                         name={`trainings.${index}.TrainingProvider`}
@@ -166,7 +169,7 @@ export default function StepFive({ setFieldValue, values }) {
                     </div>
                   </div>
                   <div
-                    className={`flex-1 border-[#e2e8f0] rounded-xl border-2 p-4`}
+                    className={`flex-1 border-gray-300 hover:border-gray-400 ${trainingImgErr?"border-red-500":""} rounded-xl border-1 p-4`}
                   >
                     <label
                       htmlFor="TrainingCertImg"
@@ -219,7 +222,8 @@ export default function StepFive({ setFieldValue, values }) {
                         name={`trainings.${index}.AddNotes`}
                         placeholder={`Enter any additional notes or special requirments...`}
                         type="text"
-                        className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl pb-15 ${error ? "border-red-500" : ""}`}
+                        className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl pb-15 ${error ? "border-red-500" : ""} focus:outline-none focus:border-blue-500
+           focus:ring-1 focus:ring-blue-400 focus:shadow hover:border-gray-400`}
                       ></Field>
                       <ShowErrorV2
                         name={`trainings.${index}.AddNotes`}
