@@ -13,6 +13,9 @@ export default function ReactSelect({ options, instanceId,onChange,value = "defa
                         ? {
                             borderColor: "#ef4444", // border-red-500
                             boxShadow: state.isFocused ? "0 0 0 1px #f87171" : "none", // focus:ring-red-400
+                            "&:hover": {
+                                borderColor: "", // hover:border-gray-400
+                            },
                         }
                         : {
                             // normal state

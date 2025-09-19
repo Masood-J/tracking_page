@@ -72,7 +72,7 @@ export default function StepTwo({ values, setFieldValue }) {
                   onChange={(val) => form.setFieldValue(field.name, val)}
                   inputClass="!w-full p-5 !rounded-xl "
                   buttonClass="!border-gray-300 !border-r-1 !border-l-0 !rounded-l-xl !bg-white"
-                  containerClass={`!w-full !border-1 !border-gray-300 !rounded-l-xl !rounded-r-xl ${errors.phone ? "!border-red-500 focus-within:!ring-1 focus-within:!ring-red-400" : "focus-within:!border-blue-500 !border-[#e2e8f0] focus:!outline-none focus:!border-blue-500 focus-within:!ring-1 focus-within:!ring-blue-400 focus-within:!shadow hover:!border-gray-400"} `}
+                  containerClass={`!w-full !border-1 !border-gray-300 !rounded-l-xl !rounded-r-xl !py-2 ${errors.phone ? "!border-red-500 focus-within:!ring-1 focus-within:!ring-red-400" : "focus-within:!border-blue-500 !border-[#e2e8f0] focus:!outline-none focus:!border-blue-500 focus-within:!ring-1 focus-within:!ring-blue-400 focus-within:!shadow hover:!border-gray-400"} `}
                 />
               )}
             </Field>
@@ -97,7 +97,7 @@ export default function StepTwo({ values, setFieldValue }) {
                   onChange={(val) => form.setFieldValue(field.name, val)}
                   inputClass="!w-full p-5 !rounded-xl "
                   buttonClass="!border-gray-300 !border-r-1 !border-l-1 !rounded-l-xl !bg-white"
-                  containerClass="!w-full !border-1 !border-gray-300 !rounded-l-xl !rounded-r-xl focus-within:!border-blue-500 !border-[#e2e8f0] focus:!outline-none focus:!border-blue-500 focus-within:!ring-1 focus-within:!ring-blue-400 focus-within:!shadow hover:!border-gray-400"
+                  containerClass="!w-full !border-1 !border-gray-300 !rounded-l-xl !rounded-r-xl !py-2 focus-within:!border-blue-500 !border-[#e2e8f0] focus:!outline-none focus:!border-blue-500 focus-within:!ring-1 focus-within:!ring-blue-400 focus-within:!shadow hover:!border-gray-400"
                 />
               )}
             </Field>
@@ -114,7 +114,7 @@ export default function StepTwo({ values, setFieldValue }) {
             <Field
               name="Address"
               type="text"
-              className={`border min-w-30 !border-gray-300 p-2 w-full rounded-xl  ${errors.Address ? "border-red-500" : ""}`}
+              className={`border min-w-30 !border-gray-300 p-2 w-full rounded-xl outline-0 ${errors.Address ? "!border-red-500 focus:!ring-1 focus:!ring-red-400" : " focus:!border-blue-500 focus:!ring-1 focus:!ring-blue-400 focus:!shadow hover:!border-gray-400"}`}
             ></Field>
             <ShowError name={`Address`}></ShowError>
           </div>
@@ -155,11 +155,25 @@ export default function StepTwo({ values, setFieldValue }) {
                     control: (baseStyles, state) => ({
                       ...baseStyles,
                       borderRadius: "10px",
-                      borderColor: errors.Country
-                        ? state.isFocused
-                          ? "#2b7fff"
-                          : "#ef4444"
-                        : "#d1d5dc",
+                        ...(errors.Country
+                            ? {
+                                borderColor: "#ef4444", // border-red-500
+                                boxShadow: state.isFocused ? "0 0 0 1px #f87171" : "none", // focus:ring-red-400
+                                "&:hover": {
+                                    borderColor: "", // hover:border-gray-400
+                                },
+                            }
+                            : {
+                                // normal state
+                                borderColor: state.isFocused ? "#3b82f6" : "#d1d5dc", // focus:border-blue-500 or default gray
+                                boxShadow: state.isFocused ? "0 0 0 1px #60a5fa" : "none", // focus:ring-blue-400
+                                transition: "border-color 0.2s, box-shadow 0.2s",
+
+                                // hover
+                                "&:hover": {
+                                    borderColor: "#9ca3af", // hover:border-gray-400
+                                },
+                            }),
                     }),
                   }}
                 />
@@ -197,11 +211,25 @@ export default function StepTwo({ values, setFieldValue }) {
                     control: (baseStyles, state) => ({
                       ...baseStyles,
                       borderRadius: "10px",
-                      borderColor: errors.State
-                        ? state.isFocused
-                          ? "#2b7fff"
-                          : "#ef4444"
-                        : "#d1d5dc",
+                        ...(errors.State
+                            ? {
+                                borderColor: "#ef4444", // border-red-500
+                                boxShadow: state.isFocused ? "0 0 0 1px #f87171" : "none", // focus:ring-red-400
+                                "&:hover": {
+                                    borderColor: "", // hover:border-gray-400
+                                },
+                            }
+                            : {
+                                // normal state
+                                borderColor: state.isFocused ? "#3b82f6" : "#d1d5dc", // focus:border-blue-500 or default gray
+                                boxShadow: state.isFocused ? "0 0 0 1px #60a5fa" : "none", // focus:ring-blue-400
+                                transition: "border-color 0.2s, box-shadow 0.2s",
+
+                                // hover
+                                "&:hover": {
+                                    borderColor: "#9ca3af", // hover:border-gray-400
+                                },
+                            }),
                     }),
                   }}
                   noOptionsMessage={() => "Please select a country first"}
@@ -247,11 +275,25 @@ export default function StepTwo({ values, setFieldValue }) {
                     control: (baseStyles, state) => ({
                       ...baseStyles,
                       borderRadius: "10px",
-                      borderColor: errors.City
-                        ? state.isFocused
-                          ? "#2b7fff"
-                          : "#ef4444"
-                        : "#d1d5dc",
+                        ...(errors.Country
+                            ? {
+                                borderColor: "#ef4444", // border-red-500
+                                boxShadow: state.isFocused ? "0 0 0 1px #f87171" : "none", // focus:ring-red-400
+                                "&:hover": {
+                                    borderColor: "", // hover:border-gray-400
+                                },
+                            }
+                            : {
+                                // normal state
+                                borderColor: state.isFocused ? "#3b82f6" : "#d1d5dc", // focus:border-blue-500 or default gray
+                                boxShadow: state.isFocused ? "0 0 0 1px #60a5fa" : "none", // focus:ring-blue-400
+                                transition: "border-color 0.2s, box-shadow 0.2s",
+
+                                // hover
+                                "&:hover": {
+                                    borderColor: "#9ca3af", // hover:border-gray-400
+                                },
+                            }),
                     }),
                   }}
                   noOptionsMessage={() => "Please select a state first"}

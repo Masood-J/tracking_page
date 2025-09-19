@@ -11,8 +11,8 @@ export default function DateSingleSelectV2({ onChange,value,FieldName }) {
     const error=getIn(errors,FieldName)
     const isTouched=getIn(touched,FieldName)
     return(
-        <div className={`p-2 border border-gray-300 rounded-xl flex items-center gap-2 text-black focus-within:outline-none focus-within:border-blue-500 
-           focus-within:ring-1 focus-within:ring-blue-400 focus-within:shadow hover:border-gray-400 ${error ? "border-red-500" : ""}`}>
+        <div className={`p-2 rounded-xl flex items-center gap-2 text-black border-1 border-gray-300 focus-within:outline-none   ${error ? "border-red-500 focus-within:ring-1 focus-within:ring-red-400" : "focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-400 focus-within:shadow hover:border-gray-400"}`}
+        >
       <span className="text-gray-600">
         <FiCalendar color="black" />
       </span>

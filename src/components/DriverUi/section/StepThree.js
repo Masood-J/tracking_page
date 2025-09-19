@@ -10,6 +10,8 @@ import {useFormikContext} from "formik";
 
 export default function StepThree(){
 const {errors} = useFormikContext();
+    const normalClass="focus:border-blue-500 focus:ring-1 focus:ring-blue-400 focus:shadow hover:border-gray-400";
+    const errorClass="border-red-500 focus:ring-1 focus:ring-red-400";
     return(
         <div>
         <FormCard title={`Employement Details`} desc={`Work-related information and position`} icon={<Briefcase className={`text-white`}></Briefcase>}></FormCard>
@@ -17,8 +19,7 @@ const {errors} = useFormikContext();
                 <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="EmployeeID" className={`block`}>Employee ID<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="EmployeeID" type="text" className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl focus:outline-none focus:border-blue-500 
-           focus:ring-1 focus:ring-blue-400 focus:shadow hover:border-gray-400 ${errors.EmployeeID?"border-red-500":""}`}></Field>
+                        <Field name="EmployeeID" type="text" className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl focus:outline-none ${errors.EmployeeID? errorClass:normalClass}`}></Field>
                      <ShowError name={`EmployeeID`}></ShowError>
                     </div>
                     <div className={`flex-1`}>
@@ -37,14 +38,12 @@ const {errors} = useFormikContext();
                 <div className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}>
                     <div className={`flex-1`}>
                         <label htmlFor="EmploymentType" className={`block`}>Employment Type<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="EmploymentType" type="text" className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl focus:outline-none focus:border-blue-500 
-           focus:ring-1 focus:ring-blue-400 focus:shadow hover:border-gray-400 ${errors.EmploymentType?"border-red-500":""}`}></Field>
+                        <Field name="EmploymentType" type="text" className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl focus:outline-none ${errors.EmploymentType?errorClass:normalClass}`}></Field>
                        <ShowError name={`EmploymentType`}></ShowError>
                     </div>
                     <div className={`flex-1`}>
                         <label htmlFor="Department" className={`block`}>Department<span className="text-red-500 ml-1">*</span></label>
-                        <Field name="Department" type="text" className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl focus:outline-none focus:border-blue-500 
-           focus:ring-1 focus:ring-blue-400 focus:shadow hover:border-gray-400 ${errors.Department?"border-red-500":""}`}></Field>
+                        <Field name="Department" type="text" className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl focus:outline-none ${errors.Department?errorClass:normalClass}`}></Field>
                        <ShowError name={`Department`}></ShowError>
                     </div>
                 </div>
@@ -65,7 +64,7 @@ const {errors} = useFormikContext();
                                     onChange={(val) => form.setFieldValue(field.name, val)}
                                     inputClass="!w-full p-5 !rounded-xl "
                                     buttonClass="!border-gray-300 !border-r-1 !border-l-0 !rounded-l-md !bg-white"
-                                    containerClass="!w-full !border-1 !rounded-l-md !border-gray-300 !rounded-r-xl !border-[#e2e8f0] focus-within:!border-blue-500 !border-[#e2e8f0] focus:!outline-none focus:!border-blue-500 focus-within:!ring-1 focus-within:!ring-blue-400 focus-within:!shadow hover:!border-gray-400 "
+                                    containerClass="!w-full !border-1 !rounded-l-md !border-gray-300 !py-2 !rounded-r-xl !border-[#e2e8f0] focus-within:!border-blue-500 !border-[#e2e8f0] focus:!outline-none focus:!border-blue-500 focus-within:!ring-1 focus-within:!ring-blue-400 focus-within:!shadow hover:!border-gray-400 "
                                 />
                             )}
                         </Field>

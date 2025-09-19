@@ -47,7 +47,7 @@ body {
 }
 .react-tel-input .form-control {
     font-size: 14px !important; /* smaller text */
-    padding-top:5px !important ;
-    padding-bottom:5px !important;
+    padding-top:0 !important ;
+    padding-bottom:0 !important;
     height: auto !important; /* let padding control height */
 }

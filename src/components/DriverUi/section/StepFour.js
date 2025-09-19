@@ -8,16 +8,16 @@ import PhoneInput from "react-phone-input-2";
 import DateSingleSelect from "@/components/DriverUi/ui/DateSingleSelect";
 import ReactSelect from "@/components/DriverUi/ui/ReactSelect";
 import { ContextApi } from "@/components/DriverUi/section/DriverForm";
-import { useContext} from "react";
+import { useContext } from "react";
 import React, { useState, useEffect } from "react";
 import { GetCountries, GetState } from "react-country-state-city";
 import Select from "react-select";
 import UploadFiles from "@/components/DriverUi/ui/UploadFiles";
 import Image from "next/image";
 import ShowError from "@/components/DriverUi/ui/ShowError";
-import {useFormikContext} from "formik"
+import { useFormikContext } from "formik";
 export default function StepFour({ setFieldValue, values }) {
-    const {errors} = useFormikContext();
+  const { errors } = useFormikContext();
   const nationalities = useContext(ContextApi);
   const [country, setCountry] = useState(null);
   const [currentState, setcurrentState] = useState(null);
@@ -57,24 +57,25 @@ export default function StepFour({ setFieldValue, values }) {
     { value: 7, label: "O+" },
     { value: 8, label: "O-" },
   ];
-  const[licensePicker, setLicensePicker] = useState();
-  const[medicalCertificate, setMedicalCertificate] = useState();
-  const[visaImg, setVisaImg] = useState();
-    useEffect(() => {
-if(values.LicenseImg){
-    const LicensePrev=URL.createObjectURL(values.LicenseImg)
-    setLicensePicker(LicensePrev);
-}
-if(values.MedicalCertIMG){
-    const MedicalPrev=URL.createObjectURL(values.MedicalCertIMG)
-    setMedicalCertificate(MedicalPrev);
-}
-if(values.VisaIMG){
-    const VisaPrev=URL.createObjectURL(values.VisaIMG)
-    setVisaImg(VisaPrev)
-}
-
-    }, [values.LicenseImg, values.MedicalCertIMG, values.VisaIMG]);
+  const [licensePicker, setLicensePicker] = useState();
+  const [medicalCertificate, setMedicalCertificate] = useState();
+  const [visaImg, setVisaImg] = useState();
+  useEffect(() => {
+    if (values.LicenseImg) {
+      const LicensePrev = URL.createObjectURL(values.LicenseImg);
+      setLicensePicker(LicensePrev);
+    }
+    if (values.MedicalCertIMG) {
+      const MedicalPrev = URL.createObjectURL(values.MedicalCertIMG);
+      setMedicalCertificate(MedicalPrev);
+    }
+    if (values.VisaIMG) {
+      const VisaPrev = URL.createObjectURL(values.VisaIMG);
+      setVisaImg(VisaPrev);
+    }
+  }, [values.LicenseImg, values.MedicalCertIMG, values.VisaIMG]);
+    const normalClass="focus:border-blue-500 focus:ring-1 focus:ring-blue-400 focus:shadow hover:border-gray-400";
+    const errorClass="border-red-500 focus:ring-1 focus:ring-red-400";
   return (
     <div>
       <FormCard
@@ -100,10 +101,9 @@ if(values.VisaIMG){
             <Field
               name="License"
               type="number"
-              className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${errors.License?"border-red-500":""} focus:outline-none focus:border-blue-500
-           focus:ring-1 focus:ring-blue-400 focus:shadow hover:border-gray-400`}
+              className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${errors.License ? errorClass : normalClass} focus:outline-none`}
             ></Field>
-              <ShowError name={`License`}></ShowError>
+            <ShowError name={`License`}></ShowError>
           </div>
           <div className={`flex-1`}>
             <label htmlFor="IssueCountry" className={`block`}>
@@ -124,11 +124,29 @@ if(values.VisaIMG){
                     form.setFieldValue(field.name, e.label);
                   }}
                   styles={{
-                    control: (baseStyles,state) => ({
+                    control: (baseStyles, state) => ({
                       ...baseStyles,
                       borderRadius: "10px",
-                        padding: "2px",
-                        borderColor:errors.IssueCountry?state.isFocused?"#2b7fff":"#ef4444":"#d1d5dc",
+                      padding: "2px",
+                    ...(errors.IssueCountry
+                        ? {
+                            borderColor: "#ef4444", // border-red-500
+                            boxShadow: state.isFocused ? "0 0 0 1px #f87171" : "none", // focus:ring-red-400
+                            "&:hover": {
+                                borderColor: "", // hover:border-gray-400
+                            },
+                        }
+                        : {
+                            // normal state
+                            borderColor: state.isFocused ? "#3b82f6" : "#d1d5dc", // focus:border-blue-500 or default gray
+                            boxShadow: state.isFocused ? "0 0 0 1px #60a5fa" : "none", // focus:ring-blue-400
+                            transition: "border-color 0.2s, box-shadow 0.2s",
+
+                            // hover
+                            "&:hover": {
+                                borderColor: "#9ca3af", // hover:border-gray-400
+                            },
+                        }),
                     }),
                   }}
                   value={
@@ -143,7 +161,8 @@ if(values.VisaIMG){
                 />
               )}
             </Field>
-              <ShowError name={`IssueCountry`}></ShowError>       </div>
+            <ShowError name={`IssueCountry`}></ShowError>{" "}
+          </div>
         </div>
         <div
           className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}
@@ -167,18 +186,36 @@ if(values.VisaIMG){
                     form.setFieldValue(field.name, e.label);
                   }}
                   styles={{
-                    control: (baseStyles,state) => ({
+                    control: (baseStyles, state) => ({
                       ...baseStyles,
                       borderRadius: "10px",
-                        padding: "2px",
-                        borderColor:errors.IssueState?state.isFocused?"#2b7fff":"#ef4444":"#d1d5dc",
+                      padding: "2px",
+                        ...(errors.IssueState
+                            ? {
+                                borderColor: "#ef4444", // border-red-500
+                                boxShadow: state.isFocused ? "0 0 0 1px #f87171" : "none", // focus:ring-red-400
+                                "&:hover": {
+                                    borderColor: "", // hover:border-gray-400
+                                },
+                            }
+                            : {
+                                // normal state
+                                borderColor: state.isFocused ? "#3b82f6" : "#d1d5dc", // focus:border-blue-500 or default gray
+                                boxShadow: state.isFocused ? "0 0 0 1px #60a5fa" : "none", // focus:ring-blue-400
+                                transition: "border-color 0.2s, box-shadow 0.2s",
+
+                                // hover
+                                "&:hover": {
+                                    borderColor: "#9ca3af", // hover:border-gray-400
+                                },
+                            }),
                     }),
                   }}
                   noOptionsMessage={() => "Please select a country first"}
                 />
               )}
             </Field>
-              <ShowError name={`IssueState`}></ShowError>
+            <ShowError name={`IssueState`}></ShowError>
           </div>
           <div className={`flex-1`}>
             <label htmlFor="IssueDate" className={`block`}>
@@ -196,7 +233,8 @@ if(values.VisaIMG){
                 />
               )}
             </Field>
-              <ShowError name={`IssueDate`}></ShowError>  </div>
+            <ShowError name={`IssueDate`}></ShowError>{" "}
+          </div>
         </div>
         <div
           className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}
@@ -217,14 +255,17 @@ if(values.VisaIMG){
                 />
               )}
             </Field>
-              <ShowError name={`Expiry`}></ShowError>  </div>
+            <ShowError name={`Expiry`}></ShowError>{" "}
+          </div>
           <div className={`flex-1`}></div>
         </div>
         <div
           className={`flex flex-col gap-2 justify-between w-full text-black`}
         >
           <h3>License Image:</h3>
-          <div className={`flex-1 border-gray-300 hover:border-gray-400 ${errors.LicenseImg?"border-red-500":""} rounded-xl border-1 p-4`}>
+          <div
+            className={`flex-1 border-gray-300 hover:border-gray-400 ${errors.LicenseImg ? "border-red-500" : ""} rounded-xl border-1 p-4`}
+          >
             <label htmlFor="LicenseImg" className={`block`}></label>
             <Field name="LicenseImg">
               {({ field, form }) => (
@@ -246,12 +287,12 @@ if(values.VisaIMG){
                     onFileChange={(file) =>
                       form.setFieldValue("LicenseImg", file)
                     }
-
                   />
                 </div>
               )}
             </Field>
-              <ShowError name={`LicenseImg`}></ShowError>  </div>
+            <ShowError name={`LicenseImg`}></ShowError>{" "}
+          </div>
         </div>
         <hr />
         <div className={`flex flex-row items-center gap-2 `}>
@@ -282,7 +323,7 @@ if(values.VisaIMG){
                 />
               )}
             </Field>
-              <ShowError name={`VisaType`}></ShowError>
+            <ShowError name={`VisaType`}></ShowError>
           </div>
           <div className={`flex-1`}>
             <label htmlFor="Status" className={`block`}>
@@ -305,7 +346,8 @@ if(values.VisaIMG){
                 />
               )}
             </Field>
-              <ShowError name={`Status`}></ShowError> </div>
+            <ShowError name={`Status`}></ShowError>{" "}
+          </div>
         </div>
         <div
           className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}
@@ -325,21 +367,39 @@ if(values.VisaIMG){
                     label: _country.name,
                   }))}
                   onChange={(e) => {
-                      setcurrentState(e.value);
-                      form.setFieldValue(field.name, e.label);
+                    setcurrentState(e.value);
+                    form.setFieldValue(field.name, e.label);
                   }}
                   styles={{
-                    control: (baseStyles,state) => ({
+                    control: (baseStyles, state) => ({
                       ...baseStyles,
                       borderRadius: "10px",
-                        padding: "2px",
-                        borderColor:errors.VisaIssueCountry?state.isFocused?"#2b7fff":"#ef4444":"#d1d5dc",
+                      padding: "2px",
+                        ...(errors.VisaIssueCountry
+                            ? {
+                                borderColor: "#ef4444", // border-red-500
+                                boxShadow: state.isFocused ? "0 0 0 1px #f87171" : "none", // focus:ring-red-400
+                                "&:hover": {
+                                    borderColor: "", // hover:border-gray-400
+                                },
+                            }
+                            : {
+                                // normal state
+                                borderColor: state.isFocused ? "#3b82f6" : "#d1d5dc", // focus:border-blue-500 or default gray
+                                boxShadow: state.isFocused ? "0 0 0 1px #60a5fa" : "none", // focus:ring-blue-400
+                                transition: "border-color 0.2s, box-shadow 0.2s",
+
+                                // hover
+                                "&:hover": {
+                                    borderColor: "#9ca3af", // hover:border-gray-400
+                                },
+                            }),
                     }),
                   }}
                 />
               )}
             </Field>
-              <ShowError name={`VisaIssueCountry`}></ShowError>
+            <ShowError name={`VisaIssueCountry`}></ShowError>
           </div>
           <div className={`flex-1`}>
             <label htmlFor="VisaDate" className={`block`}>
@@ -357,7 +417,8 @@ if(values.VisaIMG){
                 ></DateSingleSelect>
               )}
             </Field>
-              <ShowError name={`VisaDate`}></ShowError>  </div>
+            <ShowError name={`VisaDate`}></ShowError>{" "}
+          </div>
         </div>
         <div
           className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}
@@ -378,7 +439,7 @@ if(values.VisaIMG){
                 ></DateSingleSelect>
               )}
             </Field>
-              <ShowError name={`VisaExp`}></ShowError>
+            <ShowError name={`VisaExp`}></ShowError>
           </div>
           <div className={`flex-1`}></div>
         </div>
@@ -386,7 +447,9 @@ if(values.VisaIMG){
           className={`flex flex-col gap-2 justify-between w-full text-black`}
         >
           <h3>Visa Image:</h3>
-          <div className={`flex-1 border-gray-300 hover:border-gray-400 ${errors.VisaIMG?"border-red-500":""} rounded-xl border-1 p-4`}>
+          <div
+            className={`flex-1 border-gray-300 hover:border-gray-400 ${errors.VisaIMG ? "border-red-500" : ""} rounded-xl border-1 p-4`}
+          >
             <label htmlFor="VisaIMG" className={`block`}></label>
             <Field name="VisaIMG">
               {({ field, form }) => (
@@ -410,7 +473,8 @@ if(values.VisaIMG){
                 </div>
               )}
             </Field>
-              <ShowError name={`VisaIMG`}></ShowError>   </div>
+            <ShowError name={`VisaIMG`}></ShowError>{" "}
+          </div>
         </div>
         <hr />
         <div className={`flex flex-row items-center gap-2`}>
@@ -440,7 +504,7 @@ if(values.VisaIMG){
                 ></DateSingleSelect>
               )}
             </Field>
-              <ShowError name={`MedicalCertExpiry`}></ShowError>
+            <ShowError name={`MedicalCertExpiry`}></ShowError>
           </div>
           <div className={`flex-1`}>
             <label htmlFor="BloodType" className={`block`}>
@@ -462,13 +526,16 @@ if(values.VisaIMG){
                 ></ReactSelect>
               )}
             </Field>
-              <ShowError name={`BloodType`}></ShowError>  </div>
+            <ShowError name={`BloodType`}></ShowError>{" "}
+          </div>
         </div>
         <div
           className={`flex flex-col gap-2 justify-between w-full text-black`}
         >
           <h3>Medical Certificate</h3>
-          <div className={`flex-1 border-gray-300 hover:border-gray-400 ${errors.MedicalCertIMG?"border-red-500":""} rounded-xl border-1 p-4`}>
+          <div
+            className={`flex-1 border-gray-300 hover:border-gray-400 ${errors.MedicalCertIMG ? "border-red-500" : ""} rounded-xl border-1 p-4`}
+          >
             <label htmlFor="MedicalCertIMG" className={`block`}></label>
             <Field name="MedicalCertIMG">
               {({ field, form }) => (
@@ -494,7 +561,7 @@ if(values.VisaIMG){
                 </div>
               )}
             </Field>
-              <ShowError name={`MedicalCertIMG`}></ShowError>
+            <ShowError name={`MedicalCertIMG`}></ShowError>
           </div>
         </div>
         <hr />
@@ -514,10 +581,9 @@ if(values.VisaIMG){
             <Field
               name="ContactName"
               type="text"
-              className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${errors.ContactName?"border-red-500":""} focus:outline-none focus:border-blue-500
-           focus:ring-1 focus:ring-blue-400 focus:shadow hover:border-gray-400`}
+              className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${errors.ContactName ? errorClass:normalClass} focus:outline-none`}
             ></Field>
-              <ShowError name={`ContactName`}></ShowError>
+            <ShowError name={`ContactName`}></ShowError>
           </div>
           <div className={`flex-1`}>
             <label htmlFor="Relationship" className={`block`}>
@@ -526,10 +592,10 @@ if(values.VisaIMG){
             <Field
               name="Relationship"
               type="text"
-              className={`border-1 min-w-30 border-gray-300 p-2 w-full rounded-xl ${errors.Relationship?"border-red-500":""} focus:outline-none focus:border-blue-500
-           focus:ring-1 focus:ring-blue-400 focus:shadow hover:border-gray-400`}
+              className={`border-1 min-w-30 border-gray-300 p-2 w-full rounded-xl outline-0 ${errors.Relationship ? errorClass : normalClass}`}
             ></Field>
-              <ShowError name={`Relationship`}></ShowError> </div>
+            <ShowError name={`Relationship`}></ShowError>{" "}
+          </div>
         </div>
         <div
           className={`flex flex-row flex-wrap gap-2 justify-between w-full text-black`}
@@ -546,11 +612,11 @@ if(values.VisaIMG){
                   onChange={(val) => form.setFieldValue(field.name, val)}
                   inputClass="!w-full p-5 !rounded-xl "
                   buttonClass="!border-gray-300 !border-r-1 !border-l-0 !rounded-l-md !bg-white"
-                  containerClass={`!w-full !border-1 !rounded-l-md !rounded-r-xl !border-gray-300 ${errors.Phone?"!border-red-500":""} focus-within:!border-blue-500 !border-[#e2e8f0] focus:!outline-none focus:!border-blue-500 focus-within:!ring-1 focus-within:!ring-blue-400 focus-within:!shadow hover:!border-gray-400`}
+                  containerClass={`!w-full !border-1 !rounded-l-md !rounded-r-xl !py-2 !border-gray-300 ${errors.Phone ? "!border-red-500 focus-within:!ring-1 focus-within:!ring-red-400" : "focus-within:!border-blue-500 !border-[#e2e8f0] focus:!outline-none focus:!border-blue-500 focus-within:!ring-1 focus-within:!ring-blue-400 focus-within:!shadow hover:!border-gray-400"} `}
                 />
               )}
             </Field>
-              <ShowError name={`Phone`}></ShowError>
+            <ShowError name={`Phone`}></ShowError>
           </div>
           <div className={`sm:flex-1`}></div>
         </div>

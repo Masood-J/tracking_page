@@ -21,6 +21,8 @@ const PDFViewer = dynamic(
 
 export default function StepFive({ setFieldValue, values }) {
     const {errors}=useFormikContext();
+    const normalClass="focus:border-blue-500 focus:ring-1 focus:ring-blue-400 focus:shadow hover:border-gray-400";
+    const errorClass="border-red-500 focus:ring-1 focus:ring-red-400";
   return (
     <div>
       <FormCard
@@ -94,9 +96,8 @@ export default function StepFive({ setFieldValue, values }) {
                         name={`trainings.${index}.trainingName`}
                         type="text"
                         className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${
-                            error ? "border-red-500" : "border-gray-300"
-                        } focus:outline-none focus:border-blue-500
-           focus:ring-1 focus:ring-blue-400 focus:shadow hover:border-gray-400`}
+                            error ? errorClass:normalClass
+                        } focus:outline-none`}
                       ></Field>
                       <ShowErrorV2
                         name={`trainings.${index}.trainingName`}
@@ -110,8 +111,7 @@ export default function StepFive({ setFieldValue, values }) {
                       <Field
                         name={`trainings.${index}.TrainingProvider`}
                         type="text"
-                        className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${error?"border-red-500":"border-gray-300"} focus:outline-none focus:border-blue-500
-           focus:ring-1 focus:ring-blue-400 focus:shadow hover:border-gray-400`}
+                        className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl ${error?errorClass:normalClass} focus:outline-none`}
                       ></Field>
                       <ShowErrorV2
                         name={`trainings.${index}.TrainingProvider`}
@@ -222,8 +222,7 @@ export default function StepFive({ setFieldValue, values }) {
                         name={`trainings.${index}.AddNotes`}
                         placeholder={`Enter any additional notes or special requirments...`}
                         type="text"
-                        className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl pb-15 ${error ? "border-red-500" : ""} focus:outline-none focus:border-blue-500
-           focus:ring-1 focus:ring-blue-400 focus:shadow hover:border-gray-400`}
+                        className={`border min-w-30 border-gray-300 p-2 w-full rounded-xl pb-15 ${error ? errorClass:normalClass} focus:outline-none`}
                       ></Field>
                       <ShowErrorV2
                         name={`trainings.${index}.AddNotes`}
